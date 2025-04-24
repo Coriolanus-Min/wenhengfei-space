@@ -54,7 +54,7 @@ async function translateText(text) {
         // 显示用户友好的错误消息
         const errorMessage = document.createElement('div');
         errorMessage.className = 'translation-error';
-        errorMessage.textContent = '翻译服务暂时不可用，请稍后再试';
+        errorMessage.textContent = 'err';
         document.body.appendChild(errorMessage);
         setTimeout(() => errorMessage.remove(), 3000);
         return text;
