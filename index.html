@@ -6,6 +6,7 @@
     <title>My Profile</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/translate-button.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -14,12 +15,6 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <div class="language-switch">
-                <button id="translateBtn" onclick="window.translationService.toggleLanguage()">
-                    <i class="fas fa-language"></i>
-                    <span>中文</span>
-                </button>
-            </div>
             <div class="logo">
                 <a href="index.html">Wen Hengfei</a>
             </div>
@@ -30,16 +25,23 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html" class="active" data-translate="nav-home">Home</a></li>
-                    <li><a href="work.html" data-translate="nav-work">Work</a></li>
-                    <li><a href="hobbies.html" data-translate="nav-hobbies">Hobbies</a></li>
-                    <li><a href="articles.html" data-translate="nav-articles">Articles</a></li>
-                    <li><a href="portfolio.html" data-translate="nav-portfolio">Portfolio</a></li>
-                    <li><a href="contact.html" data-translate="nav-contact">Contact</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="hobbies.html">Hobbies</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
+    <div class="language-switch">
+        <button onclick="toggleLanguage()">
+            <i class="fas fa-language"></i>
+            中文
+        </button>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -147,7 +149,7 @@
         </div>
     </footer>
 
-    <script src="js/translationService.js"></script>
+    <script src="js/translate.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
