@@ -1,0 +1,15 @@
+{
+    "works": [
+        {
+            "id": "project1",
+            "title": "Project Title 1",
+            "description": "Brief description of the project",
+            "image": "images/work-placeholder-1.jpg",
+            "category": "Web Development",
+            "technologies": ["HTML", "CSS", "JavaScript"],
+            "demoUrl": "https://demo.example.com",
+            "githubUrl": "https://github.com/example/project1",
+            "details": "Detailed description of the project including challenges and solutions..."
+        }
+    ]
+} 

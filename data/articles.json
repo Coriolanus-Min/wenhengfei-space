@@ -1,0 +1,31 @@
+{
+  "articles": [
+    {
+      "id": "china-trade-war",
+      "title": "China's Plan to Fight Trump's Trade War",
+      "date": "2024-03-20",
+      "type": "notion",
+      "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
+      "summary": "An analysis of China's strategic response to trade tensions and economic policies.",
+      "tags": ["economics", "international trade", "politics"]
+    },
+    {
+      "id": "article-1",
+      "title": "Article Title 1",
+      "date": "2025-04-10",
+      "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
+      "content": "content/article-1.md",
+      "type": "markdown",
+      "tags": ["web development", "technology"]
+    },
+    {
+      "id": "article-2",
+      "title": "Article Title 2 (Notion)",
+      "date": "2025-03-25",
+      "summary": "This is an example of a Notion-based article. Click to read the full content directly from Notion.",
+      "type": "notion",
+      "notionId": "42cdeddd4b6440b98ed14b6a55f0de78",
+      "tags": ["design", "user experience"]
+    }
+  ]
+} 
