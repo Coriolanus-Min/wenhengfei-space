@@ -95,3 +95,11 @@ async function toggleLanguage() {
         icon.className = 'fas fa-language'; // 恢复原始图标
     }
 }
+
+// 初始化按钮提示文本
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.querySelector('.language-switch button');
+    if (button) {
+        button.title = isEnglish ? '切换到中文' : 'Switch to English';
+    }
+});
