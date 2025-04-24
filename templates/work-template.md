@@ -1,7 +1,7 @@
 ---
 title: "Project Title"
 description: "Brief description of the project"
-date: "YYYY-MM-DD"
+date: "2024-04-26"
 category: "Web Development"
 technologies:
   - HTML
