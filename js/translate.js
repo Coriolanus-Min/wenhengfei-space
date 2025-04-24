@@ -93,4 +93,4 @@ async function toggleLanguage() {
         button.disabled = false;
         icon.className = 'fas fa-language'; // 恢复原始图标
     }
-} 
+}
