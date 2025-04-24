@@ -85,8 +85,9 @@ async function toggleLanguage() {
         }
 
         isEnglish = !isEnglish;
-        button.textContent = isEnglish ? '中文' : 'English';
-        button.insertBefore(icon, button.firstChild); // 保持图标在文本前面
+       // 移除文字提示，只使用图标
+        button.textContent = '';
+        button.appendChild(icon); // 重新添加图标
     } catch (error) {
         console.error('Toggle language error:', error);
     } finally {
