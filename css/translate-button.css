@@ -1,14 +1,16 @@
 .language-switch {
   position: fixed;
   top: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 1000;
 }
 
 .language-switch button {
-  background-color: transparent;
-  color: #333;
-  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #666;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
@@ -16,11 +18,13 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .language-switch button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .language-switch button:disabled {
@@ -29,14 +33,14 @@
 }
 
 .language-switch i {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 /* 翻译错误消息样式 */
 .translation-error {
   position: fixed;
   top: 70px;
-  left: 20px;
+  right: 20px;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px 20px;
@@ -54,21 +58,65 @@
 
 @media (max-width: 768px) {
   .language-switch {
-    top: 10px;
-    left: 10px;
+    top: 15px;
+    right: 15px;
   }
 
   .language-switch button {
+    width: 36px;
+    height: 36px;
     padding: 6px;
   }
 
   .language-switch i {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .translation-error {
-    top: 50px;
-    left: 10px;
+    top: 60px;
+    right: 15px;
     font-size: 14px;
+    padding: 8px 16px;
   }
+}
+
+.translate-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.translate-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.translate-button i {
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    .translate-button {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .translate-button i {
+        font-size: 20px;
+    }
 } 
