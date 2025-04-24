@@ -35,4 +35,12 @@ yarn-error.log*
 
 # Cache
 .cache/
-.npm/ 
+.npm/
+
+# Project specific
+templates/
+admin/
+components/
+pages/
+wireframes.md
+sitemap.md 
