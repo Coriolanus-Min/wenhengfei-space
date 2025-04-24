@@ -1,49 +1,74 @@
 .language-switch {
   position: fixed;
   top: 20px;
-  right: 20px;
+  left: 20px;
   z-index: 1000;
 }
 
 .language-switch button {
-  background-color: #007bff;
-  color: white;
+  background-color: transparent;
+  color: #333;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 8px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: background-color 0.3s ease;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .language-switch button:hover {
-  background-color: #0056b3;
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
 }
 
 .language-switch button:disabled {
-  background-color: #ccc;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .language-switch i {
-  font-size: 20px;
+  font-size: 24px;
+}
+
+/* 翻译错误消息样式 */
+.translation-error {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
 }
 
 @media (max-width: 768px) {
   .language-switch {
     top: 10px;
-    right: 10px;
+    left: 10px;
   }
 
   .language-switch button {
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 6px;
   }
 
   .language-switch i {
-    font-size: 18px;
+    font-size: 20px;
+  }
+
+  .translation-error {
+    top: 50px;
+    left: 10px;
+    font-size: 14px;
   }
 } 
