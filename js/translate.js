@@ -100,6 +100,6 @@ async function toggleLanguage() {
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.querySelector('.language-switch button');
     if (button) {
-        button.title = isEnglish ? '切换到中文' : 'Switch to English';
+        button.title = isEnglish ? '中' : 'En';
     }
 });

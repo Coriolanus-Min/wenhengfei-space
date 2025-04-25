@@ -1,6 +1,6 @@
-// 配置
-const TRANSLATOR_KEY = 'YOUR_API_KEY_HERE'; // 替换为您的 Microsoft Translator API 密钥
-const TRANSLATOR_REGION = 'global';
+require('dotenv').config();
+const TRANSLATOR_KEY = process.env.MICROSOFT_TRANSLATOR_KEY;
+const TRANSLATOR_REGION = process.env.MICROSOFT_TRANSLATOR_REGION;
 
 // 默认语言设置
 export const defaultLanguage = 'en';
