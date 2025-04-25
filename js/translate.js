@@ -27,7 +27,7 @@ async function translateText(text) {
             throw new Error('Missing required environment variables');
         }
 
-        const response = await fetch('https://iris-dandelion-marble.glitch.me/api/translate', {
+        const response = await fetch('https://grizzled-spiral-mantis.glitch.me/api/translate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text, to: zh-CN })
