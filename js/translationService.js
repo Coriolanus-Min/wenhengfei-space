@@ -59,11 +59,11 @@ class TranslationService {
         }
 
         try {
-            const response = await fetch('https://<wenhengfei-space>.azurewebsites.net/api/translate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text, to: zh-CN })
-            });
+            const response = await fetch('https://iris-dandelion-marble.glitch.me/api/translate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, to: zh-CN })
+});
             if (!response.ok) {
                 throw new Error(`Translation failed: ${response.statusText}`);
             }
