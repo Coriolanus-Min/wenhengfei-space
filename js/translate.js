@@ -27,15 +27,11 @@ async function translateText(text) {
             throw new Error('Missing required environment variables');
         }
 
-        const response = await fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=${isEnglish ? 'en' : 'zh-Hans'}&to=${isEnglish ? 'zh-Hans' : 'en'}`, {
-            method: 'POST',
-            headers: {
-                'Ocp-Apim-Subscription-Key': process.env.TRANSLATOR_API_KEY,
-                'Ocp-Apim-Subscription-Region': process.env.TRANSLATOR_LOCATION,
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify([{ text }]),
-        });
+        const response = await fetch('https://iris-dandelion-marble.glitch.me/api/translate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, to: zh-CN })
+});
 
         if (!response.ok) {
             throw new Error(`Translation API error: ${response.status}`);
