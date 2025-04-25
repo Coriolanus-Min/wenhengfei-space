@@ -59,7 +59,7 @@ class TranslationService {
         }
 
         try {
-            const response = await fetch('https://<your-app-name>.azurewebsites.net/api/translate', {
+            const response = await fetch('https://<wenhengfei-space>.azurewebsites.net/api/translate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text, to: zh-CN })
