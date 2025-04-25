@@ -59,16 +59,11 @@ class TranslationService {
         }
 
         try {
-            const response = await fetch(`https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${targetLang}`, {
+            const response = await fetch('https://<your-app-name>.azurewebsites.net/api/translate', {
                 method: 'POST',
-                headers: {
-                    'Ocp-Apim-Subscription-Key': TRANSLATOR_KEY,
-                    'Ocp-Apim-Subscription-Region': TRANSLATOR_REGION,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify([{ text }]),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, to: zh-CN })
             });
-
             if (!response.ok) {
                 throw new Error(`Translation failed: ${response.statusText}`);
             }
