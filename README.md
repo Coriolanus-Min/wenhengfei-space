@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Personal Profile Website
 
 A personal website with Notion integration for article management.
@@ -40,3 +41,7 @@ The development server will automatically:
 - Enable live reloading
 - Allow JSON file loading
 - Support Notion embeds 
+=======
+# wenhengfei-space
+ This is where I share my professional work, personal interests, and thoughts through articles.
+>>>>>>> 25a44c57ab1e11cb15467144cd047872f8b0dde1
