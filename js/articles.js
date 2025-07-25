@@ -1,34 +1,153 @@
 class ArticleManager {
     constructor() {
         this.articles = [];
+        this.projects = [];
         this.container = document.querySelector('.articles-container');
         this.notionLoadRetries = 0;
         this.maxRetries = 3;
+        this.isHomepage = window.location.pathname === '/' || window.location.pathname.includes('index.html');
+        
+        // Use configuration from notion-config.js
+        this.config = window.NOTION_CONFIG || NOTION_CONFIG;
     }
 
     async init() {
         try {
-            await this.loadArticles();
+            // Try Notion API first if enabled, fallback to JSON
+            if (this.config.ENABLE_NOTION_INTEGRATION && this.config.NOTION_TOKEN !== 'YOUR_NOTION_TOKEN_HERE') {
+                await this.loadFromNotion();
+            } else {
+                await this.loadFromJSON();
+            }
             await this.displayArticles();
-            await this.initializeNotion();
+            if (!this.isHomepage) {
+                await this.initializeNotion();
+            }
         } catch (error) {
             console.error('Error initializing ArticleManager:', error);
-            this.showError('无法加载文章，请稍后再试');
+            // Fallback to JSON if Notion fails
+            if (this.config.FALLBACK_TO_JSON) {
+                try {
+                    await this.loadFromJSON();
+                    await this.displayArticles();
+                } catch (fallbackError) {
+                    this.showError('Unable to load articles, please refresh the page');
+                }
+            }
         }
     }
 
-    async loadArticles() {
+    async loadFromNotion() {
         try {
-            const response = await fetch('/data/articles.json');
+            const baseUrl = this.config.CORS_PROXY + 'https://api.notion.com/v1/databases/';
+            
+            // Load articles from Notion
+            const articlesResponse = await fetch(`${baseUrl}${this.config.ARTICLES_DATABASE_ID}/query`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${this.config.NOTION_TOKEN}`,
+                    'Notion-Version': '2022-06-28',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    filter: {
+                        property: 'Status',
+                        select: {
+                            equals: 'Published'
+                        }
+                    },
+                    sorts: [
+                        {
+                            property: 'Date',
+                            direction: 'descending'
+                        }
+                    ]
+                })
+            });
+
+            if (articlesResponse.ok) {
+                const articlesData = await articlesResponse.json();
+                this.articles = this.parseNotionArticles(articlesData.results);
+            }
+
+            // Load projects from Notion
+            const projectsResponse = await fetch(`${baseUrl}${this.config.PROJECTS_DATABASE_ID}/query`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${this.config.NOTION_TOKEN}`,
+                    'Notion-Version': '2022-06-28',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (projectsResponse.ok) {
+                const projectsData = await projectsResponse.json();
+                this.projects = this.parseNotionProjects(projectsData.results);
+            }
+
+        } catch (error) {
+            console.error('Error loading from Notion:', error);
+            throw error;
+        }
+    }
+
+    parseNotionArticles(results) {
+        return results.map(page => {
+            const properties = page.properties;
+            return {
+                id: page.id,
+                title: this.getNotionText(properties.Title),
+                summary: this.getNotionText(properties.Summary),
+                date: properties.Date?.date?.start || new Date().toISOString(),
+                tags: properties.Tags?.multi_select?.map(tag => tag.name) || [],
+                featured: properties.Featured?.checkbox || false,
+                type: 'notion',
+                notionId: page.id,
+                url: page.url
+            };
+        });
+    }
+
+    parseNotionProjects(results) {
+        return results.map(page => {
+            const properties = page.properties;
+            return {
+                id: page.id,
+                name: this.getNotionText(properties['Project Name']),
+                description: this.getNotionText(properties.Description),
+                techStack: properties['Tech Stack']?.multi_select?.map(tech => tech.name) || [],
+                liveUrl: properties['Live URL']?.url,
+                githubUrl: properties['GitHub URL']?.url,
+                featured: properties.Featured?.checkbox || false,
+                image: properties.Image?.files?.[0]?.file?.url || properties.Image?.files?.[0]?.external?.url
+            };
+        });
+    }
+
+    getNotionText(property) {
+        if (!property) return '';
+        if (property.title) return property.title.map(t => t.plain_text).join('');
+        if (property.rich_text) return property.rich_text.map(t => t.plain_text).join('');
+        return '';
+    }
+
+    async loadFromJSON() {
+        try {
+            const response = await fetch('data/articles.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             this.articles = data.articles;
         } catch (error) {
-            console.error('Error loading articles:', error);
+            console.error('Error loading from JSON:', error);
             throw new Error('Failed to load articles data');
         }
+    }
+
+    async loadArticles() {
+        // This method is now deprecated, replaced by loadFromNotion/loadFromJSON
+        return this.loadFromJSON();
     }
 
     async initializeNotion() {
@@ -173,16 +292,111 @@ class ArticleManager {
         // Clear existing content
         this.container.innerHTML = '';
 
-        // Add articles
-        for (const article of this.articles) {
-            const articleElement = this.createArticleElement(article);
-            this.container.appendChild(articleElement);
+        // On homepage, show only featured articles or first 2 articles
+        if (this.isHomepage) {
+            let articlesToShow = this.articles.filter(article => article.featured);
+            if (articlesToShow.length === 0) {
+                articlesToShow = this.articles.slice(0, 2);
+            }
+            
+            for (const article of articlesToShow) {
+                const articleElement = this.createSimpleArticleElement(article);
+                this.container.appendChild(articleElement);
+            }
+        } else {
+            // On articles page, show all articles with full format
+            for (const article of this.articles) {
+                const articleElement = this.createArticleElement(article);
+                this.container.appendChild(articleElement);
+            }
         }
+    }
+
+    async displayFeaturedProjects() {
+        const projectsContainer = document.querySelector('.portfolio-gallery');
+        if (!projectsContainer || this.projects.length === 0) return;
+
+        // Clear existing projects
+        projectsContainer.innerHTML = '';
+
+        // Show featured projects or first 3 projects
+        let projectsToShow = this.projects.filter(project => project.featured);
+        if (projectsToShow.length === 0) {
+            projectsToShow = this.projects.slice(0, 3);
+        }
+
+        for (const project of projectsToShow) {
+            const projectElement = this.createProjectElement(project);
+            projectsContainer.appendChild(projectElement);
+        }
+    }
+
+    createProjectElement(project) {
+        const projectElement = document.createElement('div');
+        projectElement.className = 'portfolio-item';
+        
+        const imageUrl = project.image || 'images/portfolio-placeholder-1.jpg';
+        const techStackHtml = project.techStack.length > 0 
+            ? `<div class="tech-stack">${project.techStack.map(tech => `<span class="tech">${tech}</span>`).join('')}</div>`
+            : '';
+        
+        projectElement.innerHTML = `
+            <div class="portfolio-image-container">
+                <img src="${imageUrl}" alt="${project.name}" loading="lazy">
+                ${project.liveUrl ? `<div class="project-overlay"><a href="${project.liveUrl}" target="_blank" class="project-link">View Live</a></div>` : ''}
+            </div>
+            <div class="portfolio-caption">
+                <h3>${project.name}</h3>
+                <p>${project.description}</p>
+                ${techStackHtml}
+                <div class="project-links">
+                    ${project.liveUrl ? `<a href="${project.liveUrl}" target="_blank" class="btn-small">Live Demo</a>` : ''}
+                    ${project.githubUrl ? `<a href="${project.githubUrl}" target="_blank" class="btn-small">GitHub</a>` : ''}
+                </div>
+            </div>
+        `;
+        
+        return projectElement;
+    }
+
+    createSimpleArticleElement(article) {
+        const articleElement = document.createElement('div');
+        articleElement.className = 'article';
+        
+        let articleUrl;
+        let target = '_self';
+        
+        if (article.type === 'notion') {
+            // Use the direct Notion URL if available, otherwise construct it
+            articleUrl = article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
+            target = '_blank';
+        } else {
+            articleUrl = `articles/${article.id}.html`;
+        }
+        
+        const tagsHtml = article.tags && article.tags.length > 0 
+            ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+            : '';
+        
+        articleElement.innerHTML = `
+            <div class="article-date">${this.formatDate(article.date)}</div>
+            <h3 class="article-title">${article.title}</h3>
+            <p>${article.summary}</p>
+            ${tagsHtml}
+            <a href="${articleUrl}" class="read-more" target="${target}">Read More</a>
+        `;
+        
+        return articleElement;
     }
 }
 
 // Initialize article manager when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     const articleManager = new ArticleManager();
-    articleManager.init();
+    articleManager.init().then(() => {
+        // Also load featured projects on homepage
+        if (articleManager.isHomepage && articleManager.projects.length > 0) {
+            articleManager.displayFeaturedProjects();
+        }
+    });
 }); 
