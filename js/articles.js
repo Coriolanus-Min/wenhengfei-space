@@ -250,17 +250,30 @@ class ArticleManager {
         
         let contentHtml = '';
         if (article.type === 'notion') {
-            contentHtml = `
-                <div class="article-header">
+            // Use direct link to Notion page when API integration is disabled
+            if (!this.config.USE_API_INTEGRATION) {
+                const articleUrl = article.notionUrl || article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
+                contentHtml = `
                     <div class="article-date">${this.formatDate(article.date)}</div>
                     <h3 class="article-title">${article.title}</h3>
+                    <p>${article.summary}</p>
                     <div class="article-tags">
                         ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                </div>
-                <div class="article-content notion-content">
-                    ${this.createNotionEmbed(article.notionId)}
-                </div>`;
+                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>`;
+            } else {
+                contentHtml = `
+                    <div class="article-header">
+                        <div class="article-date">${this.formatDate(article.date)}</div>
+                        <h3 class="article-title">${article.title}</h3>
+                        <div class="article-tags">
+                            ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="article-content notion-content">
+                        ${this.createNotionEmbed(article.notionId)}
+                    </div>`;
+            }
         } else {
             contentHtml = `
                 <div class="article-date">${this.formatDate(article.date)}</div>
@@ -269,7 +282,7 @@ class ArticleManager {
                 <div class="article-tags">
                     ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
-                <a href="/article/${article.id}" class="read-more">Read Full Article</a>`;
+                <a href="${article.content}" class="read-more">Read Full Article</a>`;
         }
 
         articleElement.innerHTML = contentHtml;
@@ -389,4 +402,4 @@ document.addEventListener('DOMContentLoaded', () => {
             articleManager.displayFeaturedProjects();
         }
     });
-}); 
+});
