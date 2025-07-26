@@ -1,21 +1,22 @@
-// Notion Configuration
-// Replace these with your actual Notion credentials and database IDs
+// Notion Configuration - Updated for Public Pages
+// Modern approach using Notion's public publishing feature
 
 const NOTION_CONFIG = {
-    // Get your integration token from: https://www.notion.so/my-integrations
-    NOTION_TOKEN: 'YOUR_NOTION_TOKEN_HERE',
+    // Public Notion Pages Approach (Recommended & Active)
+    // 1. In Notion: Share → Publish to web → Copy public URL
+    // 2. Add URLs to articles.json with "notionUrl" property
+    // 3. Articles will open directly in Notion's public pages
     
-    // Database IDs - Get these from your Notion database URLs
-    ARTICLES_DATABASE_ID: 'YOUR_ARTICLES_DATABASE_ID_HERE',
-    PROJECTS_DATABASE_ID: 'YOUR_PROJECTS_DATABASE_ID_HERE',
+    // API Integration (Optional - only needed for advanced database features)
+    // You can ignore these unless you want to pull content automatically from Notion databases
+    NOTION_TOKEN: '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',
+    ARTICLES_DATABASE_ID: '23c727d0d1bf804bb40efa350a1256c4', // Extracted from your URL
+    PROJECTS_DATABASE_ID: '23c727d0d1bf805dac99dfe721e83123', // Extracted from your URL
     
-    // CORS Proxy (needed for browser requests to Notion API)
-    // You can use a service like https://cors-anywhere.herokuapp.com/ or set up your own
-    CORS_PROXY: 'https://cors-anywhere.herokuapp.com/',
-    
-    // Enable/disable features
-    ENABLE_NOTION_INTEGRATION: false, // Set to true once you configure everything above
-    FALLBACK_TO_JSON: true // Always keep JSON as fallback
+    // Feature toggles
+    USE_PUBLIC_PAGES: true, // ✅ ACTIVE - Uses public Notion pages
+    USE_API_INTEGRATION: false, // ❌ DISABLED - No complex API calls needed
+    FALLBACK_TO_JSON: true // ✅ ACTIVE - Always keep JSON as backup
 };
 
 // Export for use in other files

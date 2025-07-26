@@ -13,27 +13,17 @@ class ArticleManager {
 
     async init() {
         try {
-            // Try Notion API first if enabled, fallback to JSON
-            if (this.config.ENABLE_NOTION_INTEGRATION && this.config.NOTION_TOKEN !== 'YOUR_NOTION_TOKEN_HERE') {
-                await this.loadFromNotion();
-            } else {
-                await this.loadFromJSON();
-            }
+            // Use simple JSON loading with public Notion URLs
+            await this.loadFromJSON();
             await this.displayArticles();
-            if (!this.isHomepage) {
+            
+            // Only initialize complex Notion embeds for full articles page
+            if (!this.isHomepage && this.config.USE_API_INTEGRATION) {
                 await this.initializeNotion();
             }
         } catch (error) {
             console.error('Error initializing ArticleManager:', error);
-            // Fallback to JSON if Notion fails
-            if (this.config.FALLBACK_TO_JSON) {
-                try {
-                    await this.loadFromJSON();
-                    await this.displayArticles();
-                } catch (fallbackError) {
-                    this.showError('Unable to load articles, please refresh the page');
-                }
-            }
+            this.showError('Unable to load articles, please refresh the page');
         }
     }
 
@@ -367,8 +357,8 @@ class ArticleManager {
         let target = '_self';
         
         if (article.type === 'notion') {
-            // Use the direct Notion URL if available, otherwise construct it
-            articleUrl = article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
+            // Use public Notion URL (preferred) or construct from notionId
+            articleUrl = article.notionUrl || article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
             target = '_blank';
         } else {
             articleUrl = `articles/${article.id}.html`;

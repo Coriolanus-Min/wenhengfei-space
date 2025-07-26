@@ -1,121 +1,90 @@
 # Notion Integration Setup Guide
 
-## 🚀 Quick Start
+## 🚀 Quick Start with Public Pages (Recommended)
 
-Your website now supports dynamic content loading from Notion! Here's how to set it up:
+Your website now supports simple integration with Notion's public pages! Here's the easiest way to get started:
 
-## Step 1: Create Notion Integration
+## Method 1: Public Notion Pages (Simple & Fast)
 
-1. Go to [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations)
-2. Click "Create new integration"
-3. Name it "Website Integration" 
-4. Select your workspace
-5. Copy the **Integration Token** (starts with `secret_`)
+### Step 1: Publish Your Notion Page
+1. Go to your Notion page (e.g., "China's Plan to Fight Trump's Trade War")
+2. Click **"Share"** in the top-right
+3. Toggle **"Publish to web"** ON
+4. Copy the public URL (e.g., `https://username.notion.site/page-title-123abc`)
 
-## Step 2: Create Notion Databases
+### Step 2: Update Your Articles JSON
+Edit `data/articles.json` and add the `notionUrl` property:
 
-### Articles Database
-Create a new database with these properties:
-- **Title** (Title) - Article title
-- **Summary** (Text) - Brief description  
-- **Date** (Date) - Publication date
-- **Status** (Select) - Options: "Draft", "Published"
-- **Tags** (Multi-select) - Article categories
-- **Featured** (Checkbox) - Show on homepage
-
-### Projects Database  
-Create another database with these properties:
-- **Project Name** (Title) - Project title
-- **Description** (Text) - Project description
-- **Image** (Files & media) - Project cover image
-- **Tech Stack** (Multi-select) - Technologies used
-- **Live URL** (URL) - Live demo link
-- **GitHub URL** (URL) - GitHub repository
-- **Featured** (Checkbox) - Show on homepage
-
-## Step 3: Share Databases with Integration
-
-1. Go to each database page
-2. Click "Share" in top-right
-3. "Invite" your integration
-4. Copy the database ID from the URL:
-   `https://notion.so/DATABASE_ID?v=...`
-
-## Step 4: Configure Your Website
-
-Edit `js/notion-config.js`:
-
-```javascript
-const NOTION_CONFIG = {
-    NOTION_TOKEN: 'secret_YOUR_ACTUAL_TOKEN_HERE',
-    ARTICLES_DATABASE_ID: 'your-articles-database-id-here',
-    PROJECTS_DATABASE_ID: 'your-projects-database-id-here',
-    ENABLE_NOTION_INTEGRATION: true, // Enable Notion
-    FALLBACK_TO_JSON: true // Keep JSON as backup
-};
+```json
+{
+  "articles": [
+    {
+      "id": "china-trade-war",
+      "title": "China's Plan to Fight Trump's Trade War",
+      "date": "2024-03-20",
+      "type": "notion",
+      "notionUrl": "YOUR_PUBLIC_NOTION_URL_HERE",
+      "summary": "An analysis of China's strategic response...",
+      "tags": ["economics", "politics"],
+      "featured": true
+    }
+  ]
+}
 ```
 
-## Step 5: Add Content
-
-### Add Articles:
-1. Create new pages in your Articles database
-2. Set Status to "Published"
-3. Check "Featured" for homepage display
-4. Add content using Notion's rich editor
-
-### Add Projects:
-1. Create new pages in your Projects database  
-2. Upload cover images
-3. Add tech stack tags
-4. Include live/GitHub URLs
-5. Check "Featured" for homepage display
-
-## Step 6: Deploy
-
-1. Commit and push your changes:
+### Step 3: Push Changes
 ```bash
 git add .
-git commit -m "Add Notion integration"
+git commit -m "Add public Notion URL for Trump article"
 git push
 ```
 
-2. Your website will now:
-   - ✅ Load articles from Notion automatically
-   - ✅ Show featured content on homepage
-   - ✅ Link directly to Notion pages
-   - ✅ Fallback to JSON if Notion is unavailable
+**That's it!** Your article will now link directly to your published Notion page.
 
-## 🔧 Troubleshooting
+## Method 2: Advanced API Integration (Optional)
 
-### CORS Issues
-If you get CORS errors, the integration includes a CORS proxy. For production, consider:
-- Setting up your own CORS proxy
-- Using a serverless function (Vercel, Netlify)
-- Moving API calls to server-side
+For dynamic content loading from Notion databases:
 
-### Database Not Found
-- Ensure the integration has access to your databases
-- Double-check database IDs in the configuration
-- Verify the integration token is correct
+### Step 1: Create Notion Integration
+1. Go to [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations)
+2. Click "Create new integration"
+3. Copy the integration token
 
-### Content Not Loading
-- Check browser console for errors
-- Ensure "Status" is set to "Published" for articles
-- Verify database property names match exactly
+### Step 2: Set Up Databases
+Create databases with these properties:
 
-## 🎯 Benefits
+**Articles Database:**
+- Title, Summary, Date, Status (Draft/Published), Tags, Featured
 
-- **Write in Notion**: Use Notion's powerful editor
-- **Auto-sync**: Content updates automatically
-- **No coding**: Add articles without touching code
-- **Rich content**: Full Notion formatting support
-- **Backup**: JSON files as fallback system
+**Projects Database:**  
+- Project Name, Description, Image, Tech Stack, Live URL, GitHub URL, Featured
 
-## 🔄 Workflow
+### Step 3: Configure Integration
+Edit `js/notion-config.js`:
+```javascript
+const NOTION_CONFIG = {
+    USE_API_INTEGRATION: true,
+    NOTION_TOKEN: 'your_token_here',
+    ARTICLES_DATABASE_ID: 'your_db_id',
+    PROJECTS_DATABASE_ID: 'your_db_id'
+};
+```
 
-1. **Write** articles in Notion
-2. **Set** status to "Published" 
-3. **Check** "Featured" for homepage
-4. **Content** appears automatically on your website!
+## 🎯 Benefits of Public Pages Approach
 
-Your Trump trade war article is already configured and will load once you set up the Notion integration!
+- ✅ **No API setup required**
+- ✅ **Works immediately** 
+- ✅ **Full Notion formatting** preserved
+- ✅ **Easy to maintain**
+- ✅ **Mobile-friendly**
+- ✅ **SEO-friendly** (Notion handles this)
+
+## 🔄 Simple Workflow
+
+1. **Write** in Notion
+2. **Publish to web** (one click)
+3. **Add URL** to articles.json
+4. **Push** to GitHub
+5. **Article goes live!**
+
+Your Trump trade war article is ready to work with this system!
