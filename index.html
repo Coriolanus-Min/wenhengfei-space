@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wen Hengfei - Web Developer & Designer</title>
+    <meta name="description" content="Personal website of Wen Hengfei, a web developer and designer. View portfolio, articles, and professional work.">
+    <meta name="keywords" content="web developer, designer, portfolio, frontend, backend, JavaScript, HTML, CSS">
+    <meta name="author" content="Wen Hengfei">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wenhengfei.space/">
+    <meta property="og:title" content="Wen Hengfei - Web Developer & Designer">
+    <meta property="og:description" content="Personal website of Wen Hengfei, a web developer and designer. View portfolio, articles, and professional work.">
+    <meta property="og:image" content="https://wenhengfei.space/images/profile-placeholder.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://wenhengfei.space/">
+    <meta property="twitter:title" content="Wen Hengfei - Web Developer & Designer">
+    <meta property="twitter:description" content="Personal website of Wen Hengfei, a web developer and designer. View portfolio, articles, and professional work.">
+    <meta property="twitter:image" content="https://wenhengfei.space/images/profile-placeholder.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/translate-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- 设置 Google Translate API 密钥 -->
+    <script>
+        // 注意：在生产环境中，不应该在客户端代码中硬编码API密钥
+        // 这里仅用于演示目的
+        window.GOOGLE_TRANSLATE_API_KEY = 'YOUR_GOOGLE_TRANSLATE_API_KEY_HERE';
+    </script>
+    
+    <!-- Header -->
+     <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Wen Hengfei</a>
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="hobbies.html">Hobbies</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="language-switch">
+        <button onclick="toggleLanguage()" title="中/En">
+            <i class="fas fa-language"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Wen Hengfei</h1>
+                    <p data-translate="hero-title">Web Developer & Designer</p>
+                    <p data-translate="hero-description">Welcome to my personal website. This is where I share my professional work, personal interests, and thoughts through articles.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="images/profile-placeholder.jpg" alt="Wen Hengfei">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title" data-translate="about-title">About Me</h2>
+            <p data-translate="about-p1">
+                This is where you can introduce yourself in more detail. Share your background, education, professional journey, and what drives you. This section helps visitors get to know you better and understand your perspective.
+            </p>
+            <p data-translate="about-p2">
+                You can talk about your values, philosophy, and approach to your work. What makes you unique? What principles guide your professional and personal life? This is your opportunity to connect with your audience on a deeper level.
+            </p>
+            <p data-translate="about-p3">
+                Feel free to include any significant milestones, achievements, or transformative experiences that have shaped who you are today. The goal is to create an authentic representation of yourself that resonates with visitors.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Work -->
+    <section>
+        <div class="container">
+            <h2 class="section-title" data-translate="featured-work">Featured Work</h2>
+            <div class="portfolio-gallery">
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/work-placeholder-1.jpg" alt="Project 1">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3 data-translate="project1-title">Project Title 1</h3>
+                        <p data-translate="project1-desc">Brief description of the project</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/work-placeholder-2.webp" alt="Project 2">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3 data-translate="project2-title">Project Title 2</h3>
+                        <p data-translate="project2-desc">Brief description of the project</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/work-placeholder-3.webp" alt="Project 3">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3 data-translate="project3-title">Project Title 3</h3>
+                        <p data-translate="project3-desc">Brief description of the project</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="portfolio.html" class="read-more" data-translate="view-portfolio">View Full Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles -->
+    <section>
+        <div class="container">
+            <h2 class="section-title" data-translate="latest-articles">Latest Articles</h2>
+            <div class="articles-container" id="latest-articles">
+                <!-- Articles will be loaded dynamically from articles.json -->
+                <div class="loading-articles">
+                    <p>Loading articles...</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="articles.html" class="read-more" data-translate="view-articles">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p data-translate="copyright">&copy; 2025 Wen Hengfei. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/notion-config.js"></script>
+    <script src="js/translate.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/articles.js"></script>
+    <script src="js/structured-data.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/translate-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- 设置 Google Translate API 密钥 -->
+    <script>
+        // 注意：在生产环境中，不应该在客户端代码中硬编码API密钥
+        // 这里仅用于演示目的
+        window.GOOGLE_TRANSLATE_API_KEY = 'YOUR_GOOGLE_TRANSLATE_API_KEY_HERE';
+    </script>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Wen Hengfei</a>
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html" class="active">Work</a></li>
+                    <li><a href="hobbies.html">Hobbies</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="language-switch">
+        <button onclick="toggleLanguage()" title="中/En">
+            <i class="fas fa-language"></i>
+        </button>
+    </div>
+
+    <!-- Work Experience Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="work-experience">
+                <div class="work-item">
+                    <h3>Senior Web Developer</h3>
+                    <div class="work-meta">
+                        <span class="company">Tech Company</span> | 
+                        <span class="date">2022 - Present</span>
+                    </div>
+                    <p>Led development of responsive web applications using modern JavaScript frameworks. Collaborated with design teams to implement user-friendly interfaces and optimize performance.</p>
+                    <ul>
+                        <li>Developed and maintained 15+ responsive websites</li>
+                        <li>Improved page load times by 40% through optimization</li>
+                        <li>Mentored junior developers and conducted code reviews</li>
+                    </ul>
+                </div>
+                
+                <div class="work-item">
+                    <h3>Frontend Developer</h3>
+                    <div class="work-meta">
+                        <span class="company">Digital Agency</span> | 
+                        <span class="date">2020 - 2022</span>
+                    </div>
+                    <p>Specialized in creating pixel-perfect, responsive designs. Worked closely with clients to understand requirements and deliver high-quality solutions.</p>
+                    <ul>
+                        <li>Built custom WordPress themes and plugins</li>
+                        <li>Implemented SEO best practices across all projects</li>
+                        <li>Managed deployment and maintenance workflows</li>
+                    </ul>
+                </div>
+                
+                <div class="work-item">
+                    <h3>Junior Developer</h3>
+                    <div class="work-meta">
+                        <span class="company">Startup Studio</span> | 
+                        <span class="date">2018 - 2020</span>
+                    </div>
+                    <p>Gained experience in full-stack development while contributing to various client projects. Learned agile methodologies and best practices.</p>
+                    <ul>
+                        <li>Assisted in development of e-commerce platforms</li>
+                        <li>Created responsive email templates</li>
+                        <li>Participated in daily standups and sprint planning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React & Vue.js</li>
+                        <li>Responsive Design</li>
+                        <li>SASS/SCSS</li>
+                        <li>Bootstrap & Tailwind</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Node.js & Express</li>
+                        <li>Python & Django</li>
+                        <li>RESTful APIs</li>
+                        <li>Database Design</li>
+                        <li>MongoDB & PostgreSQL</li>
+                        <li>Authentication & Security</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Tools & Others</h3>
+                    <ul>
+                        <li>Git & GitHub</li>
+                        <li>Webpack & Vite</li>
+                        <li>Docker & CI/CD</li>
+                        <li>AWS & Cloud Services</li>
+                        <li>SEO & Analytics</li>
+                        <li>Agile & Scrum</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section>
+        <div class="container" style="text-align: center;">
+            <h2>Interested in Working Together?</h2>
+            <p>I'm always open to discussing new opportunities and interesting projects.</p>
+            <a href="contact.html" class="read-more">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 Wen Hengfei. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/translate.js"></script>
+</body>
+</html>

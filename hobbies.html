@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobbies - My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/translate-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+     <!-- 设置 Google Translate API 密钥 -->
+    <script>
+        // 注意：在生产环境中，不应该在客户端代码中硬编码API密钥
+        // 这里仅用于演示目的
+        window.GOOGLE_TRANSLATE_API_KEY = 'YOUR_GOOGLE_TRANSLATE_API_KEY_HERE';
+    </script>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Wen Hengfei</a>
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="hobbies.html" class="active">Hobbies</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="language-switch">
+        <button onclick="toggleLanguage()" title="中/En">
+            <i class="fas fa-language"></i>
+        </button>
+    </div>
+
+    <!-- Hobbies Introduction -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">My Hobbies & Interests</h2>
+            <p>
+                Beyond my professional life, I'm passionate about various activities that help me maintain balance, 
+                find joy, and continue learning. This page offers a glimpse into my personal interests and how they 
+                shape who I am outside of work.
+            </p>
+            <p>
+                These hobbies not only provide me with enjoyment and relaxation but also contribute to my creativity, 
+                problem-solving abilities, and overall perspective on life. I believe that maintaining diverse interests 
+                helps me bring fresh ideas and approaches to all aspects of my life.
+            </p>
+        </div>
+    </section>
+
+    <!-- Hobby Categories -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">What I Love To Do</h2>
+            
+            <div class="article">
+                <h3>Hobby Category 1</h3>
+                <p>
+                    Describe your first hobby or interest category in detail. What draws you to this activity? 
+                    How long have you been doing it? What skills have you developed? What do you enjoy most about it? 
+                    Include any notable experiences, achievements, or projects related to this hobby.
+                </p>
+            </div>
+            
+            <div class="article">
+                <h3>Hobby Category 2</h3>
+                <p>
+                    Describe your second hobby or interest category in detail. How did you get started with this activity? 
+                    How does it complement your other interests or your professional work? What have you learned from 
+                    this hobby? Include any interesting anecdotes or insights.
+                </p>
+            </div>
+            
+            <div class="article">
+                <h3>Hobby Category 3</h3>
+                <p>
+                    Describe your third hobby or interest category in detail. What aspects of this activity challenge you? 
+                    How has this hobby evolved over time? How does it reflect your personality or values? 
+                    Include any goals you have related to this hobby.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobby Gallery -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Hobby Gallery</h2>
+            <div class="portfolio-gallery">
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                    <img src="images/work-placeholder-1.jpg" alt="Hobby 1">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Hobby Image 1</h3>
+                        <p>A detailed description of this hobby activity, including what's happening in the image, when it was taken, and why this moment was special.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                    <img src="images/work-placeholder-3.webp" alt="Hobby 2">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Hobby Image 2</h3>
+                        <p>A detailed description of this hobby activity, including what's happening in the image, when it was taken, and why this moment was special.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                    <img src="images/hobby-placeholder-3.jpg" alt="Hobby 3">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Hobby Image 3</h3>
+                        <p>A detailed description of this hobby activity, including what's happening in the image, when it was taken, and why this moment was special.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                    <img src="images/work-placeholder-3.webp" alt="Hobby 4">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Hobby Image 4</h3>
+                        <p>A detailed description of this hobby activity, including what's happening in the image, when it was taken, and why this moment was special.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                    <img src="images/hobby-placeholder-5.jpg" alt="Hobby 5">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Hobby Image 5</h3>
+                        <p>A detailed description of this hobby activity, including what's happening in the image, when it was taken, and why this moment was special.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                    <img src="images/hobby-placeholder-6.jpg" alt="Hobby 6">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Hobby Image 6</h3>
+                        <p>A detailed description of this hobby activity, including what's happening in the image, when it was taken, and why this moment was special.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 Wen Hengfei. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/translate.js"></script>
+</body>
+</html>

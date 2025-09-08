@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/translate-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- 设置 Google Translate API 密钥 -->
+    <script>
+        // 注意：在生产环境中，不应该在客户端代码中硬编码API密钥
+        // 这里仅用于演示目的
+        window.GOOGLE_TRANSLATE_API_KEY = 'YOUR_GOOGLE_TRANSLATE_API_KEY_HERE';
+    </script>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Wen Hengfei</a>
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="hobbies.html">Hobbies</a></li>
+                    <li><a href="articles.html" class="active">Articles</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="language-switch">
+        <button onclick="toggleLanguage()" title="中/En">
+            <i class="fas fa-language"></i>
+        </button>
+    </div>
+
+    <!-- Articles Introduction -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">My Articles</h2>
+            <p>
+                Welcome to my articles section. Here, I share my thoughts, insights, and experiences on various topics 
+                related to my professional field and personal interests. These articles reflect my perspective and 
+                are meant to inform, inspire, and sometimes challenge conventional thinking.
+            </p>
+            <p>
+                I regularly update this section with new content, so check back often for fresh insights. 
+                Feel free to share these articles if you find them valuable, and I welcome thoughtful 
+                discussion on the topics I explore.
+            </p>
+        </div>
+    </section>
+
+    <!-- Articles List -->
+    <section>
+        <div class="container">
+            <div class="articles-container" id="articles-container">
+                <div class="loading-articles">
+                    <p>Loading articles...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 Wen Hengfei. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/notion-config.js"></script>
+    <script src="js/articles.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/translate.js"></script>
+    <script src="js/structured-data.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "profile-website",
+  "version": "1.0.0",
+  "description": "Personal profile website with Notion integration",
+  "scripts": {
+    "start": "http-server . -p 3001 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0"
+  },
+  "main": "test-api.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coriolanus-Min/wenhengfei.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Coriolanus-Min/wenhengfei/issues"
+  },
+  "homepage": "https://github.com/Coriolanus-Min/wenhengfei#readme"
+}

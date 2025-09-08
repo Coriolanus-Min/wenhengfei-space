@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/translate-button.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- 设置 Google Translate API 密钥 -->
+    <script>
+        // 注意：在生产环境中，不应该在客户端代码中硬编码API密钥
+        // 这里仅用于演示目的
+        window.GOOGLE_TRANSLATE_API_KEY = 'YOUR_GOOGLE_TRANSLATE_API_KEY_HERE';
+    </script>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Wen Hengfei</a>
+            </div>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="hobbies.html">Hobbies</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="language-switch">
+        <button onclick="toggleLanguage()" title="中/En">
+            <i class="fas fa-language"></i>
+        </button>
+    </div>
+
+    <!-- Portfolio Introduction -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">My Portfolio</h2>
+            <p>
+                Welcome to my portfolio showcase. This gallery features selected projects and work samples that 
+                represent my skills, expertise, and creative approach. Each item includes a brief description 
+                to provide context and highlight key aspects of the work.
+            </p>
+            <p>
+                These projects span different areas of my professional experience and demonstrate my ability to 
+                tackle various challenges. Feel free to explore the gallery and contact me if you'd like more 
+                information about any specific project.
+            </p>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery -->
+    <section>
+        <div class="container">
+            <div class="portfolio-gallery">
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/work-placeholder-1.jpg" alt="Portfolio Item 1">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 1</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/work-placeholder-2.webp" alt="Portfolio Item 2">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 2</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/hobby-placeholder-1.png" alt="Portfolio Item 3">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 3</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/portfolio-placeholder-1.jpg" alt="Portfolio Item 4">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 4</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/portfolio-placeholder-2.webp" alt="Portfolio Item 5">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 5</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/portfolio-placeholder-3.webp" alt="Portfolio Item 6">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 6</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/portfolio-placeholder-4.webp" alt="Portfolio Item 7">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 7</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/portfolio-placeholder-8.jpg" alt="Portfolio Item 8">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 8</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image-container">
+                        <img src="images/portfolio-placeholder-9.png" alt="Portfolio Item 9">
+                    </div>
+                    <div class="portfolio-caption">
+                        <h3>Project Title 9</h3>
+                        <p>Detailed description of this project, including your role, the technologies or methodologies used, challenges overcome, and outcomes achieved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2025 Wen Hengfei. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/translate.js"></script>
+</body>
+</html>
