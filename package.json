@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Personal profile website with Notion integration",
   "scripts": {
-    "start": "http-server . -p 3001 -c-1"
+    "start": "node server.js",
+    "dev": "http-server . -p 3001 -c-1"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
@@ -22,5 +23,10 @@
   "bugs": {
     "url": "https://github.com/Coriolanus-Min/wenhengfei/issues"
   },
-  "homepage": "https://github.com/Coriolanus-Min/wenhengfei#readme"
+  "homepage": "https://github.com/Coriolanus-Min/wenhengfei#readme",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
 }
