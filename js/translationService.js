@@ -1,8 +1,13 @@
-const TRANSLATOR_KEY = typeof MICROSOFT_TRANSLATOR_KEY !== 'undefined' ? MICROSOFT_TRANSLATOR_KEY : '';
-const TRANSLATOR_REGION = typeof MICROSOFT_TRANSLATOR_REGION !== 'undefined' ? MICROSOFT_TRANSLATOR_REGION : '';
-
 // 默认语言设置
 export const defaultLanguage = 'en';
+
+// Get the translation endpoint
+function getTranslationEndpoint() {
+    return window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+}
+
+// Store original English content from the page
+let originalTranslations = {};
 
 // 默认英文内容
 const defaultTranslations = {
@@ -52,23 +57,21 @@ class TranslationService {
     }
 
     async translate(text, targetLang = 'zh-CN') {
-        if (!TRANSLATOR_KEY) {
-            console.warn('Translation API key not set');
-            return text;
-        }
-
         try {
-            const response = await fetch('https://grizzled-spiral-mantis.glitch.me/api/translate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, to: zh-CN })
-});
+            const endpoint = getTranslationEndpoint();
+            
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, targetLanguage: targetLang })
+            });
+            
             if (!response.ok) {
                 throw new Error(`Translation failed: ${response.statusText}`);
             }
 
             const data = await response.json();
-            return data[0]?.translations[0]?.text || text;
+            return data.translated || text;
         } catch (error) {
             console.error('Translation error:', error);
             return text;
@@ -98,30 +101,38 @@ class TranslationService {
         const elements = document.querySelectorAll('[data-translate]');
         
         try {
-            if (this.currentLanguage === 'en') {
-                // 使用默认英文
+            // On first load, capture the original English text from the page
+            if (Object.keys(originalTranslations).length === 0) {
                 elements.forEach(el => {
                     const key = el.getAttribute('data-translate');
-                    el.textContent = defaultTranslations[key] || key;
+                    originalTranslations[key] = el.textContent;
+                });
+            }
+            
+            if (this.currentLanguage === 'en') {
+                // Restore original English text
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-translate');
+                    el.textContent = originalTranslations[key] || defaultTranslations[key] || key;
                 });
             } else {
-                // 如果没有缓存的翻译，获取新的翻译
+                // If no cached translation, get new translation
                 if (!this.translations[this.currentLanguage]) {
-                    this.translations[this.currentLanguage] = await this.translateObject(defaultTranslations, this.currentLanguage);
+                    this.translations[this.currentLanguage] = await this.translateObject(originalTranslations, this.currentLanguage);
                 }
                 
-                // 更新页面文本
+                // Update page text
                 elements.forEach(el => {
                     const key = el.getAttribute('data-translate');
-                    el.textContent = this.translations[this.currentLanguage][key] || key;
+                    el.textContent = this.translations[this.currentLanguage][key] || originalTranslations[key] || key;
                 });
             }
         } catch (error) {
             console.error('Failed to update translations:', error);
-            // 出错时使用默认英文
+            // On error, restore original English text
             elements.forEach(el => {
                 const key = el.getAttribute('data-translate');
-                el.textContent = defaultTranslations[key] || key;
+                el.textContent = originalTranslations[key] || defaultTranslations[key] || key;
             });
         } finally {
             this.loading = false;
