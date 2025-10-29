@@ -1,8 +1,10 @@
 // 统一使用同一代理端点；支持在页面里用 window.TRANSLATE_ENDPOINT 覆盖。
+// 建议在页面里提前设置：window.TRANSLATE_ENDPOINT = 'https://你的代理域名/api/translate';
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
     : 'https://<your-production-domain>/api/translate';
+
 // 简化：不依赖浏览器“环境变量”或密钥；直接调用代理。
 // 与 DOM 解绑默认文案：首次加载时从 [data-translate] 元素采集英文原文，作为默认表。
 async function callTranslate(text, to = 'zh-CN') {
