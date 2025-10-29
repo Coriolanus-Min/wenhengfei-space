@@ -3,7 +3,7 @@
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
-    : 'https://<your-production-domain>/api/translate';
+    : 'https://translation-proxy-oizxhi497-coriolanus-mins-projects.vercel.app/api/translate';
 
 let isEnglish = true;
 const translationCache = Object.create(null);
