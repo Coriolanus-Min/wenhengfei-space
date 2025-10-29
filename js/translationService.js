@@ -1,4 +1,5 @@
 // 统一使用同一代理端点；支持在页面里用 window.TRANSLATE_ENDPOINT 覆盖。
+// 建议在页面里提前设置：window.TRANSLATE_ENDPOINT = 'https://你的代理域名/api/translate';
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
