@@ -173,7 +173,7 @@ if (!window.toggleLanguage) {
         const elements = document.querySelectorAll('[data-translate]');
         elements.forEach(element => {
             const key = element.getAttribute('data-translate');
-            if (currentLang === 'zh' && typeof translations !== 'undefined' && translations.zh && translations.zh[key]) {
+            if (currentLang === 'zh' && translations && translations.zh && translations.zh[key]) {
                 element.textContent = translations.zh[key];
             } else {
                 // Restore original English content

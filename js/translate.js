@@ -96,19 +96,11 @@ async function safeToggleLanguage() {
 
 // Explicitly bind to window for inline onclick handlers
 window.toggleLanguage = safeToggleLanguage;
-window.safeToggleLanguage = safeToggleLanguage;
 
-// 初始按钮提示和事件监听器作为后备
+// 初始按钮提示
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
   if (button) {
     button.title = isEnglish ? '中' : 'En';
-    // Add click listener as fallback if inline onclick fails
-    button.addEventListener('click', function(e) {
-      // Only handle if not already handled by onclick
-      if (!e.defaultPrevented && window.toggleLanguage) {
-        window.toggleLanguage();
-      }
-    });
   }
 });
