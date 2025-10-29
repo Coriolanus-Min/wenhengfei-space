@@ -42,7 +42,7 @@ async function translateText(text) {
   return translatedText;
 }
 
-async function toggleLanguage() {
+async function safeToggleLanguage() {
   const button = document.querySelector('.language-switch button');
   const icon = button ? button.querySelector('i') : null;
   if (button) {
@@ -94,8 +94,15 @@ async function toggleLanguage() {
   }
 }
 
-// 初始按钮提示
+// Explicitly bind to window for inline onclick handlers
+window.toggleLanguage = safeToggleLanguage;
+
+// 初始按钮提示 + fallback event listener
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
-  if (button) button.title = isEnglish ? '中' : 'En';
+  if (button) {
+    button.title = isEnglish ? '中' : 'En';
+    // Add click listener as fallback in case inline handler fails
+    button.addEventListener('click', safeToggleLanguage);
+  }
 });
