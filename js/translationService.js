@@ -196,10 +196,3 @@ export async function getTranslations(lang = 'en') {
         return defaultTranslations;
     }
 }
-
-// 当页面加载完成时初始化翻译
-document.addEventListener('DOMContentLoaded', () => {
-    window.translationService.updatePageTranslations();
-});
-
-window.translationService.toggleLanguage(); // 切换语言
