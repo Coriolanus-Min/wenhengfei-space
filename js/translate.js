@@ -1,4 +1,4 @@
-// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default.
+// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
