@@ -1,5 +1,4 @@
 // Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default.
-// TODO: 如需切换端点，可在页面里提前设置 window.TRANSLATE_ENDPOINT = 'https://<your-production-domain>/api/translate';
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
@@ -42,7 +41,8 @@ async function translateText(text) {
   return translatedText;
 }
 
-async function toggleLanguage() {
+// 实际实现：显式挂到 window，并提供事件监听兜底，避免加载顺序/覆盖问题
+async function safeToggleLanguage() {
   const button = document.querySelector('.language-switch button');
   const icon = button ? button.querySelector('i') : null;
   if (button) {
@@ -94,8 +94,20 @@ async function toggleLanguage() {
   }
 }
 
-// 初始按钮提示
+// 让 inline onclick 能调到，并暴露兜底实现
+window.safeToggleLanguage = safeToggleLanguage;
+window.toggleLanguage = safeToggleLanguage;
+
+// 初始提示 + 兜底 click 监听（即使 inline onclick 不工作也能点击）
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
-  if (button) button.title = isEnglish ? '中' : 'En';
+  if (button) {
+    button.title = isEnglish ? '中' : 'En';
+    if (!button.dataset._langBound) {
+      button.addEventListener('click', () => {
+        safeToggleLanguage();
+      });
+      button.dataset._langBound = '1';
+    }
+  }
 });
