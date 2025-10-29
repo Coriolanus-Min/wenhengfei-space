@@ -1,5 +1,5 @@
-const TRANSLATOR_KEY = typeof MICROSOFT_TRANSLATOR_KEY !== 'undefined' ? MICROSOFT_TRANSLATOR_KEY : '';
-const TRANSLATOR_REGION = typeof MICROSOFT_TRANSLATOR_REGION !== 'undefined' ? MICROSOFT_TRANSLATOR_REGION : '';
+// Use unified translation proxy endpoint
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
 // 默认语言设置
 export const defaultLanguage = 'en';
@@ -52,23 +52,22 @@ class TranslationService {
     }
 
     async translate(text, targetLang = 'zh-CN') {
-        if (!TRANSLATOR_KEY) {
-            console.warn('Translation API key not set');
-            return text;
-        }
-
         try {
-            const response = await fetch('https://grizzled-spiral-mantis.glitch.me/api/translate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, to: zh-CN })
-});
+            const response = await fetch(TRANSLATE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    text: text,
+                    targetLanguage: targetLang 
+                })
+            });
+            
             if (!response.ok) {
                 throw new Error(`Translation failed: ${response.statusText}`);
             }
 
             const data = await response.json();
-            return data[0]?.translations[0]?.text || text;
+            return data.translated || text;
         } catch (error) {
             console.error('Translation error:', error);
             return text;

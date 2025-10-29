@@ -1,34 +1,21 @@
+// Use unified translation proxy endpoint
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+
 let isEnglish = true;
 const translationCache = {};
 
-// 检查是否缺少必要的环境变量
-function checkEnvironmentVariables() {
-    const missingVars = [];
-    // 在浏览器环境中检查全局变量而不是 process.env
-    if (typeof TRANSLATOR_API_KEY === 'undefined') missingVars.push('TRANSLATOR_API_KEY');
-    if (typeof TRANSLATOR_LOCATION === 'undefined') missingVars.push('TRANSLATOR_LOCATION');
-    
-    if (missingVars.length > 0) {
-        console.error('Missing required environment variables:', missingVars.join(', '));
-        return false;
-    }
-    return true;
-}
-
-async function translateText(text) {
+// Call the translation proxy with the new request/response shape
+async function callTranslate(text, to) {
     if (!text.trim()) return text;
     
-    const cacheKey = isEnglish ? text : translationCache[text];
-    if (translationCache[cacheKey]) {
-        return translationCache[cacheKey];
-    }
-
     try {
-        // Remove server-side environment variable check - not applicable in browser
-        const response = await fetch('https://grizzled-spiral-mantis.glitch.me/api/translate', {
+        const response = await fetch(TRANSLATE_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text, to: "zh-CN" })
+            body: JSON.stringify({ 
+                text: text,
+                targetLanguage: to 
+            })
         });
 
         if (!response.ok) {
@@ -36,16 +23,34 @@ async function translateText(text) {
         }
 
         const data = await response.json();
-        const translatedText = data[0].translations[0].text;
+        return data.translated;
+    } catch (error) {
+        console.error('Translation error:', error);
+        throw error;
+    }
+}
+
+async function translateText(text) {
+    if (!text.trim()) return text;
+    
+    // Check cache first
+    const cacheKey = isEnglish ? text : translationCache[text];
+    if (translationCache[cacheKey]) {
+        return translationCache[cacheKey];
+    }
+
+    try {
+        const targetLang = isEnglish ? 'zh-CN' : 'en';
+        const translatedText = await callTranslate(text, targetLang);
         
-        // Store in cache both ways
+        // Store in cache both ways for bidirectional lookup
         translationCache[text] = translatedText;
         translationCache[translatedText] = text;
         
         return translatedText;
     } catch (error) {
         console.error('Translation error:', error);
-        // 显示用户友好的错误消息
+        // Display user-friendly error message
         const errorMessage = document.createElement('div');
         errorMessage.className = 'translation-error';
         errorMessage.textContent = '暂不可用';
