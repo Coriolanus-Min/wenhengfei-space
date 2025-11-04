@@ -23,15 +23,15 @@
     },
     {
       "id": "article-2",
-      "title": "Peter's Laws: The Creed of the Persistent and Passionate Mind ",
+      "title": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
       "date": "2025-11-04",
-      "summary": "Dr. Peter H. Diamandis is a renowned visionary, entrepreneur, and author focused on breakthrough technology and massive, transformative challenges. He has founded over 25 companies spanning the fields of space, health-tech, venture capital, and education. He is widely recognized for his advocacy of exponential thinking and his optimistic outlook on global abundance.",
+      "summary": "Dr. Peter H. Diamandis is a renowned visionary, entrepreneur, and author focused on breakthrough technology and massive, transformative challenges.",
       "type": "notion",
       "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
       "notionUrl": "https://canary-fountain-2ab.notion.site/Peter-s-Laws-The-Creed-of-the-Persistent-and-Passionate-Mind-2a1727d0d1bf8060b3d2dd7d7a60456e?source=copy_link",
       "tags": ["thinking", "self-improving"],
       "featured": true
-    }
+    },
     {
       "id": "article-3",
       "title": "Article Title 2 (Notion)",
@@ -44,4 +44,4 @@
       "featured": true
     }
   ]
-} 
+}
