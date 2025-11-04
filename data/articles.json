@@ -23,12 +23,23 @@
     },
     {
       "id": "article-2",
-      "title": "Article Title 2 (Notion)",
-      "date": "2025-03-25",
-      "summary": "involuntary single",
+      "title": "Peter's Laws: The Creed of the Persistent and Passionate Mind ",
+      "date": "2025-11-04",
+      "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
       "type": "notion",
       "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
-      "notionUrl": "https://canary-fountain-2ab.notion.site/involuntary-single-23c727d0d1bf80a2b433f0827e76dc61?source=copy_link",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/Peter-s-Laws-The-Creed-of-the-Persistent-and-Passionate-Mind-2a1727d0d1bf8060b3d2dd7d7a60456e?source=copy_link",
+      "tags": ["thinking", "self-improving"],
+      "featured": true
+    }
+    {
+      "id": "article-3",
+      "title": "Article Title 2 (Notion)",
+      "date": "2025-03-25",
+      "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
+      "type": "notion",
+      "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/Peter-s-Laws-The-Creed-of-the-Persistent-and-Passionate-Mind-2a1727d0d1bf8060b3d2dd7d7a60456e?source=copy_link",
       "tags": ["design", "user experience"],
       "featured": true
     }
