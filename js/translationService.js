@@ -1,10 +1,12 @@
 // Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
+
 const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
-// 默认语言设置
+
+// Default language setting
 export const defaultLanguage = 'en';
 
-// 默认英文内容
+// Default English content
 const defaultTranslations = {
     'switchLang': 'Switch to Chinese',
     'nav-home': 'Home',
@@ -45,7 +47,7 @@ class TranslationService {
         this.translations = {};
         this.loading = false;
         
-        // 初始化时立即翻译页面
+        // Initialize page translations on DOMContentLoaded
         document.addEventListener('DOMContentLoaded', () => {
             this.updatePageTranslations();
         });
@@ -180,10 +182,10 @@ class TranslationService {
     }
 }
 
-// 创建全局翻译服务实例
+// Create global translation service instance
 window.translationService = new TranslationService();
 
-// 获取翻译的函数
+// Function to get translations
 export async function getTranslations(lang = 'en') {
     if (lang === 'en') {
         return defaultTranslations;

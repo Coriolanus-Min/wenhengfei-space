@@ -1,8 +1,10 @@
+
 // Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
 const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
 let isEnglish = true;
-const translationCache = {};
+const translationCache = Object.create(null);
+
 
 /**
  * Call the translation proxy endpoint
@@ -23,9 +25,9 @@ async function callTranslate(text, targetLanguage) {
             })
         });
 
-        if (!response.ok) {
-            throw new Error(`Translation API error: ${response.status}`);
-        }
+
+  const translatedText = await callTranslate(s, 'zh-CN');
+
 
         const data = await response.json();
         return data.translated || text;
@@ -125,7 +127,16 @@ async function toggleLanguage() {
             icon.className = 'fas fa-language';
         }
     }
+  } catch (error) {
+    console.error('Toggle language error:', error);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      if (icon) icon.className = 'fas fa-language';
+    }
+  }
 }
+
 
 // Initialize button on page load
 document.addEventListener('DOMContentLoaded', () => {
