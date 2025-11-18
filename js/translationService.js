@@ -1,4 +1,5 @@
-// Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
+// Use unified translation proxy endpoint
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
 const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
@@ -60,18 +61,16 @@ class TranslationService {
      * @returns {Promise<string>} Translated text
      */
     async translate(text, targetLang = 'zh-CN') {
-        if (!text) return text;
-
         try {
             const response = await fetch(TRANSLATE_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    text: text,
+                    text,
                     targetLanguage: targetLang 
                 })
             });
-
+            
             if (!response.ok) {
                 throw new Error(`Translation failed: ${response.statusText}`);
             }

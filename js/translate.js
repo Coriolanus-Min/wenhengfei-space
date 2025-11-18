@@ -1,38 +1,61 @@
-
-// js/translate.js
+// Use unified translation proxy endpoint
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
 let isEnglish = true;
-const translationCache = Object.create(null);
+const translationCache = {};
 
-async function translateText(text, targetLang) {
-    const cacheKey = `${text}-${targetLang}`;
+// Call the translation proxy with the new request/response shape
+async function callTranslate(text, to) {
+    if (!text.trim()) return text;
+    
+    try {
+        const response = await fetch(TRANSLATE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                text,
+                targetLanguage: to 
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Translation API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.translated;
+    } catch (error) {
+        console.error('Translation error:', error);
+        throw error;
+    }
+}
+
+async function translateText(text) {
+    if (!text.trim()) return text;
+    
+    // Check cache first
+    const cacheKey = isEnglish ? text : translationCache[text];
     if (translationCache[cacheKey]) {
         return translationCache[cacheKey];
     }
 
     try {
-        const response = await fetch('/api/translate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text, targetLang }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const translatedText = data.data.translations[0].translatedText;
+        const targetLang = isEnglish ? 'zh-CN' : 'en';
+        const translatedText = await callTranslate(text, targetLang);
         
-        // Store in cache
-        translationCache[cacheKey] = translatedText;
+        // Store in cache both ways for bidirectional lookup
+        translationCache[text] = translatedText;
+        translationCache[translatedText] = text;
         
         return translatedText;
     } catch (error) {
         console.error('Translation error:', error);
-        // Return original text if translation fails
+        // Display user-friendly error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'translation-error';
+        errorMessage.textContent = '暂不可用';
+        document.body.appendChild(errorMessage);
+        setTimeout(() => errorMessage.remove(), 3000);
         return text;
     }
 }
