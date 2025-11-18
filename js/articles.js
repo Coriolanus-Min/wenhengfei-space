@@ -266,8 +266,8 @@ class ArticleManager {
                     <div class="article-tags">
                         ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>`
-                    <div class="article-date">${this.formatDate(article.date)}</div>;
+                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>
+                    <div class="article-date">${this.formatDate(article.date)}</div>`;
             } else {
                 contentHtml = `
                     <div class="article-header">

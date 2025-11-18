@@ -40,3 +40,12 @@ The development server will automatically:
 - Enable live reloading
 - Allow JSON file loading
 - Support Notion embeds
+
+## Help & Documentation
+
+- **New to Git/GitHub?** Check out our guides:
+  - [Pull Request Management Guide](PULL_REQUEST_GUIDE.md) - Complete guide for managing PRs
+  - [Merge Conflicts Quick Start](docs/MERGE_CONFLICTS_QUICK_START.md) - Simple visual guide for resolving conflicts
+- **Setting up features:**
+  - [Notion Integration](docs/NOTION_SETUP.md)
+  - [Translation Setup](docs/TRANSLATION_SETUP.md)
