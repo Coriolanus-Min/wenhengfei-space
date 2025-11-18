@@ -157,11 +157,45 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(String(email).toLowerCase());
     }
 });
-
-// Fallback toggleLanguage if not defined by translate.js
-// Only define if translate.js hasn't already bound it
+// Language switching functionality (fallback demo implementation)
+// Only define if window.toggleLanguage doesn't already exist (from translate.js)
 if (!window.toggleLanguage) {
-    window.toggleLanguage = function() {
-        console.warn('Translation service not available - translate.js not loaded');
-    };
+    let currentLang = 'en';
+
+    window.toggleLanguage = function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        updateContent();
+        updateButtonText();
+    }
+
+    function updateContent() {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (currentLang === 'zh' && typeof translations !== 'undefined' && translations.zh && translations.zh[key]) {
+                element.textContent = translations.zh[key];
+            } else {
+                // Restore original English content
+                element.textContent = element.getAttribute('data-original') || element.textContent;
+            }
+        });
+    }
+
+    function updateButtonText() {
+        const button = document.getElementById('translateBtn');
+        if (button) {
+            const buttonText = button.querySelector('span');
+            if (buttonText) {
+                buttonText.textContent = currentLang === 'en' ? '中文' : 'English';
+            }
+        }
+    }
+
+    // Store original English content when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            element.setAttribute('data-original', element.textContent);
+        });
+    });
 }
