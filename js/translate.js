@@ -60,45 +60,63 @@ async function translateText(text) {
     }
 }
 
+/**
+ * Toggle page language between English and Chinese
+ * Translates all text nodes and updates the UI
+ */
 async function toggleLanguage() {
     const button = document.querySelector('.language-switch button');
-    const icon = button.querySelector('i');
-    button.disabled = true;
-    icon.className = 'fas fa-spinner fa-spin'; // 添加加载动画
-    
-    try {
-        const textNodes = document.evaluate(
-            '//text()[not(ancestor::script) and not(ancestor::style)]',
-            document,
-            null,
-            XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-            null
-        );
+    if (button) {
+        const icon = button.querySelector('i');
+        button.disabled = true;
+        if (icon) icon.className = 'fas fa-spinner fa-spin'; // Loading spinner
+    }
 
-        for (let i = 0; i < textNodes.snapshotLength; i++) {
-            const node = textNodes.snapshotItem(i);
-            if (node.nodeValue.trim()) {
-                const translatedText = await translateText(node.nodeValue);
-                node.nodeValue = translatedText;
-            }
+    isEnglish = !isEnglish;
+    const targetLang = isEnglish ? 'en' : 'zh';
+
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+
+    for (const element of elementsToTranslate) {
+        // Store original text if it's not already stored
+        if (!element.dataset.originalText) {
+            element.dataset.originalText = element.textContent;
         }
 
-        isEnglish = !isEnglish;
-        // 移除文字提示，只使用图标
-        button.textContent = '';
-        button.appendChild(icon); // 重新添加图标
-    } catch (error) {
-        console.error('Toggle language error:', error);
-    } finally {
-        button.disabled = false;
-        icon.className = 'fas fa-language'; // 恢复原始图标
+        const originalText = element.dataset.originalText;
+        let newText;
+
+        if (isEnglish) {
+            // If switching back to English, use the stored original text
+            newText = originalText;
+        } else {
+            // Otherwise, translate the original English text to Chinese
+            newText = await translateText(originalText, targetLang);
+        }
+
+        element.textContent = newText;
     }
+
+    if (button) {
+        button.disabled = false;
+        const icon = button.querySelector('i');
+        if (icon) icon.className = 'fas fa-language'; // Restore original icon
+        button.title = isEnglish ? '中文' : 'English';
+    }
+  } catch (error) {
+    console.error('Toggle language error:', error);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      if (icon) icon.className = 'fas fa-language';
+    }
+  }
 }
 
-// 初始化按钮提示文本
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('.language-switch button');
-    if (button) {
-        button.title = isEnglish ? '中' : 'En';
+    const langButton = document.querySelector('.language-switch button');
+    if (langButton) {
+        langButton.addEventListener('click', toggleLanguage);
+        langButton.title = '中文'; // Initial tooltip
     }
 });

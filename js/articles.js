@@ -16,29 +16,17 @@ class ArticleManager {
             ARTICLES_DATABASE_ID: '',
             PROJECTS_DATABASE_ID: ''
         });
-        
         // Debug logging
-        console.log('ArticleManager initialized');
-        console.log('Container found:', this.container);
-        console.log('Is homepage:', this.isHomepage);
-        console.log('Config:', this.config);
     }
 
     async init() {
-        console.log('ArticleManager.init() called');
         try {
             // Use simple JSON loading with public Notion URLs
-            console.log('Loading from JSON...');
             await this.loadFromJSON();
-            console.log('Articles loaded:', this.articles.length);
-            
-            console.log('Displaying articles...');
             await this.displayArticles();
-            console.log('Articles displayed');
             
             // Only initialize complex Notion embeds for full articles page
             if (!this.isHomepage && this.config.USE_API_INTEGRATION) {
-                console.log('Initializing Notion embeds...');
                 await this.initializeNotion();
             }
         } catch (error) {
@@ -172,7 +160,6 @@ class ArticleManager {
             console.error('Error loading Notion script:', error);
             if (this.notionLoadRetries < this.maxRetries) {
                 this.notionLoadRetries++;
-                console.log(`Retrying Notion script load (${this.notionLoadRetries}/${this.maxRetries})`);
                 setTimeout(() => this.initializeNotion(), 2000);
             } else {
                 this.showError('Notion 内容暂时无法加载，请刷新页面重试');
@@ -274,21 +261,21 @@ class ArticleManager {
             if (!this.config.USE_API_INTEGRATION) {
                 const articleUrl = article.notionUrl || article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
                 contentHtml = `
-                    <div class="article-date">${this.formatDate(article.date)}</div>
                     <h3 class="article-title">${article.title}</h3>
                     <p>${article.summary}</p>
                     <div class="article-tags">
                         ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>`;
+                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>`
+                    <div class="article-date">${this.formatDate(article.date)}</div>;
             } else {
                 contentHtml = `
                     <div class="article-header">
-                        <div class="article-date">${this.formatDate(article.date)}</div>
                         <h3 class="article-title">${article.title}</h3>
                         <div class="article-tags">
                             ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
+                        <div class="article-date">${this.formatDate(article.date)}</div>
                     </div>
                     <div class="article-content notion-content">
                         ${this.createNotionEmbed(article.notionId)}
