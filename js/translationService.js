@@ -1,5 +1,7 @@
 // Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
-const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-oizxhi497-coriolanus-mins-projects.vercel.app/api/translate';
+
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+
 
 // Default language setting
 export const defaultLanguage = 'en';
@@ -196,6 +198,3 @@ export async function getTranslations(lang = 'en') {
         return defaultTranslations;
     }
 }
-
-// Also expose the class
-window.TranslationService = window.TranslationService || TranslationService;

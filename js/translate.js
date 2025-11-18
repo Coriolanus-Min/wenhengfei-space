@@ -1,100 +1,131 @@
-// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default
-const TRANSLATE_ENDPOINT =
-  (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
-    ? window.TRANSLATE_ENDPOINT
-    : 'https://translation-proxy-oizxhi497-coriolanus-mins-projects.vercel.app/api/translate';
+
+// Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
 
 let isEnglish = true;
 const translationCache = Object.create(null);
 
-// Call the proxy API: accepts { text, targetLanguage }, returns { translated }.
-async function callTranslate(text, to = 'zh-CN') {
-  try {
-    const res = await fetch(TRANSLATE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, targetLanguage: to }),
-      cache: 'no-store'
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data?.error || res.statusText);
-    return (data && typeof data.translated === 'string') ? data.translated : text;
-  } catch (e) {
-    console.error('Translation error:', e);
-    return text;
-  }
-}
 
-// Check if text is worth translating (skip numbers, single chars, special symbols)
-function isTranslatable(text) {
-  const s = text.trim();
-  if (s.length <= 1) return false; // Skip single characters
-  if (/^[\d\s\.,;:!?()[\]{}\-_+=*&^%$#@~`|\\/<>'"]+$/.test(s)) return false; // Skip numbers and punctuation only
-  return true;
-}
+/**
+ * Call the translation proxy endpoint
+ * @param {string} text - Text to translate
+ * @param {string} targetLanguage - Target language code (e.g., 'zh-CN', 'en')
+ * @returns {Promise<string>} Translated text
+ */
+async function callTranslate(text, targetLanguage) {
+    if (!text.trim()) return text;
+    
+    try {
+        const response = await fetch(TRANSLATE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                text: text,
+                targetLanguage: targetLanguage 
+            })
+        });
 
-async function translateText(text) {
-  const s = String(text ?? '');
-  if (!s.trim()) return s;
-  
-  // Skip non-translatable content
-  if (!isTranslatable(s)) return s;
-
-  const cacheKey = isEnglish ? s : translationCache[s];
-  if (cacheKey && translationCache[cacheKey]) return translationCache[cacheKey];
 
   const translatedText = await callTranslate(s, 'zh-CN');
 
-  // Bidirectional cache for easy toggling back to original text
-  translationCache[s] = translatedText;
-  translationCache[translatedText] = s;
 
-  return translatedText;
+        const data = await response.json();
+        return data.translated || text;
+    } catch (error) {
+        console.error('Translation error:', error);
+        return text;
+    }
 }
-async function safeToggleLanguage() {
-  const button = document.querySelector('.language-switch button');
-  const icon = button ? button.querySelector('i') : null;
-  if (button) {
-    button.disabled = true;
-    if (icon) icon.className = 'fas fa-spinner fa-spin';
-  }
 
-  try {
-    // Iterate through visible text nodes (excluding script/style)
-    const textNodes = document.evaluate(
-      '//text()[not(ancestor::script) and not(ancestor::style)]',
-      document,
-      null,
-      XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-      null
-    );
-
-    for (let i = 0; i < textNodes.snapshotLength; i++) {
-      const node = textNodes.snapshotItem(i);
-      const val = node?.nodeValue ?? '';
-      if (!val.trim()) continue;
-      
-      // Skip non-translatable content to reduce API calls
-      if (!isTranslatable(val)) continue;
-
-      if (isEnglish) {
-        // English to Chinese
-        node.nodeValue = await translateText(val);
-      } else {
-        // Chinese to English (reverse from cache)
-        const original = translationCache[val];
-        if (typeof original === 'string') node.nodeValue = original;
-      }
+/**
+ * Translate text with caching
+ * @param {string} text - Text to translate
+ * @returns {Promise<string>} Translated text
+ */
+async function translateText(text) {
+    if (!text.trim()) return text;
+    
+    // Check cache first
+    const cacheKey = text;
+    if (translationCache[cacheKey]) {
+        return translationCache[cacheKey];
     }
 
-    isEnglish = !isEnglish;
+    try {
+        // Determine target language based on current state
+        const targetLanguage = isEnglish ? 'zh-CN' : 'en';
+        const translatedText = await callTranslate(text, targetLanguage);
+        
+        // Store in cache both ways for bidirectional translation
+        translationCache[text] = translatedText;
+        translationCache[translatedText] = text;
+        
+        return translatedText;
+    } catch (error) {
+        console.error('Translation error:', error);
+        // Show user-friendly error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'translation-error';
+        errorMessage.textContent = 'Translation temporarily unavailable';
+        errorMessage.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 12px 20px; border-radius: 4px; z-index: 10000;';
+        document.body.appendChild(errorMessage);
+        setTimeout(() => errorMessage.remove(), 3000);
+        return text;
+    }
+}
 
-    if (button) {
-      button.title = isEnglish ? '中' : 'En';
-      if (icon) {
-        button.textContent = '';
-        button.appendChild(icon);
-      }
+/**
+ * Toggle page language between English and Chinese
+ * Translates all text nodes and updates the UI
+ */
+async function toggleLanguage() {
+    const button = document.querySelector('.language-switch button');
+    if (!button) return;
+    
+    const icon = button.querySelector('i');
+    button.disabled = true;
+    if (icon) {
+        icon.className = 'fas fa-spinner fa-spin';
+    }
+    
+    try {
+        // Get all text nodes that are not in script or style tags
+        const textNodes = document.evaluate(
+            '//text()[not(ancestor::script) and not(ancestor::style)]',
+            document,
+            null,
+            XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
+            null
+        );
+
+        // Translate each text node
+        for (let i = 0; i < textNodes.snapshotLength; i++) {
+            const node = textNodes.snapshotItem(i);
+            const trimmedText = node.nodeValue.trim();
+            if (trimmedText) {
+                const translatedText = await translateText(node.nodeValue);
+                node.nodeValue = translatedText;
+            }
+        }
+
+        // Toggle language state
+        isEnglish = !isEnglish;
+        
+        // Update button UI
+        if (icon) {
+            button.textContent = '';
+            button.appendChild(icon);
+        }
+        button.title = isEnglish ? 'Switch to Chinese (中)' : 'Switch to English (En)';
+    } catch (error) {
+        console.error('Toggle language error:', error);
+        // Show error to user
+        alert('Translation failed. Please try again.');
+    } finally {
+        button.disabled = false;
+        if (icon) {
+            icon.className = 'fas fa-language';
+        }
     }
   } catch (error) {
     console.error('Toggle language error:', error);
@@ -106,15 +137,11 @@ async function safeToggleLanguage() {
   }
 }
 
-// Bind to window for inline onclick handlers and prevent override by script.js
-window.safeToggleLanguage = safeToggleLanguage;
-window.toggleLanguage = safeToggleLanguage;
 
+// Initialize button on page load
 document.addEventListener('DOMContentLoaded', () => {
-  const button = document.querySelector('.language-switch button');
-  if (button) {
-    button.title = isEnglish ? '中' : 'En';
-    // Also attach event listener as backup
-    button.addEventListener('click', safeToggleLanguage);
-  }
+    const button = document.querySelector('.language-switch button');
+    if (button) {
+        button.title = isEnglish ? 'Switch to Chinese (中)' : 'Switch to English (En)';
+    }
 });
