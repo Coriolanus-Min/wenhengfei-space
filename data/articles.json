@@ -1,7 +1,7 @@
 {
   "articles": [
     {
-      "id": "Oblique-Strategies",
+      "id": "article-1",
       "title": "Oblique-Strategies",
       "date": "2024-03-20",
       "type": "notion",
@@ -12,7 +12,7 @@
       "featured": true
     },
     {
-      "id": "article-1",
+      "id": "article-3",
       "title": "Article Title 1",
       "date": "2025-04-10",
       "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
@@ -33,7 +33,7 @@
       "featured": true
     },
     {
-      "id": "article-3",
+      "id": "article-4",
       "title": "Article Title 2 (Notion)",
       "date": "2025-03-25",
       "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
