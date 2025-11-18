@@ -3,7 +3,7 @@
     {
       "id": "article-1",
       "title": "Oblique-Strategies",
-      "date": "2024-03-20",
+      "date": "2025-11-17",
       "type": "notion",
       "notionId": "2af727d0d1bf80bab998ceaad87bc492",
       "notionUrl": "https://canary-fountain-2ab.notion.site/Oblique-Strategies-2af727d0d1bf80bab998ceaad87bc492?source=copy_link",
@@ -11,20 +11,11 @@
       "tags": ["self-improving", "skill tools", "thinking"],
       "featured": true
     },
-    {
-      "id": "article-3",
-      "title": "Article Title 1",
-      "date": "2025-04-10",
-      "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
-      "content": "content/article-1.md",
-      "type": "markdown",
-      "tags": ["web development", "technology"],
-      "featured": true
-    },
+ 
     {
       "id": "article-2",
       "title": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
-      "date": "2025-11-04",
+      "date": "2025-08-04",
       "summary": "Dr. Peter H. Diamandis is a renowned visionary, entrepreneur, and author focused on breakthrough technology and massive, transformative challenges.",
       "type": "notion",
       "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
@@ -32,10 +23,22 @@
       "tags": ["thinking", "self-improving"],
       "featured": true
     },
+    
+    {
+      "id": "article-3",
+      "title": "Article Title 1",
+      "date": "2024-04-10",
+      "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
+      "content": "content/article-1.md",
+      "type": "markdown",
+      "tags": ["web development", "technology"],
+      "featured": true
+    },
+    
     {
       "id": "article-4",
       "title": "Article Title 2 (Notion)",
-      "date": "2025-03-25",
+      "date": "2023-03-25",
       "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
       "type": "notion",
       "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
