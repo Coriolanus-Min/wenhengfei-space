@@ -1,75 +1,38 @@
 
-// Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
-const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+// js/translate.js
 
 let isEnglish = true;
 const translationCache = Object.create(null);
 
-
-/**
- * Call the translation proxy endpoint
- * @param {string} text - Text to translate
- * @param {string} targetLanguage - Target language code (e.g., 'zh-CN', 'en')
- * @returns {Promise<string>} Translated text
- */
-async function callTranslate(text, targetLanguage) {
-    if (!text.trim()) return text;
-    
-    try {
-        const response = await fetch(TRANSLATE_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                text: text,
-                targetLanguage: targetLanguage 
-            })
-        });
-
-
-  const translatedText = await callTranslate(s, 'zh-CN');
-
-
-        const data = await response.json();
-        return data.translated || text;
-    } catch (error) {
-        console.error('Translation error:', error);
-        return text;
-    }
-}
-
-/**
- * Translate text with caching
- * @param {string} text - Text to translate
- * @returns {Promise<string>} Translated text
- */
-async function translateText(text) {
-    if (!text.trim()) return text;
-    
-    // Check cache first
-    const cacheKey = text;
+async function translateText(text, targetLang) {
+    const cacheKey = `${text}-${targetLang}`;
     if (translationCache[cacheKey]) {
         return translationCache[cacheKey];
     }
 
     try {
-        // Determine target language based on current state
-        const targetLanguage = isEnglish ? 'zh-CN' : 'en';
-        const translatedText = await callTranslate(text, targetLanguage);
+        const response = await fetch('/api/translate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text, targetLang }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const translatedText = data.data.translations[0].translatedText;
         
-        // Store in cache both ways for bidirectional translation
-        translationCache[text] = translatedText;
-        translationCache[translatedText] = text;
+        // Store in cache
+        translationCache[cacheKey] = translatedText;
         
         return translatedText;
     } catch (error) {
         console.error('Translation error:', error);
-        // Show user-friendly error message
-        const errorMessage = document.createElement('div');
-        errorMessage.className = 'translation-error';
-        errorMessage.textContent = 'Translation temporarily unavailable';
-        errorMessage.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 12px 20px; border-radius: 4px; z-index: 10000;';
-        document.body.appendChild(errorMessage);
-        setTimeout(() => errorMessage.remove(), 3000);
+        // Return original text if translation fails
         return text;
     }
 }
@@ -80,52 +43,42 @@ async function translateText(text) {
  */
 async function toggleLanguage() {
     const button = document.querySelector('.language-switch button');
-    if (!button) return;
-    
-    const icon = button.querySelector('i');
-    button.disabled = true;
-    if (icon) {
-        icon.className = 'fas fa-spinner fa-spin';
+    if (button) {
+        const icon = button.querySelector('i');
+        button.disabled = true;
+        if (icon) icon.className = 'fas fa-spinner fa-spin'; // Loading spinner
     }
-    
-    try {
-        // Get all text nodes that are not in script or style tags
-        const textNodes = document.evaluate(
-            '//text()[not(ancestor::script) and not(ancestor::style)]',
-            document,
-            null,
-            XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-            null
-        );
 
-        // Translate each text node
-        for (let i = 0; i < textNodes.snapshotLength; i++) {
-            const node = textNodes.snapshotItem(i);
-            const trimmedText = node.nodeValue.trim();
-            if (trimmedText) {
-                const translatedText = await translateText(node.nodeValue);
-                node.nodeValue = translatedText;
-            }
+    isEnglish = !isEnglish;
+    const targetLang = isEnglish ? 'en' : 'zh';
+
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+
+    for (const element of elementsToTranslate) {
+        // Store original text if it's not already stored
+        if (!element.dataset.originalText) {
+            element.dataset.originalText = element.textContent;
         }
 
-        // Toggle language state
-        isEnglish = !isEnglish;
-        
-        // Update button UI
-        if (icon) {
-            button.textContent = '';
-            button.appendChild(icon);
+        const originalText = element.dataset.originalText;
+        let newText;
+
+        if (isEnglish) {
+            // If switching back to English, use the stored original text
+            newText = originalText;
+        } else {
+            // Otherwise, translate the original English text to Chinese
+            newText = await translateText(originalText, targetLang);
         }
-        button.title = isEnglish ? 'Switch to Chinese (中)' : 'Switch to English (En)';
-    } catch (error) {
-        console.error('Toggle language error:', error);
-        // Show error to user
-        alert('Translation failed. Please try again.');
-    } finally {
+
+        element.textContent = newText;
+    }
+
+    if (button) {
         button.disabled = false;
-        if (icon) {
-            icon.className = 'fas fa-language';
-        }
+        const icon = button.querySelector('i');
+        if (icon) icon.className = 'fas fa-language'; // Restore original icon
+        button.title = isEnglish ? '中文' : 'English';
     }
   } catch (error) {
     console.error('Toggle language error:', error);
@@ -137,11 +90,10 @@ async function toggleLanguage() {
   }
 }
 
-
-// Initialize button on page load
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('.language-switch button');
-    if (button) {
-        button.title = isEnglish ? 'Switch to Chinese (中)' : 'Switch to English (En)';
+    const langButton = document.querySelector('.language-switch button');
+    if (langButton) {
+        langButton.addEventListener('click', toggleLanguage);
+        langButton.title = '中文'; // Initial tooltip
     }
 });

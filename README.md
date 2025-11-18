@@ -1,6 +1,6 @@
 # Personal Profile Website
 
-A personal website with Notion integration for article management.
+This is where I share my professional work, personal interests, and thoughts through articles.
 
 ## Setup
 
