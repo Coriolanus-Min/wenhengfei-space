@@ -25,7 +25,7 @@
     },
 
      {
-      "id": "article-2",
+      "id": "article-3",
       "title": "Technology Ruining Teens’ Lives?",
       "date": "2025-04-01",
       "summary": "When examining contemporary writing on adolescent mental health, technology, and cultural anxiety, it becomes clear that meaning often hides in phrasing rather than in argument alone. ",
@@ -37,7 +37,7 @@
     },
     
     {
-      "id": "article-3",
+      "id": "article-4",
       "title": "Article Title 1",
       "date": "2024-04-10",
       "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
@@ -48,6 +48,7 @@
     },
    
     {
+      "id": "article-5",
       "title": "Article Title 2 (Notion)",
       "date": "2023-03-25",
       "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
