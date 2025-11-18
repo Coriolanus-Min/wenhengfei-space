@@ -157,3 +157,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(String(email).toLowerCase());
     }
 });
+
+// Fallback toggleLanguage if not defined by translate.js
+// Only define if translate.js hasn't already bound it
+if (!window.toggleLanguage) {
+    window.toggleLanguage = function() {
+        console.warn('Translation service not available - translate.js not loaded');
+    };
+}

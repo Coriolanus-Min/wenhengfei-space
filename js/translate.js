@@ -5,6 +5,49 @@ const TRANSLATE_ENDPOINT =
     : 'https://translation-proxy-oizxhi497-coriolanus-mins-projects.vercel.app/api/translate';
 
 let isEnglish = true;
+const translationCache = Object.create(null);
+
+// Call the proxy API: accepts { text, targetLanguage }, returns { translated }.
+async function callTranslate(text, to = 'zh-CN') {
+  try {
+    const res = await fetch(TRANSLATE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, targetLanguage: to }),
+      cache: 'no-store'
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.error || res.statusText);
+    return (data && typeof data.translated === 'string') ? data.translated : text;
+  } catch (e) {
+    console.error('Translation error:', e);
+    return text;
+  }
+}
+
+// Check if text is worth translating (skip numbers, single chars, special symbols)
+function isTranslatable(text) {
+  const s = text.trim();
+  if (s.length <= 1) return false; // Skip single characters
+  if (/^[\d\s\.,;:!?()[\]{}\-_+=*&^%$#@~`|\\/<>'"]+$/.test(s)) return false; // Skip numbers and punctuation only
+  return true;
+}
+
+async function translateText(text) {
+  const s = String(text ?? '');
+  if (!s.trim()) return s;
+  
+  // Skip non-translatable content
+  if (!isTranslatable(s)) return s;
+
+  const cacheKey = isEnglish ? s : translationCache[s];
+  if (cacheKey && translationCache[cacheKey]) return translationCache[cacheKey];
+
+  const translatedText = await callTranslate(s, 'zh-CN');
+
+  // Bidirectional cache for easy toggling back to original text
+  translationCache[s] = translatedText;
+  translationCache[translatedText] = s;
 
   return translatedText;
 }
@@ -17,7 +60,7 @@ async function safeToggleLanguage() {
   }
 
   try {
-    // 遍历可见文本节点（排除 script/style）
+    // Iterate through visible text nodes (excluding script/style)
     const textNodes = document.evaluate(
       '//text()[not(ancestor::script) and not(ancestor::style)]',
       document,
@@ -35,10 +78,10 @@ async function safeToggleLanguage() {
       if (!isTranslatable(val)) continue;
 
       if (isEnglish) {
-        // 英 -> 中
+        // English to Chinese
         node.nodeValue = await translateText(val);
       } else {
-        // 中 -> 英（反向缓存还原）
+        // Chinese to English (reverse from cache)
         const original = translationCache[val];
         if (typeof original === 'string') node.nodeValue = original;
       }
@@ -62,9 +105,16 @@ async function safeToggleLanguage() {
     }
   }
 }
+
+// Bind to window for inline onclick handlers and prevent override by script.js
+window.safeToggleLanguage = safeToggleLanguage;
+window.toggleLanguage = safeToggleLanguage;
+
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
   if (button) {
     button.title = isEnglish ? '中' : 'En';
+    // Also attach event listener as backup
+    button.addEventListener('click', safeToggleLanguage);
   }
 });
