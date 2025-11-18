@@ -1,36 +1,50 @@
 {
   "articles": [
     {
-      "id": "Oblique-Strategies",
+      "id": "article-1",
       "title": "Oblique-Strategies",
-      "date": "2024-03-20",
+      "date": "2025-11-17",
       "type": "notion",
-      "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
-      "notionUrl": "https://canary-fountain-2ab.notion.site/Oblique-Strategies-23c727d0d1bf8086a579c944b6dc56b7?source=copy_link",
-      "summary": "An analysis of China's strategic response to trade tensions and economic policies.",
-      "tags": ["economics", "international trade", "politics"],
+      "notionId": "2af727d0d1bf80bab998ceaad87bc492",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/Oblique-Strategies-2af727d0d1bf80bab998ceaad87bc492?source=copy_link",
+      "summary": "Oblique Strategies can be your secret weapon for breaking out of technical routines or philosophical ruts.",
+      "tags": ["self-improving", "skill tools", "thinking"],
       "featured": true
     },
+ 
     {
-      "id": "article-1",
+      "id": "article-2",
+      "title": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
+      "date": "2025-08-04",
+      "summary": "Dr. Peter H. Diamandis is a renowned visionary, entrepreneur, and author focused on breakthrough technology and massive, transformative challenges.",
+      "type": "notion",
+      "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/Peter-s-Laws-The-Creed-of-the-Persistent-and-Passionate-Mind-2a1727d0d1bf8060b3d2dd7d7a60456e?source=copy_link",
+      "tags": ["thinking", "self-improving"],
+      "featured": true
+    },
+    
+    {
+      "id": "article-3",
       "title": "Article Title 1",
-      "date": "2025-04-10",
+      "date": "2024-04-10",
       "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
       "content": "content/article-1.md",
       "type": "markdown",
       "tags": ["web development", "technology"],
       "featured": true
     },
+    
     {
-      "id": "article-2",
+      "id": "article-4",
       "title": "Article Title 2 (Notion)",
-      "date": "2025-03-25",
-      "summary": "involuntary single",
+      "date": "2023-03-25",
+      "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
       "type": "notion",
       "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
-      "notionUrl": "https://canary-fountain-2ab.notion.site/involuntary-single-23c727d0d1bf80a2b433f0827e76dc61?source=copy_link",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/Peter-s-Laws-The-Creed-of-the-Persistent-and-Passionate-Mind-2a1727d0d1bf8060b3d2dd7d7a60456e?source=copy_link",
       "tags": ["design", "user experience"],
       "featured": true
     }
   ]
-} 
+}

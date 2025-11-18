@@ -1,5 +1,4 @@
-// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default.
-// TODO: 如需切换端点，可在页面里提前设置 window.TRANSLATE_ENDPOINT = 'https://<your-production-domain>/api/translate';
+// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
@@ -52,7 +51,6 @@ async function translateText(text) {
 
   return translatedText;
 }
-
 async function safeToggleLanguage() {
   const button = document.querySelector('.language-switch button');
   const icon = button ? button.querySelector('i') : null;
@@ -107,11 +105,6 @@ async function safeToggleLanguage() {
     }
   }
 }
-
-// Explicitly bind to window for inline onclick handlers
-window.toggleLanguage = safeToggleLanguage;
-
-// 初始按钮提示
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
   if (button) {
