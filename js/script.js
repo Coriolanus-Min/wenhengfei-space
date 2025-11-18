@@ -157,5 +157,3 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(String(email).toLowerCase());
     }
 });
-
-// Note: Language switching functionality is now handled by translate.js
