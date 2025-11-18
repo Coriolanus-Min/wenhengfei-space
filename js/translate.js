@@ -25,9 +25,20 @@ async function callTranslate(text, to = 'zh-CN') {
   }
 }
 
+// Check if text is worth translating (skip numbers, single chars, special symbols)
+function isTranslatable(text) {
+  const s = text.trim();
+  if (s.length <= 1) return false; // Skip single characters
+  if (/^[\d\s\.,;:!?()[\]{}\-_+=*&^%$#@~`|\\/<>'"]+$/.test(s)) return false; // Skip numbers and punctuation only
+  return true;
+}
+
 async function translateText(text) {
   const s = String(text ?? '');
   if (!s.trim()) return s;
+  
+  // Skip non-translatable content
+  if (!isTranslatable(s)) return s;
 
   const cacheKey = isEnglish ? s : translationCache[s];
   if (cacheKey && translationCache[cacheKey]) return translationCache[cacheKey];
@@ -40,8 +51,6 @@ async function translateText(text) {
 
   return translatedText;
 }
-
-// 实际实现：显式挂到 window，并提供事件监听兜底，避免加载顺序/覆盖问题
 async function safeToggleLanguage() {
   const button = document.querySelector('.language-switch button');
   const icon = button ? button.querySelector('i') : null;
@@ -64,6 +73,9 @@ async function safeToggleLanguage() {
       const node = textNodes.snapshotItem(i);
       const val = node?.nodeValue ?? '';
       if (!val.trim()) continue;
+      
+      // Skip non-translatable content to reduce API calls
+      if (!isTranslatable(val)) continue;
 
       if (isEnglish) {
         // 英 -> 中
@@ -93,21 +105,9 @@ async function safeToggleLanguage() {
     }
   }
 }
-
-// 让 inline onclick 能调到，并暴露兜底实现
-window.safeToggleLanguage = safeToggleLanguage;
-window.toggleLanguage = safeToggleLanguage;
-
-// 初始提示 + 兜底 click 监听（即使 inline onclick 不工作也能点击）
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
   if (button) {
     button.title = isEnglish ? '中' : 'En';
-    if (!button.dataset._langBound) {
-      button.addEventListener('click', () => {
-        safeToggleLanguage();
-      });
-      button.dataset._langBound = '1';
-    }
   }
 });
