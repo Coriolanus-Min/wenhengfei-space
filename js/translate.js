@@ -26,9 +26,20 @@ async function callTranslate(text, to = 'zh-CN') {
   }
 }
 
+// Check if text is worth translating (skip numbers, single chars, special symbols)
+function isTranslatable(text) {
+  const s = text.trim();
+  if (s.length <= 1) return false; // Skip single characters
+  if (/^[\d\s\.,;:!?()[\]{}\-_+=*&^%$#@~`|\\/<>'"]+$/.test(s)) return false; // Skip numbers and punctuation only
+  return true;
+}
+
 async function translateText(text) {
   const s = String(text ?? '');
   if (!s.trim()) return s;
+  
+  // Skip non-translatable content
+  if (!isTranslatable(s)) return s;
 
   const cacheKey = isEnglish ? s : translationCache[s];
   if (cacheKey && translationCache[cacheKey]) return translationCache[cacheKey];
@@ -64,6 +75,9 @@ async function safeToggleLanguage() {
       const node = textNodes.snapshotItem(i);
       const val = node?.nodeValue ?? '';
       if (!val.trim()) continue;
+      
+      // Skip non-translatable content to reduce API calls
+      if (!isTranslatable(val)) continue;
 
       if (isEnglish) {
         // 英 -> 中
