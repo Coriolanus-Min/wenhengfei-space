@@ -23,6 +23,18 @@
       "tags": ["thinking", "self-improving"],
       "featured": true
     },
+
+     {
+      "id": "article-2",
+      "title": "Technology Ruining Teens’ Lives?",
+      "date": "2025-04-01",
+      "summary": "When examining contemporary writing on adolescent mental health, technology, and cultural anxiety, it becomes clear that meaning often hides in phrasing rather than in argument alone. ",
+      "type": "notion",
+      "notionId": "2af727d0d1bf80c9add4f1166fafe0ed",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/A-I-Technology-Ruining-Teens-Lives-2af727d0d1bf80c9add4f1166fafe0ed?source=copy_link",
+      "tags": ["thinking", "self-improving"],
+      "featured": true
+    },
     
     {
       "id": "article-3",
