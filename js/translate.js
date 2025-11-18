@@ -5,49 +5,6 @@ const TRANSLATE_ENDPOINT =
     : 'https://translation-proxy-oizxhi497-coriolanus-mins-projects.vercel.app/api/translate';
 
 let isEnglish = true;
-const translationCache = Object.create(null);
-
-// 调用你的代理：接受 { text, targetLanguage }，读取 { translated }。
-async function callTranslate(text, to = 'zh-CN') {
-  try {
-    const res = await fetch(TRANSLATE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, targetLanguage: to }),
-      cache: 'no-store'
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data?.error || res.statusText);
-    return (data && typeof data.translated === 'string') ? data.translated : text;
-  } catch (e) {
-    console.error('Translation error:', e);
-    return text;
-  }
-}
-
-// Check if text is worth translating (skip numbers, single chars, special symbols)
-function isTranslatable(text) {
-  const s = text.trim();
-  if (s.length <= 1) return false; // Skip single characters
-  if (/^[\d\s\.,;:!?()[\]{}\-_+=*&^%$#@~`|\\/<>'"]+$/.test(s)) return false; // Skip numbers and punctuation only
-  return true;
-}
-
-async function translateText(text) {
-  const s = String(text ?? '');
-  if (!s.trim()) return s;
-  
-  // Skip non-translatable content
-  if (!isTranslatable(s)) return s;
-
-  const cacheKey = isEnglish ? s : translationCache[s];
-  if (cacheKey && translationCache[cacheKey]) return translationCache[cacheKey];
-
-  const translatedText = await callTranslate(s, 'zh-CN');
-
-  // 双向缓存，便于切回原文
-  translationCache[s] = translatedText;
-  translationCache[translatedText] = s;
 
   return translatedText;
 }
