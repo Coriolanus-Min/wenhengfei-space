@@ -7,7 +7,7 @@ const TRANSLATE_ENDPOINT =
 let isEnglish = true;
 const translationCache = Object.create(null);
 
-// 调用你的代理：接受 { text, targetLanguage }，读取 { translated }。
+// Call the proxy API: accepts { text, targetLanguage }, returns { translated }.
 async function callTranslate(text, to = 'zh-CN') {
   try {
     const res = await fetch(TRANSLATE_ENDPOINT, {
@@ -45,7 +45,7 @@ async function translateText(text) {
 
   const translatedText = await callTranslate(s, 'zh-CN');
 
-  // 双向缓存，便于切回原文
+  // Bidirectional cache for easy toggling back to original text
   translationCache[s] = translatedText;
   translationCache[translatedText] = s;
 
@@ -60,7 +60,7 @@ async function safeToggleLanguage() {
   }
 
   try {
-    // 遍历可见文本节点（排除 script/style）
+    // Iterate through visible text nodes (excluding script/style)
     const textNodes = document.evaluate(
       '//text()[not(ancestor::script) and not(ancestor::style)]',
       document,
@@ -78,10 +78,10 @@ async function safeToggleLanguage() {
       if (!isTranslatable(val)) continue;
 
       if (isEnglish) {
-        // 英 -> 中
+        // English to Chinese
         node.nodeValue = await translateText(val);
       } else {
-        // 中 -> 英（反向缓存还原）
+        // Chinese to English (reverse from cache)
         const original = translationCache[val];
         if (typeof original === 'string') node.nodeValue = original;
       }
