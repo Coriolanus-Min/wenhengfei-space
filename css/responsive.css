@@ -55,16 +55,6 @@
     padding: 0 1rem;
   }
   
-  .message-board-container {
-    padding: 1rem;
-  }
-  
-  .message-board-intro p {
-    font-size: 1rem;
-  }
-  
-  .message-board-frame {
-    min-height: 500px;
   }
 }
 
