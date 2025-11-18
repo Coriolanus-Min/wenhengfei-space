@@ -44,7 +44,7 @@
       "content": "content/article-1.md",
       "type": "markdown",
       "tags": ["web development", "technology"],
-      "featured": true
+      "featured": false
     },
    
     {
@@ -55,7 +55,7 @@
       "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
       "notionUrl": "https://canary-fountain-2ab.notion.site/Peter-s-Laws-The-Creed-of-the-Persistent-and-Passionate-Mind-2a1727d0d1bf8060b3d2dd7d7a60456e?source=copy_link",
       "tags": ["design", "user experience"],
-      "featured": true
+      "featured": false
     }
   ]
 }
