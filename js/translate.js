@@ -1,5 +1,4 @@
-// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default.
-// TODO: 如需切换端点，可在页面里提前设置 window.TRANSLATE_ENDPOINT = 'https://<your-production-domain>/api/translate';
+// Unified translate caller: prefer window.TRANSLATE_ENDPOINT, fallback to a hardcoded default
 const TRANSLATE_ENDPOINT =
   (typeof window !== 'undefined' && window.TRANSLATE_ENDPOINT)
     ? window.TRANSLATE_ENDPOINT
@@ -8,7 +7,7 @@ const TRANSLATE_ENDPOINT =
 let isEnglish = true;
 const translationCache = Object.create(null);
 
-// 调用你的代理：接受 { text, targetLanguage }，读取 { translated }。
+// Call the proxy API: accepts { text, targetLanguage }, returns { translated }.
 async function callTranslate(text, to = 'zh-CN') {
   try {
     const res = await fetch(TRANSLATE_ENDPOINT, {
@@ -26,22 +25,32 @@ async function callTranslate(text, to = 'zh-CN') {
   }
 }
 
+// Check if text is worth translating (skip numbers, single chars, special symbols)
+function isTranslatable(text) {
+  const s = text.trim();
+  if (s.length <= 1) return false; // Skip single characters
+  if (/^[\d\s\.,;:!?()[\]{}\-_+=*&^%$#@~`|\\/<>'"]+$/.test(s)) return false; // Skip numbers and punctuation only
+  return true;
+}
+
 async function translateText(text) {
   const s = String(text ?? '');
   if (!s.trim()) return s;
+  
+  // Skip non-translatable content
+  if (!isTranslatable(s)) return s;
 
   const cacheKey = isEnglish ? s : translationCache[s];
   if (cacheKey && translationCache[cacheKey]) return translationCache[cacheKey];
 
   const translatedText = await callTranslate(s, 'zh-CN');
 
-  // 双向缓存，便于切回原文
+  // Bidirectional cache for easy toggling back to original text
   translationCache[s] = translatedText;
   translationCache[translatedText] = s;
 
   return translatedText;
 }
-
 async function safeToggleLanguage() {
   const button = document.querySelector('.language-switch button');
   const icon = button ? button.querySelector('i') : null;
@@ -51,7 +60,7 @@ async function safeToggleLanguage() {
   }
 
   try {
-    // 遍历可见文本节点（排除 script/style）
+    // Iterate through visible text nodes (excluding script/style)
     const textNodes = document.evaluate(
       '//text()[not(ancestor::script) and not(ancestor::style)]',
       document,
@@ -64,12 +73,15 @@ async function safeToggleLanguage() {
       const node = textNodes.snapshotItem(i);
       const val = node?.nodeValue ?? '';
       if (!val.trim()) continue;
+      
+      // Skip non-translatable content to reduce API calls
+      if (!isTranslatable(val)) continue;
 
       if (isEnglish) {
-        // 英 -> 中
+        // English to Chinese
         node.nodeValue = await translateText(val);
       } else {
-        // 中 -> 英（反向缓存还原）
+        // Chinese to English (reverse from cache)
         const original = translationCache[val];
         if (typeof original === 'string') node.nodeValue = original;
       }
@@ -94,11 +106,15 @@ async function safeToggleLanguage() {
   }
 }
 
-// Explicitly bind to window for inline onclick handlers
+// Bind to window for inline onclick handlers and prevent override by script.js
+window.safeToggleLanguage = safeToggleLanguage;
 window.toggleLanguage = safeToggleLanguage;
 
-// 初始按钮提示
 document.addEventListener('DOMContentLoaded', () => {
   const button = document.querySelector('.language-switch button');
-  if (button) button.title = isEnglish ? '中' : 'En';
+  if (button) {
+    button.title = isEnglish ? '中' : 'En';
+    // Also attach event listener as backup
+    button.addEventListener('click', safeToggleLanguage);
+  }
 });

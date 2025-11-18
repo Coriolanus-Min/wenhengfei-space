@@ -157,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(String(email).toLowerCase());
     }
 });
-
 // Language switching functionality (fallback demo implementation)
 // Only define if window.toggleLanguage doesn't already exist (from translate.js)
 if (!window.toggleLanguage) {
