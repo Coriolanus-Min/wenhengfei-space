@@ -1,10 +1,12 @@
-const TRANSLATOR_KEY = typeof MICROSOFT_TRANSLATOR_KEY !== 'undefined' ? MICROSOFT_TRANSLATOR_KEY : '';
-const TRANSLATOR_REGION = typeof MICROSOFT_TRANSLATOR_REGION !== 'undefined' ? MICROSOFT_TRANSLATOR_REGION : '';
+// Use window.TRANSLATE_ENDPOINT if set, otherwise default to the proxy
 
-// 默认语言设置
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+
+
+// Default language setting
 export const defaultLanguage = 'en';
 
-// 默认英文内容
+// Default English content
 const defaultTranslations = {
     'switchLang': 'Switch to Chinese',
     'nav-home': 'Home',
@@ -45,42 +47,55 @@ class TranslationService {
         this.translations = {};
         this.loading = false;
         
-        // 初始化时立即翻译页面
+        // Initialize page translations on DOMContentLoaded
         document.addEventListener('DOMContentLoaded', () => {
             this.updatePageTranslations();
         });
     }
 
+    /**
+     * Translate a single text string using the proxy endpoint
+     * @param {string} text - Text to translate
+     * @param {string} targetLang - Target language (e.g., 'zh-CN')
+     * @returns {Promise<string>} Translated text
+     */
     async translate(text, targetLang = 'zh-CN') {
-        if (!TRANSLATOR_KEY) {
-            console.warn('Translation API key not set');
-            return text;
-        }
+        if (!text) return text;
 
         try {
-            const response = await fetch('https://grizzled-spiral-mantis.glitch.me/api/translate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text, to: zh-CN })
-});
+            const response = await fetch(TRANSLATE_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    text: text,
+                    targetLanguage: targetLang 
+                })
+            });
+
             if (!response.ok) {
                 throw new Error(`Translation failed: ${response.statusText}`);
             }
 
             const data = await response.json();
-            return data[0]?.translations[0]?.text || text;
+            return data.translated || text;
         } catch (error) {
             console.error('Translation error:', error);
             return text;
         }
     }
 
+    /**
+     * Translate an object with string values recursively
+     * @param {Object} obj - Object to translate
+     * @param {string} targetLang - Target language
+     * @returns {Promise<Object>} Translated object
+     */
     async translateObject(obj, targetLang) {
         const translated = {};
         for (const [key, value] of Object.entries(obj)) {
             if (typeof value === 'string') {
                 translated[key] = await this.translate(value, targetLang);
-            } else if (typeof value === 'object') {
+            } else if (typeof value === 'object' && value !== null) {
                 translated[key] = await this.translateObject(value, targetLang);
             } else {
                 translated[key] = value;
@@ -89,6 +104,9 @@ class TranslationService {
         return translated;
     }
 
+    /**
+     * Update all elements with data-translate attribute
+     */
     async updatePageTranslations() {
         if (this.loading) return;
         
@@ -99,18 +117,21 @@ class TranslationService {
         
         try {
             if (this.currentLanguage === 'en') {
-                // 使用默认英文
+                // Use default English translations
                 elements.forEach(el => {
                     const key = el.getAttribute('data-translate');
                     el.textContent = defaultTranslations[key] || key;
                 });
             } else {
-                // 如果没有缓存的翻译，获取新的翻译
+                // Get translations from cache or translate
                 if (!this.translations[this.currentLanguage]) {
-                    this.translations[this.currentLanguage] = await this.translateObject(defaultTranslations, this.currentLanguage);
+                    this.translations[this.currentLanguage] = await this.translateObject(
+                        defaultTranslations, 
+                        this.currentLanguage
+                    );
                 }
                 
-                // 更新页面文本
+                // Update page text
                 elements.forEach(el => {
                     const key = el.getAttribute('data-translate');
                     el.textContent = this.translations[this.currentLanguage][key] || key;
@@ -118,7 +139,7 @@ class TranslationService {
             }
         } catch (error) {
             console.error('Failed to update translations:', error);
-            // 出错时使用默认英文
+            // On error, fallback to English
             elements.forEach(el => {
                 const key = el.getAttribute('data-translate');
                 el.textContent = defaultTranslations[key] || key;
@@ -161,10 +182,10 @@ class TranslationService {
     }
 }
 
-// 创建全局翻译服务实例
+// Create global translation service instance
 window.translationService = new TranslationService();
 
-// 获取翻译的函数
+// Function to get translations
 export async function getTranslations(lang = 'en') {
     if (lang === 'en') {
         return defaultTranslations;
@@ -177,10 +198,3 @@ export async function getTranslations(lang = 'en') {
         return defaultTranslations;
     }
 }
-
-// 当页面加载完成时初始化翻译
-document.addEventListener('DOMContentLoaded', () => {
-    window.translationService.updatePageTranslations();
-});
-
-window.translationService.toggleLanguage(); // 切换语言

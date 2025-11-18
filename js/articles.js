@@ -261,21 +261,21 @@ class ArticleManager {
             if (!this.config.USE_API_INTEGRATION) {
                 const articleUrl = article.notionUrl || article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
                 contentHtml = `
-                    <div class="article-date">${this.formatDate(article.date)}</div>
                     <h3 class="article-title">${article.title}</h3>
                     <p>${article.summary}</p>
                     <div class="article-tags">
                         ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
-                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>`;
+                    <a href="${articleUrl}" class="read-more" target="_blank">Read Full Article</a>`
+                    <div class="article-date">${this.formatDate(article.date)}</div>;
             } else {
                 contentHtml = `
                     <div class="article-header">
-                        <div class="article-date">${this.formatDate(article.date)}</div>
                         <h3 class="article-title">${article.title}</h3>
                         <div class="article-tags">
                             ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
+                        <div class="article-date">${this.formatDate(article.date)}</div>
                     </div>
                     <div class="article-content notion-content">
                         ${this.createNotionEmbed(article.notionId)}

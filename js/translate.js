@@ -2,7 +2,7 @@
 // js/translate.js
 
 let isEnglish = true;
-const translationCache = {};
+const translationCache = Object.create(null);
 
 async function translateText(text, targetLang) {
     const cacheKey = `${text}-${targetLang}`;
@@ -37,6 +37,10 @@ async function translateText(text, targetLang) {
     }
 }
 
+/**
+ * Toggle page language between English and Chinese
+ * Translates all text nodes and updates the UI
+ */
 async function toggleLanguage() {
     const button = document.querySelector('.language-switch button');
     if (button) {
@@ -76,6 +80,14 @@ async function toggleLanguage() {
         if (icon) icon.className = 'fas fa-language'; // Restore original icon
         button.title = isEnglish ? '中文' : 'English';
     }
+  } catch (error) {
+    console.error('Toggle language error:', error);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      if (icon) icon.className = 'fas fa-language';
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
