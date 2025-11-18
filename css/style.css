@@ -383,6 +383,32 @@ section {
   margin: 0 auto;
 }
 
+/* Message Board */
+.message-board-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.message-board-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+.message-board-intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.message-board-frame {
+  width: 100%;
+  min-height: 600px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
 .form-group {
   margin-bottom: 1.5rem;
 }
