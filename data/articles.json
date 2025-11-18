@@ -1,14 +1,13 @@
 {
   "articles": [
     {
-      "id": "Oblique-Strategies",
-      "title": "Oblique-Strategies",
+      "id": "oblique-strategies",
+      "title": "Oblique Strategies",
       "date": "2024-03-20",
-      "type": "notion",
-      "notionId": "1de727d0d1bf8000b07ecfb7ad55fee8",
-      "notionUrl": "https://canary-fountain-2ab.notion.site/Oblique-Strategies-23c727d0d1bf8086a579c944b6dc56b7?source=copy_link",
-      "summary": "An analysis of China's strategic response to trade tensions and economic policies.",
-      "tags": ["economics", "international trade", "politics"],
+      "type": "markdown",
+      "content": "content/oblique-strategies.md",
+      "summary": "A set of abstruse prompts printed on a deck of cards, as a creativity aid. Explore how Oblique Strategies can help break through creative blocks and maintain originality in an AI-driven world.",
+      "tags": ["creativity", "thinking", "design"],
       "featured": true
     },
     {
