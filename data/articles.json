@@ -35,9 +35,19 @@
       "tags": ["thinking", "self-improving"],
       "featured": true
     },
-    
     {
       "id": "article-4",
+      "title": "Can we live one day at a time?",
+      "date": "2025-02-25",
+      "summary": "Jesus put it/The Stoics said/Even secular mindfulness boils down...",
+      "type": "notion",
+      "notionId": "2b0727d0d1bf80598b83d3f54cd5846a",
+      "notionUrl": "https://canary-fountain-2ab.notion.site/can-we-live-one-day-at-a-time-2b0727d0d1bf80598b83d3f54cd5846a?source=copy_link",
+      "tags": ["mindful", "reflection"],
+      "featured": True
+    }
+    {
+      "id": "article-5",
       "title": "Article Title 1",
       "date": "2024-04-10",
       "summary": "This is a detailed summary of your first article. It should give readers a comprehensive understanding of what the full article contains while enticing them to read more.",
@@ -48,7 +58,7 @@
     },
    
     {
-      "id": "article-5",
+      "id": "article-6",
       "title": "Article Title 2 (Notion)",
       "date": "2023-03-25",
       "summary": "Peter's Laws: The Creed of the Persistent and Passionate Mind",
