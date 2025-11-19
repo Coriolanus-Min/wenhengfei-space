@@ -282,14 +282,15 @@ class ArticleManager {
                     </div>`;
             }
         } else {
+            // Moved date below the "Read Full Article" link so homepage/simple and full article layouts match
             contentHtml = `
-                <div class="article-date">${this.formatDate(article.date)}</div>
                 <h3 class="article-title">${article.title}</h3>
                 <p>${article.summary}</p>
                 <div class="article-tags">
                     ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
-                <a href="${article.content}" class="read-more">Read Full Article</a>`;
+                <a href="${article.content}" class="read-more">Read Full Article</a>
+                <div class="article-date">${this.formatDate(article.date)}</div>`;
         }
 
         articleElement.innerHTML = contentHtml;
@@ -388,12 +389,13 @@ class ArticleManager {
             ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
             : '';
         
+        // moved article-date below the read-more link to match full-article layout
         articleElement.innerHTML = `
-            <div class="article-date">${this.formatDate(article.date)}</div>
             <h3 class="article-title">${article.title}</h3>
             <p>${article.summary}</p>
             ${tagsHtml}
             <a href="${articleUrl}" class="read-more" target="${target}">Read More</a>
+            <div class="article-date">${this.formatDate(article.date)}</div>
         `;
         
         return articleElement;
