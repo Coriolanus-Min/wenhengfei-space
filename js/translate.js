@@ -66,51 +66,52 @@ async function translateText(text) {
  */
 async function toggleLanguage() {
     const button = document.querySelector('.language-switch button');
+    let icon = null;
+    
     if (button) {
-        const icon = button.querySelector('i');
+        icon = button.querySelector('i');
         button.disabled = true;
         if (icon) icon.className = 'fas fa-spinner fa-spin'; // Loading spinner
     }
 
-    isEnglish = !isEnglish;
-    const targetLang = isEnglish ? 'en' : 'zh';
+    try {
+        isEnglish = !isEnglish;
+        const targetLang = isEnglish ? 'en' : 'zh';
 
-    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+        const elementsToTranslate = document.querySelectorAll('[data-translate]');
 
-    for (const element of elementsToTranslate) {
-        // Store original text if it's not already stored
-        if (!element.dataset.originalText) {
-            element.dataset.originalText = element.textContent;
+        for (const element of elementsToTranslate) {
+            // Store original text if it's not already stored
+            if (!element.dataset.originalText) {
+                element.dataset.originalText = element.textContent;
+            }
+
+            const originalText = element.dataset.originalText;
+            let newText;
+
+            if (isEnglish) {
+                // If switching back to English, use the stored original text
+                newText = originalText;
+            } else {
+                // Otherwise, translate the original English text to Chinese
+                newText = await translateText(originalText, targetLang);
+            }
+
+            element.textContent = newText;
         }
 
-        const originalText = element.dataset.originalText;
-        let newText;
-
-        if (isEnglish) {
-            // If switching back to English, use the stored original text
-            newText = originalText;
-        } else {
-            // Otherwise, translate the original English text to Chinese
-            newText = await translateText(originalText, targetLang);
+        if (button) {
+            button.title = isEnglish ? '中文' : 'English';
         }
-
-        element.textContent = newText;
+    } catch (error) {
+        console.error('Toggle language error:', error);
+        alert('Translation failed. Please try again.');
+    } finally {
+        if (button) {
+            button.disabled = false;
+            if (icon) icon.className = 'fas fa-language';
+        }
     }
-
-    if (button) {
-        button.disabled = false;
-        const icon = button.querySelector('i');
-        if (icon) icon.className = 'fas fa-language'; // Restore original icon
-        button.title = isEnglish ? '中文' : 'English';
-    }
-  } catch (error) {
-    console.error('Toggle language error:', error);
-  } finally {
-    if (button) {
-      button.disabled = false;
-      if (icon) icon.className = 'fas fa-language';
-    }
-  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
