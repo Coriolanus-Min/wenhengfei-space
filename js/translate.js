@@ -1,5 +1,5 @@
 // Use unified translation proxy endpoint
-const TRANSLATE_ENDPOINT = '/api/translate';
+const TRANSLATE_ENDPOINT = 'https://wenhengfei-space.vercel.app/api/translate';
 
 let isEnglish = true;
 const translationCache = {};
