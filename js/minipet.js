@@ -393,19 +393,16 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         try {
-            // DIRECT API CALL (For GitHub Pages / Static Hosting)
-            // Note: Restrict this key in Google Cloud Console to your domain!
-            const API_KEY = 'AIzaSyCHLZo238Dfu3Oof0Adp8U40scE2DbRpYY'; 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+            // Call Vercel Serverless Function
+            // TODO: Replace with your actual Vercel URL after deployment
+            const CHAT_ENDPOINT = 'https://wenhengfei-space.vercel.app/api/chat'; 
+            
+            const response = await fetch(CHAT_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: text }]
-                    }]
-                })
+                body: JSON.stringify({ message: text })
             });
 
             const data = await response.json();
@@ -414,11 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const loadingMsg = document.getElementById(loadingId);
             if (loadingMsg) loadingMsg.remove();
 
-            // Parse Gemini Response
-            if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
-                const reply = data.candidates[0].content.parts[0].text;
-                addMessage(reply, 'bot');
-                
+            if (data.reply) {
+                addMessage(data.reply, 'bot');
                 // Happy mood on reply
                 currentMood = 'happy';
                 currentShape = 'cooked';
@@ -435,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Chat error:', error);
             const loadingMsg = document.getElementById(loadingId);
             if (loadingMsg) loadingMsg.remove();
-            addMessage("Error connecting to AI.", 'bot');
+            addMessage("Error connecting to server.", 'bot');
         }
     }
 
