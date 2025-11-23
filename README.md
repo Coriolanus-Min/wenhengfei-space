@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 # Personal Profile Website
 
-A personal website with Notion integration for article management.
+This is where I share my professional work, personal interests, and thoughts through articles.
 
 ## Setup
 
@@ -40,8 +39,13 @@ The development server will automatically:
 - Serve files from the project directory
 - Enable live reloading
 - Allow JSON file loading
-- Support Notion embeds 
-=======
-# wenhengfei-space
- This is where I share my professional work, personal interests, and thoughts through articles.
->>>>>>> 25a44c57ab1e11cb15467144cd047872f8b0dde1
+- Support Notion embeds
+
+## Help & Documentation
+
+- **New to Git/GitHub?** Check out our guides:
+  - [Pull Request Management Guide](PULL_REQUEST_GUIDE.md) - Complete guide for managing PRs
+  - [Merge Conflicts Quick Start](docs/MERGE_CONFLICTS_QUICK_START.md) - Simple visual guide for resolving conflicts
+- **Setting up features:**
+  - [Notion Integration](docs/NOTION_SETUP.md)
+  - [Translation Setup](docs/TRANSLATION_SETUP.md)

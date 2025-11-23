@@ -1,34 +1,21 @@
+// Use unified translation proxy endpoint
+const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+
 let isEnglish = true;
 const translationCache = {};
 
-// 检查是否缺少必要的环境变量
-function checkEnvironmentVariables() {
-    const missingVars = [];
-    // 在浏览器环境中检查全局变量而不是 process.env
-    if (typeof TRANSLATOR_API_KEY === 'undefined') missingVars.push('TRANSLATOR_API_KEY');
-    if (typeof TRANSLATOR_LOCATION === 'undefined') missingVars.push('TRANSLATOR_LOCATION');
-    
-    if (missingVars.length > 0) {
-        console.error('Missing required environment variables:', missingVars.join(', '));
-        return false;
-    }
-    return true;
-}
-
-async function translateText(text) {
+// Call the translation proxy with the new request/response shape
+async function callTranslate(text, to) {
     if (!text.trim()) return text;
     
-    const cacheKey = isEnglish ? text : translationCache[text];
-    if (translationCache[cacheKey]) {
-        return translationCache[cacheKey];
-    }
-
     try {
-        // Remove server-side environment variable check - not applicable in browser
-        const response = await fetch('https://grizzled-spiral-mantis.glitch.me/api/translate', {
+        const response = await fetch(TRANSLATE_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text, to: "zh-CN" })
+            body: JSON.stringify({ 
+                text,
+                targetLanguage: to 
+            })
         });
 
         if (!response.ok) {
@@ -36,16 +23,34 @@ async function translateText(text) {
         }
 
         const data = await response.json();
-        const translatedText = data[0].translations[0].text;
+        return data.translated;
+    } catch (error) {
+        console.error('Translation error:', error);
+        throw error;
+    }
+}
+
+async function translateText(text) {
+    if (!text.trim()) return text;
+    
+    // Check cache first
+    const cacheKey = isEnglish ? text : translationCache[text];
+    if (translationCache[cacheKey]) {
+        return translationCache[cacheKey];
+    }
+
+    try {
+        const targetLang = isEnglish ? 'zh-CN' : 'en';
+        const translatedText = await callTranslate(text, targetLang);
         
-        // Store in cache both ways
+        // Store in cache both ways for bidirectional lookup
         translationCache[text] = translatedText;
         translationCache[translatedText] = text;
         
         return translatedText;
     } catch (error) {
         console.error('Translation error:', error);
-        // 显示用户友好的错误消息
+        // Display user-friendly error message
         const errorMessage = document.createElement('div');
         errorMessage.className = 'translation-error';
         errorMessage.textContent = '暂不可用';
@@ -55,45 +60,63 @@ async function translateText(text) {
     }
 }
 
+/**
+ * Toggle page language between English and Chinese
+ * Translates all text nodes and updates the UI
+ */
 async function toggleLanguage() {
     const button = document.querySelector('.language-switch button');
-    const icon = button.querySelector('i');
-    button.disabled = true;
-    icon.className = 'fas fa-spinner fa-spin'; // 添加加载动画
-    
-    try {
-        const textNodes = document.evaluate(
-            '//text()[not(ancestor::script) and not(ancestor::style)]',
-            document,
-            null,
-            XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-            null
-        );
+    if (button) {
+        const icon = button.querySelector('i');
+        button.disabled = true;
+        if (icon) icon.className = 'fas fa-spinner fa-spin'; // Loading spinner
+    }
 
-        for (let i = 0; i < textNodes.snapshotLength; i++) {
-            const node = textNodes.snapshotItem(i);
-            if (node.nodeValue.trim()) {
-                const translatedText = await translateText(node.nodeValue);
-                node.nodeValue = translatedText;
-            }
+    isEnglish = !isEnglish;
+    const targetLang = isEnglish ? 'en' : 'zh';
+
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+
+    for (const element of elementsToTranslate) {
+        // Store original text if it's not already stored
+        if (!element.dataset.originalText) {
+            element.dataset.originalText = element.textContent;
         }
 
-        isEnglish = !isEnglish;
-        // 移除文字提示，只使用图标
-        button.textContent = '';
-        button.appendChild(icon); // 重新添加图标
-    } catch (error) {
-        console.error('Toggle language error:', error);
-    } finally {
-        button.disabled = false;
-        icon.className = 'fas fa-language'; // 恢复原始图标
+        const originalText = element.dataset.originalText;
+        let newText;
+
+        if (isEnglish) {
+            // If switching back to English, use the stored original text
+            newText = originalText;
+        } else {
+            // Otherwise, translate the original English text to Chinese
+            newText = await translateText(originalText, targetLang);
+        }
+
+        element.textContent = newText;
     }
+
+    if (button) {
+        button.disabled = false;
+        const icon = button.querySelector('i');
+        if (icon) icon.className = 'fas fa-language'; // Restore original icon
+        button.title = isEnglish ? '中文' : 'English';
+    }
+  } catch (error) {
+    console.error('Toggle language error:', error);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      if (icon) icon.className = 'fas fa-language';
+    }
+  }
 }
 
-// 初始化按钮提示文本
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('.language-switch button');
-    if (button) {
-        button.title = isEnglish ? '中' : 'En';
+    const langButton = document.querySelector('.language-switch button');
+    if (langButton) {
+        langButton.addEventListener('click', toggleLanguage);
+        langButton.title = '中文'; // Initial tooltip
     }
 });
