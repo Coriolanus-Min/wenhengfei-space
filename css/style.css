@@ -492,7 +492,7 @@ footer a:hover {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;
+    width: 250px; /* Fixed width for cleaner look */
     height: 100vh;
     background-color: var(--background-color);
     display: flex;

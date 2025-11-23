@@ -360,6 +360,90 @@ document.addEventListener('DOMContentLoaded', () => {
         chatWindow.classList.remove('active');
     });
 
+    // Chat Logic
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatMessages = document.getElementById('chat-messages');
+
+    function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('message', sender);
+        const p = document.createElement('p');
+        p.textContent = text;
+        msgDiv.appendChild(p);
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function handleChat() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        // Add user message
+        addMessage(text, 'user');
+        chatInput.value = '';
+
+        // Show loading state (optional, could be a temporary message)
+        const loadingId = 'loading-' + Date.now();
+        const loadingDiv = document.createElement('div');
+        loadingDiv.classList.add('message', 'bot');
+        loadingDiv.id = loadingId;
+        loadingDiv.innerHTML = '<p>...</p>';
+        chatMessages.appendChild(loadingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        try {
+            // DIRECT API CALL (For GitHub Pages / Static Hosting)
+            // Note: Restrict this key in Google Cloud Console to your domain!
+            const API_KEY = 'AIzaSyCHLZo238Dfu3Oof0Adp8U40scE2DbRpYY'; 
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: text }]
+                    }]
+                })
+            });
+
+            const data = await response.json();
+            
+            // Remove loading message
+            const loadingMsg = document.getElementById(loadingId);
+            if (loadingMsg) loadingMsg.remove();
+
+            // Parse Gemini Response
+            if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+                const reply = data.candidates[0].content.parts[0].text;
+                addMessage(reply, 'bot');
+                
+                // Happy mood on reply
+                currentMood = 'happy';
+                currentShape = 'cooked';
+                updateTargets();
+                setTimeout(() => {
+                    currentMood = 'normal';
+                    currentShape = 'raw';
+                    updateTargets();
+                }, 2000);
+            } else {
+                addMessage("Sorry, I couldn't understand that.", 'bot');
+            }
+        } catch (error) {
+            console.error('Chat error:', error);
+            const loadingMsg = document.getElementById(loadingId);
+            if (loadingMsg) loadingMsg.remove();
+            addMessage("Error connecting to AI.", 'bot');
+        }
+    }
+
+    sendBtn.addEventListener('click', handleChat);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleChat();
+    });
+
     // Start
     updateTargets();
     animate();
