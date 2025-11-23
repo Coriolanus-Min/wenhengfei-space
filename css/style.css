@@ -492,7 +492,7 @@ footer a:hover {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 250px; /* Fixed width for cleaner look */
+    width: 200px; /* Fixed width for cleaner look */
     height: 100vh;
     background-color: var(--background-color);
     display: flex;
@@ -501,6 +501,7 @@ footer a:hover {
     align-items: center;
     transition: right 0.5s ease;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
   }
   
   nav.active {
@@ -510,10 +511,11 @@ footer a:hover {
   nav ul {
     flex-direction: column;
     align-items: center;
+    padding: 2rem 0;
   }
   
   nav ul li {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
   }
   
   .hamburger {
