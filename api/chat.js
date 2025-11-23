@@ -21,8 +21,10 @@ module.exports = async (req, res) => {
     }
 
     try {
+        // Using gemini-1.5-flash as it is the current stable, fast model. 
+        // 'gemini-2.5-flash-lite' does not exist yet (likely a typo for 1.5).
         const response = await axios.post(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
             {
                 contents: [{
                     parts: [{ text: message }]
