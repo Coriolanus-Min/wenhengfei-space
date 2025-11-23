@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/translate-button.css">
+    <link rel="stylesheet" href="css/minipet.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -114,6 +115,91 @@
         </div>
     </footer>
 
+    <!-- Cute Droplet Minipet -->
+    <div class="bot-icon">
+        <svg viewBox="0 0 100 120" class="droplet-shape">
+            <defs>
+                <linearGradient id="dropletGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#C5E8F7"/>
+                    <stop offset="100%" stop-color="#87CEEB"/>
+                </linearGradient>
+                <!-- Add glossy highlight -->
+                <radialGradient id="highlight" cx="35%" cy="25%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="50%" stop-color="#ffffff" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
+
+            <!-- Water droplet shape -->
+            <path
+                id="droplet-path"
+                class="droplet-body"
+                fill="url(#dropletGradient)"
+                stroke="#5DADE2"
+                stroke-width="2"
+                d="M50,10 C25,10 10,35 10,65 C10,95 30,110 50,110 C70,110 90,95 90,65 C90,35 75,10 50,10 Z"
+            >
+            </path>
+
+            <!-- Glossy highlight overlay -->
+            <ellipse id="droplet-highlight" cx="40" cy="30" rx="20" ry="25" fill="url(#highlight)" opacity="0.6">
+            </ellipse>
+
+            <!-- Cheeks (Blush/Shine) -->
+            <defs>
+                <filter id="cheek-blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+                </filter>
+            </defs>
+            <ellipse id="cheek-left" cx="25" cy="55" rx="6" ry="4" fill="#fff" opacity="0" filter="url(#cheek-blur)"></ellipse>
+            <ellipse id="cheek-right" cx="75" cy="55" rx="6" ry="4" fill="#fff" opacity="0" filter="url(#cheek-blur)"></ellipse>
+
+            <!-- Eyes (Paths for morphing) -->
+            <path class="eye eye-left" id="eye-left" fill="#333"></path>
+            <path class="eye eye-right" id="eye-right" fill="#333"></path>
+
+            <!-- Eyebrows -->
+            <path class="eyebrow" id="eyebrow-left" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"></path>
+            <path class="eyebrow" id="eyebrow-right" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"></path>
+
+            <!-- Eye highlights for cuteness -->
+            <circle id="highlight-left" cx="36.5" cy="48.5" r="1.5" fill="#fff">
+            </circle>
+            <circle id="highlight-right" cx="66.5" cy="48.5" r="1.5" fill="#fff">
+            </circle>
+
+            <!-- Smile -->
+            <path
+                id="droplet-smile"
+                d="M40,75 Q50,85 60,75"
+                stroke="#333"
+                stroke-width="3"
+                fill="none"
+                stroke-linecap="round"
+            >
+            </path>
+        </svg>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <h3>Rice Pet</h3>
+            <button class="close-chat" id="close-chat">&times;</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot">
+                <p>Hello! I am your rice pet. 🍚</p>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Say something...">
+            <button class="send-btn" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="js/minipet.js"></script>
     <script src="js/script.js"></script>
     <script src="js/translate.js"></script>
 </body>
