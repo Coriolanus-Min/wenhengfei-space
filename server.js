@@ -33,7 +33,34 @@ app.post('/api/translate', async (req, res) => {
     }
 });
 
-app.get('*', (req, res) => {
+app.post('/api/chat', async (req, res) => {
+    const { message } = req.body;
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+        return res.status(500).json({ error: 'Gemini API key not configured' });
+    }
+
+    try {
+        const response = await axios.post(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`,
+            {
+                contents: [{
+                    parts: [{ text: message }]
+                }]
+            }
+        );
+        
+        // Extract the text from the response
+        const botReply = response.data.candidates[0].content.parts[0].text;
+        res.json({ reply: botReply });
+    } catch (error) {
+        console.error('Error calling Gemini API:', error.response ? error.response.data : error.message);
+        res.status(500).json({ error: 'Failed to get chat response' });
+    }
+});
+
+app.get(/(.*)/, (req, res) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 

@@ -1,5 +1,5 @@
 // Use unified translation proxy endpoint
-const TRANSLATE_ENDPOINT = window.TRANSLATE_ENDPOINT || 'https://translation-proxy-97s8lczou-coriolanus-mins-projects.vercel.app/api/translate';
+const TRANSLATE_ENDPOINT = '/api/translate';
 
 let isEnglish = true;
 const translationCache = {};
