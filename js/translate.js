@@ -1,5 +1,5 @@
-// Use improved translation proxy endpoint with free fallback
-const TRANSLATE_ENDPOINT = 'https://wenhengfei-space.vercel.app/api/translate-improved';
+// Use improved translation proxy endpoint with free fallback (relative path to avoid CORS)
+const TRANSLATE_ENDPOINT = '/api/translate-improved';
 
 let isEnglish = true;
 const translationCache = {};
