@@ -1,5 +1,5 @@
-// Use unified translation proxy endpoint
-const TRANSLATE_ENDPOINT = 'https://wenhengfei-space.vercel.app/api/translate';
+// Use improved translation proxy endpoint with free fallback
+const TRANSLATE_ENDPOINT = 'https://wenhengfei-space.vercel.app/api/translate-improved';
 
 let isEnglish = true;
 const translationCache = {};
@@ -19,6 +19,8 @@ async function callTranslate(text, to) {
         });
 
         if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            console.error('Translation API error:', response.status, errorData);
             throw new Error(`Translation API error: ${response.status}`);
         }
 
@@ -53,9 +55,9 @@ async function translateText(text) {
         // Display user-friendly error message
         const errorMessage = document.createElement('div');
         errorMessage.className = 'translation-error';
-        errorMessage.textContent = '暂不可用';
+        errorMessage.textContent = '翻译服务暂不可用 (Translation temporarily unavailable)';
         document.body.appendChild(errorMessage);
-        setTimeout(() => errorMessage.remove(), 3000);
+        setTimeout(() => errorMessage.remove(), 5000);
         return text;
     }
 }
