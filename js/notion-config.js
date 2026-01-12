@@ -29,3 +29,8 @@ if (typeof window !== 'undefined' && NOTION_CONFIG.NOTION_TOKEN) {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = NOTION_CONFIG;
 }
+
+// Make available globally for browser usage
+if (typeof window !== 'undefined') {
+    window.NOTION_CONFIG = NOTION_CONFIG;
+}

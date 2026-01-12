@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple JSON Test</title>
+</head>
+<body>
+    <h1>JSON Loading Test</h1>
+    <div id="result"></div>
+    
+    <script>
+        async function testJSON() {
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                console.log('Attempting to load data/articles.json...');
+                const response = await fetch('data/articles.json');
+                console.log('Response received:', response);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('JSON parsed successfully:', data);
+                
+                resultDiv.innerHTML = `
+                    <h2 style="color: green;">Success!</h2>
+                    <p>Loaded ${data.articles.length} articles</p>
+                    <h3>Articles:</h3>
+                    <ul>
+                        ${data.articles.map(article => `
+                            <li><strong>${article.title}</strong> (${article.date}) - ${article.type}</li>
+                        `).join('')}
+                    </ul>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                resultDiv.innerHTML = `
+                    <h2 style="color: red;">Error!</h2>
+                    <p>${error.message}</p>
+                    <p>Check the browser console for more details.</p>
+                `;
+            }
+        }
+        
+        // Run test when page loads
+        window.addEventListener('load', testJSON);
+    </script>
+</body>
+</html>

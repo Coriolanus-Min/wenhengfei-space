@@ -20,6 +20,14 @@ class ArticleManager {
     }
 
     async init() {
+        console.log('ArticleManager.init() called');
+        
+        // Check if container exists
+        if (!this.container) {
+            console.error('Articles container not found in DOM');
+            return;
+        }
+        
         try {
             // Use simple JSON loading with public Notion URLs
             await this.loadFromJSON();
@@ -216,6 +224,14 @@ class ArticleManager {
     }
 
     showError(message) {
+        if (!this.container) {
+            console.error('Container not found for error display:', message);
+            return;
+        }
+        
+        // Clear existing content first
+        this.container.innerHTML = '';
+        
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-message';
         errorDiv.textContent = message;
@@ -254,6 +270,31 @@ class ArticleManager {
     createArticleElement(article) {
         const articleElement = document.createElement('div');
         articleElement.className = 'article';
+        
+        // Validate article properties
+        if (!article) {
+            console.error('Article is null or undefined');
+            articleElement.innerHTML = '<p>Error: Invalid article data</p>';
+            return articleElement;
+        }
+        
+        if (!article.title) {
+            console.error('Article missing title:', article);
+            article.title = 'Untitled Article';
+        }
+        
+        if (!article.date) {
+            console.error('Article missing date:', article);
+            article.date = new Date().toISOString().split('T')[0];
+        }
+        
+        if (!article.summary) {
+            article.summary = 'No summary available.';
+        }
+        
+        if (!article.tags) {
+            article.tags = [];
+        }
         
         let contentHtml = '';
         if (article.type === 'notion') {
@@ -298,7 +339,16 @@ class ArticleManager {
     }
 
     async displayArticles() {
-        if (!this.container) return;
+        if (!this.container) {
+            console.error('Container not found in displayArticles');
+            return;
+        }
+        
+        if (!this.articles || this.articles.length === 0) {
+            console.warn('No articles to display');
+            this.container.innerHTML = '<p>No articles available at this time.</p>';
+            return;
+        }
         
         // Clear existing content
         this.container.innerHTML = '';
@@ -311,14 +361,22 @@ class ArticleManager {
             }
             
             for (const article of articlesToShow) {
-                const articleElement = this.createSimpleArticleElement(article);
-                this.container.appendChild(articleElement);
+                try {
+                    const articleElement = this.createSimpleArticleElement(article);
+                    this.container.appendChild(articleElement);
+                } catch (error) {
+                    console.error('Error creating article element:', error, article);
+                }
             }
         } else {
             // On articles page, show all articles with full format
             for (const article of this.articles) {
-                const articleElement = this.createArticleElement(article);
-                this.container.appendChild(articleElement);
+                try {
+                    const articleElement = this.createArticleElement(article);
+                    this.container.appendChild(articleElement);
+                } catch (error) {
+                    console.error('Error creating article element:', error, article);
+                }
             }
         }
     }
@@ -373,6 +431,31 @@ class ArticleManager {
     createSimpleArticleElement(article) {
         const articleElement = document.createElement('div');
         articleElement.className = 'article';
+        
+        // Validate article properties
+        if (!article) {
+            console.error('Article is null or undefined');
+            articleElement.innerHTML = '<p>Error: Invalid article data</p>';
+            return articleElement;
+        }
+        
+        if (!article.title) {
+            console.error('Article missing title:', article);
+            article.title = 'Untitled Article';
+        }
+        
+        if (!article.date) {
+            console.error('Article missing date:', article);
+            article.date = new Date().toISOString().split('T')[0];
+        }
+        
+        if (!article.summary) {
+            article.summary = 'No summary available.';
+        }
+        
+        if (!article.tags) {
+            article.tags = [];
+        }
         
         let articleUrl;
         let target = '_self';

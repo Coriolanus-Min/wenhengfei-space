@@ -170,6 +170,11 @@ nav ul li a.active::after {
   margin-bottom: 2rem;
 }
 
+/* Hero title paragraph with special styling */
+.hero-content > p[data-translate="hero-title"] {
+  /* Frame removed - plain text style */
+}
+
 /* Sections */
 section {
   padding: 4rem 0;
@@ -804,6 +809,183 @@ footer a:hover {
     left: 0;
     color: var(--accent-color);
     font-weight: bold;
+}
+
+/* Timeline Section */
+.timeline-section {
+    background-color: #ffffff;
+    padding: 3rem 0;
+    overflow: hidden;
+}
+
+.timeline {
+    position: relative;
+    display: flex;
+    gap: 1.5rem;
+    padding: 2.5rem 2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(136, 136, 136, 0.2) transparent;
+    min-height: 280px;
+}
+
+/* Custom scrollbar for webkit browsers - subtle styling */
+.timeline::-webkit-scrollbar {
+    height: 6px;
+}
+
+.timeline::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.timeline::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.2);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.timeline::-webkit-scrollbar-thumb:hover {
+    background: rgba(136, 136, 136, 0.4);
+}
+
+/* Timeline horizontal line - positioned in the middle */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: calc((180px + 1.5rem) * 7 + 4rem);
+    height: 2px;
+    background: var(--accent-color);
+    pointer-events: none;
+}
+
+.timeline-item {
+    position: relative;
+    flex-shrink: 0;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Alternate items above and below the line */
+.timeline-item:nth-child(odd) {
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: calc(50% - 5px);
+}
+
+.timeline-item:nth-child(even) {
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: calc(50% - 5px);
+}
+
+.timeline-date {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    position: relative;
+    z-index: 2;
+}
+
+/* Position dates */
+.timeline-item:nth-child(odd) .timeline-date {
+    order: 2;
+    margin-top: 0.6rem;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+    order: 1;
+    margin-bottom: 0.6rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border: 3px solid var(--background-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--accent-color);
+    z-index: 10;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(136, 136, 136, 0.2);
+}
+
+.timeline-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 
+                0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    width: 100%;
+    min-height: 100px;
+}
+
+/* Symmetrical tilting - left cards tilt left, right cards tilt right */
+.timeline-item:nth-child(1) .timeline-content,
+.timeline-item:nth-child(2) .timeline-content,
+.timeline-item:nth-child(3) .timeline-content {
+    transform: rotate(-2deg);
+}
+
+.timeline-item:nth-child(4) .timeline-content {
+    transform: rotate(0deg);
+}
+
+.timeline-item:nth-child(5) .timeline-content,
+.timeline-item:nth-child(6) .timeline-content,
+.timeline-item:nth-child(7) .timeline-content {
+    transform: rotate(2deg);
+}
+
+/* Position cards */
+.timeline-item:nth-child(odd) .timeline-content {
+    order: 1;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    order: 2;
+}
+
+.timeline-content:hover {
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 
+                0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: rotate(0deg) translateY(-4px) scale(1.02) !important;
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.timeline-content p {
+    margin-bottom: 0;
+    color: var(--text-color);
+    line-height: 1.4;
+    font-size: 0.82rem;
 }
 
 /* Print styles */
