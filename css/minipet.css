@@ -10,11 +10,11 @@
     pointer-events: none;
 }
 
-/* Panel to the left of the effigy: result list + whisper + input */
+/* Panel to the lower-left of the sack: result list + whisper + input */
 .effigy-panel {
     position: absolute;
-    top: 20px;
-    right: 80px;
+    top: 85px;
+    right: 78px;
     width: 220px;
     max-width: 220px;
     display: flex;
