@@ -28,10 +28,29 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/translate-button.css">
+    <link rel="stylesheet" href="css/splash.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/minipet.css">
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <canvas id="murmuration-canvas"></canvas>
+        <div class="minimal-header">
+            <h1>Wen Hengfei</h1>
+            <p>signal.noise // seeking resonance</p>
+        </div>
+        <button id="mute-btn" title="Toggle Audio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Speaker Body -->
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <!-- The Slash (Muted) -->
+                <line x1="23" y1="1" x2="1" y2="23"></line>
+            </svg>
+        </button>
+    </div>
+
     <!-- Header -->
      <header>
         <div class="container header-container">
@@ -68,8 +87,8 @@
             <div class="hero">
                 <div class="hero-content">
                     <h1>Wen Hengfei</h1>
-                    <p data-translate="hero-title">Web Developer & Designer</p>
-                    <p data-translate="hero-description">Welcome to my personal website. This is where I share my professional work, personal interests, and thoughts through articles.</p>
+                    <p data-translate="hero-title">Wealth Manager & Healthcare Industry Analyst</p>
+                    <p data-translate="hero-description">Welcome to my digital garden. I navigate the worlds of wealth management, healthcare, and technology, but at my core, I am simply a lifelong student. This space is where I document my professional experiments, personal reflections, and the quiet endurance required to grow in both.</p>
                 </div>
                 <div class="hero-image">
                     <img src="images/profile-placeholder.jpg" alt="Wen Hengfei">
@@ -83,13 +102,13 @@
         <div class="container">
             <h2 class="section-title" data-translate="about-title">About Me</h2>
             <p data-translate="about-p1">
-                This is where you can introduce yourself in more detail. Share your background, education, professional journey, and what drives you. This section helps visitors get to know you better and understand your perspective.
+                My journey didn't start in finance; it began in Biomedical Engineering at Tianjin Medical University. Transitioning from medical device sales to wealth management was a leap of faith that taught me resilience. While I'm proud of milestones like becoming a top-performing wealth manager at CITIC Securities, I value the lessons learned from the pressure and the deep relationships built with clients far more than the accolades.
             </p>
             <p data-translate="about-p2">
-                You can talk about your values, philosophy, and approach to your work. What makes you unique? What principles guide your professional and personal life? This is your opportunity to connect with your audience on a deeper level.
+                I approach life much like I approach a marathon: with patience, pacing, and a respect for the long game. Whether I'm analyzing market trends, running my charitable micro-fund ("On the way365"), or simply reading a good book, I try to stay grounded. I believe that true expertise isn't just about data-driven results; it's about empathy, curiosity, and knowing how to endure through complex challenges.
             </p>
             <p data-translate="about-p3">
-                Feel free to include any significant milestones, achievements, or transformative experiences that have shaped who you are today. The goal is to create an authentic representation of yourself that resonates with visitors.
+                Lately, I find myself fascinated by the messy, exciting intersection of AI, finance, and healthcare. I spend my days tinkering with quantitative trading algorithms, exploring biomedical signal processing (like BCG), and building tools to aggregate global news. It's a humbling process of constant trial and error, balancing ambitious projects like CFA preparation with the simple joy of learning how to build things that matter.
             </p>
         </div>
     </section>
@@ -101,64 +120,45 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-1">2025</div>
+                    <div class="timeline-date" data-translate="timeline-date-0">2023 - 2025</div>
                     <div class="timeline-content">
-                        <h3 data-translate="timeline-title-1">Current Position</h3>
-                        <p data-translate="timeline-desc-1">Describe your current role, achievements, or what you're working on now.</p>
+                        <h3 data-translate="timeline-title-0">Exploring AI & Quant Systems</h3>
+                        <p data-translate="timeline-desc-0">Dove deep into automation and data. Built live quantitative trading algorithms, deployed an AI WeChat consultant, and developed a global news aggregator to curate insights. A period defined by intense self-teaching and experimentation.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-translate="timeline-date-1">2020 - 2023</div>
+                    <div class="timeline-content">
+                        <h3 data-translate="timeline-title-1">Embracing Financial Markets</h3>
+                        <p data-translate="timeline-desc-1">Transitioned into finance, starting as a Product Manager at China Construction Bank before moving to CITIC Securities. By leveraging deep market research and client relationship skills, I became the top-performing wealth manager in my branch.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-2">2023</div>
+                    <div class="timeline-date" data-translate="timeline-date-2">2019 - 2020</div>
                     <div class="timeline-content">
-                        <h3 data-translate="timeline-title-2">Career Milestone</h3>
-                        <p data-translate="timeline-desc-2">A significant career achievement or transition. Share details about your role, projects, or growth.</p>
+                        <h3 data-translate="timeline-title-2">Medical Device Sales Representative</h3>
+                        <p data-translate="timeline-desc-2">Pioneered regional medical equipment sales for Hangzhou Langjun Medical, conducting extensive market research and successfully managing bidding processes for hospitals.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-3">2020</div>
+                    <div class="timeline-date" data-translate="timeline-date-3">2016 - Present</div>
                     <div class="timeline-content">
-                        <h3 data-translate="timeline-title-3">Professional Growth</h3>
-                        <p data-translate="timeline-desc-3">Another important moment in your journey. This could be education, a new job, or a major project.</p>
+                        <h3 data-translate="timeline-title-3">Co-Founder of "On the way365" Micro-Fund</h3>
+                        <p data-translate="timeline-desc-3">Launched a grassroots charity fund where members donate 1 RMB daily. Over the past 7 years, we have raised over 35,000 RMB to financially support middle school students in need.</p>
                     </div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-4">2018</div>
+                    <div class="timeline-date" data-translate="timeline-date-4">2015 - 2019</div>
                     <div class="timeline-content">
-                        <h3 data-translate="timeline-title-4">Education / Early Career</h3>
-                        <p data-translate="timeline-desc-4">Your educational background or early career beginnings. Share where you started and what you learned.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-5">2015</div>
-                    <div class="timeline-content">
-                        <h3 data-translate="timeline-title-5">Major Achievement</h3>
-                        <p data-translate="timeline-desc-5">A key accomplishment or turning point. Describe an important project or personal milestone.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-6">2012</div>
-                    <div class="timeline-content">
-                        <h3 data-translate="timeline-title-6">Early Experience</h3>
-                        <p data-translate="timeline-desc-6">Your early career or educational experiences. Share what you learned during this formative period.</p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date" data-translate="timeline-date-7">2010</div>
-                    <div class="timeline-content">
-                        <h3 data-translate="timeline-title-7">The Beginning</h3>
-                        <p data-translate="timeline-desc-7">Where it all started. Your first steps into your field or a defining moment that shaped your path.</p>
+                        <h3 data-translate="timeline-title-4">B.S. in Biomedical Engineering</h3>
+                        <p data-translate="timeline-desc-4">Graduated from Tianjin Medical University. Built a strong foundation in medical devices, served as Minister of the Work-Study Center, and founded a campus tutoring platform providing over 1,000 part-time opportunities for students.</p>
                     </div>
                 </div>
             </div>
@@ -172,29 +172,29 @@
             <div class="portfolio-gallery">
                 <div class="portfolio-item">
                     <div class="portfolio-image-container">
-                        <img src="images/work-placeholder-1.jpg" alt="Project 1">
+                        <img src="images/work-placeholder-1.jpg" alt="Charity Micro-Fund">
                     </div>
                     <div class="portfolio-caption">
-                        <h3 data-translate="project1-title">Project Title 1</h3>
-                        <p data-translate="project1-desc">Brief description of the project</p>
+                        <h3 data-translate="project1-title">"On the way365" Charity Micro-Fund</h3>
+                        <p data-translate="project1-desc">A charitable initiative I co-founded in 2016. Through daily 1 RMB micro-donations from our 60+ members, we have successfully raised over 35,000 RMB to sponsor underprivileged students.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image-container">
-                        <img src="images/work-placeholder-2.webp" alt="Project 2">
+                        <img src="images/work-placeholder-2.webp" alt="Healthcare Research">
                     </div>
                     <div class="portfolio-caption">
-                        <h3 data-translate="project2-title">Project Title 2</h3>
-                        <p data-translate="project2-desc">Brief description of the project</p>
+                        <h3 data-translate="project2-title">Healthcare Industry Research & Analysis</h3>
+                        <p data-translate="project2-desc">Authored comprehensive analytical articles, including a 10,000-word deep dive into "How Far Away is mRNA Therapy" and a detailed financial analysis of Boston Scientific's 2022 annual report.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image-container">
-                        <img src="images/work-placeholder-3.webp" alt="Project 3">
+                        <img src="images/work-placeholder-3.webp" alt="Wealth Portfolio">
                     </div>
                     <div class="portfolio-caption">
-                        <h3 data-translate="project3-title">Project Title 3</h3>
-                        <p data-translate="project3-desc">Brief description of the project</p>
+                        <h3 data-translate="project3-title">Top-Performing Wealth Portfolio Strategy</h3>
+                        <p data-translate="project3-desc">Strategized and executed customized asset allocation plans for retail and institutional clients, achieving the #1 rank in annual real-trading performance for the CITIC Securities Zhejiang Branch in 2022.</p>
                     </div>
                 </div>
             </div>
@@ -224,10 +224,9 @@
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:wenhengfei@tmu.edu.cn" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" title="WeChat Official Account: 银河系青年 (ON THE WAY 365)"><i class="fab fa-weixin"></i></a>
             </div>
             <p data-translate="copyright">&copy; 2025 Wen Hengfei. All Rights Reserved.</p>
         </div>
@@ -238,5 +237,46 @@
     <script src="js/script.js"></script>
     <script src="js/articles.js"></script>
     <script src="js/structured-data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/splash.js"></script>
+<div class="bot-icon-container">
+        <!-- The CLI Dialogue Box -->
+        <div class="cli-chatbox">
+            <span class="cli-prompt">> SYSTEM.AGENT:</span> Awaiting your query...
+        </div>
+        
+        <!-- The Liquid Metal Observer -->
+        <div class="bot-icon">
+            <svg class="droplet-shape" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Liquid Metal Filter -->
+                <defs>
+                    <filter id="liquid-metal" x="-20%" y="-20%" width="140%" height="140%">
+                        <!-- Increase contrast and grayscale to create metallic shine -->
+                        <feColorMatrix type="matrix" values="
+                            1 0 0 0 0
+                            1 0 0 0 0
+                            1 0 0 0 0
+                            0 0 0 1 0" />
+                        <feComponentTransfer>
+                            <feFuncA type="linear" slope="2" intercept="-0.5"/>
+                        </feComponentTransfer>
+                        <!-- Add a subtle glowing edge -->
+                        <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#ffffff" flood-opacity="0.3"/>
+                    </filter>
+                    
+                    <linearGradient id="metal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="40%" stop-color="#888888" />
+                        <stop offset="60%" stop-color="#333333" />
+                        <stop offset="100%" stop-color="#000000" />
+                    </linearGradient>
+                </defs>
+                
+                <!-- The Core Shape (No face, just the morphing blob) -->
+                <path id="droplet-path" fill="url(#metal-grad)" filter="url(#liquid-metal)" />
+                <path id="droplet-highlight" fill="rgba(255,255,255,0.6)" filter="blur(2px)" />
+            </svg>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,12 +1,14 @@
 /* Global Styles */
 :root {
-  --primary-color: #000000;
-  --secondary-color: #ffffff;
-  --accent-color: #888888;
-  --text-color: #333333;
-  --background-color: #ffffff;
-  --font-primary: 'Open Sans', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
+  --primary-color: #eaeaea;
+  --secondary-color: #1a1a1a;
+  --accent-color: #555555;
+  --text-color: #a0a0a0;
+  --background-color: #1a1a1a;
+  --surface-color: #242424;
+  --border-color: #333333;
+  --font-primary: 'Courier New', Courier, monospace;
+  --font-heading: 'Courier New', Courier, monospace;
 }
 
 * {
@@ -42,7 +44,7 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  border-bottom: 1px solid var(--accent-color);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5rem;
   margin-top: 2rem;
 }
@@ -70,7 +72,7 @@ a:hover {
 header {
   background-color: var(--background-color);
   padding: 1.5rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -156,8 +158,9 @@ nav ul li a.active::after {
 
 .hero-image img {
   max-width: 100%;
-  border-radius: 50%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  border: 1px solid var(--border-color);
+  filter: grayscale(100%) contrast(1.2);
 }
 
 .hero h1 {
@@ -189,7 +192,7 @@ section {
 .article {
   margin-bottom: 3rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .article-date {
@@ -224,15 +227,17 @@ section {
 .tag {
     display: inline-block;
     padding: 0.3rem 0.8rem;
-    background-color: #f0f0f0;
-    border-radius: 20px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
     font-size: 0.9rem;
-    color: var(--text-color);
-    transition: background-color 0.3s ease;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
 }
 
 .tag:hover {
-    background-color: #e0e0e0;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 /* Portfolio */
@@ -245,9 +250,9 @@ section {
 .portfolio-item {
   position: relative;
   overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  background-color: var(--surface-color);
 }
 
 .portfolio-image-container {
@@ -273,10 +278,11 @@ section {
   left: 0;
   width: 100%;
   padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+  background: rgba(26, 26, 26, 0.9);
+  color: var(--primary-color);
   transform: translateY(100%);
   transition: transform 0.3s ease;
+  border-top: 1px solid var(--border-color);
 }
 
 .portfolio-item:hover .portfolio-caption {
@@ -309,10 +315,10 @@ section {
 }
 
 .contact-info {
-  background: #f9f9f9;
+  background: var(--surface-color);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
 }
 
 .contact-info h3 {
@@ -333,14 +339,15 @@ section {
   align-items: center;
   margin-bottom: 1.5rem;
   padding: 0.8rem;
-  background: white;
-  border-radius: 6px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-method:hover {
   transform: translateX(5px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
 }
 
 .contact-method i {
@@ -359,7 +366,7 @@ section {
 .message-board {
   margin-top: 4rem;
   padding-top: 3rem;
-  border-top: 2px solid #eee;
+  border-top: 1px solid var(--border-color);
 }
 
 .message-board h2 {
@@ -378,8 +385,8 @@ section {
 .message-board iframe {
   display: block;
   margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  border: 1px solid var(--border-color);
 }
 
 /* Contact Form */
@@ -409,9 +416,9 @@ section {
 .message-board-frame {
   width: 100%;
   min-height: 600px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  background-color: var(--surface-color);
 }
 
 .form-group {
@@ -428,8 +435,10 @@ input,
 textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--primary-color);
+  border-radius: 0;
   font-family: var(--font-primary);
 }
 
@@ -439,19 +448,22 @@ textarea {
 }
 
 button {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border: none;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
   padding: 0.8rem 2rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  border-radius: 0;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 /* Social Media */
@@ -505,7 +517,7 @@ footer a:hover {
     justify-content: center;
     align-items: center;
     transition: right 0.5s ease;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    border-left: 1px solid var(--border-color);
     overflow-y: auto;
   }
   
@@ -633,22 +645,23 @@ footer a:hover {
 /* Notion Content */
 .notion-content {
     margin: 2rem 0;
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
-    background: white;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
 }
 
 .notion-embed {
     width: 100%;
-    border: 1px solid #eee;
-    border-radius: 8px;
+    border: none;
+    border-radius: 0;
     transition: all 0.3s ease;
 }
 
 /* 适配 Notion 的默认样式 */
 .notion-frame {
     border: none !important;
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
 }
 
@@ -661,8 +674,8 @@ footer a:hover {
     position: relative;
     width: 100%;
     min-height: 600px;
-    background: #fff;
-    border-radius: 8px;
+    background: var(--surface-color);
+    border-radius: 0;
     overflow: hidden;
 }
 
@@ -676,15 +689,15 @@ footer a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(26, 26, 26, 0.9);
     z-index: 1;
 }
 
 .notion-loader .spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #3498db;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 10px;
@@ -697,37 +710,40 @@ footer a:hover {
     transform: translate(-50%, -50%);
     text-align: center;
     padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
 }
 
 .notion-error p {
     margin-bottom: 15px;
-    color: #666;
+    color: var(--text-color);
 }
 
 .notion-error button {
     padding: 8px 16px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
 }
 
 .notion-error button:hover {
-    background: #2980b9;
+    background: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .error-message {
     padding: 15px;
     margin: 10px 0;
-    background: #fff3f3;
-    border: 1px solid #ffcdd2;
-    border-radius: 4px;
-    color: #d32f2f;
+    background: var(--surface-color);
+    border: 1px solid #ff4444;
+    border-radius: 0;
+    color: #ff4444;
     text-align: center;
 }
 
@@ -745,7 +761,7 @@ footer a:hover {
 .work-item {
     margin-bottom: 3rem;
     padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .work-item:last-child {
@@ -813,9 +829,10 @@ footer a:hover {
 
 /* Timeline Section */
 .timeline-section {
-    background-color: #ffffff;
+    background-color: var(--background-color);
     padding: 3rem 0;
     overflow: hidden;
+    border-top: 1px solid var(--border-color);
 }
 
 .timeline {
@@ -930,12 +947,10 @@ footer a:hover {
 }
 
 .timeline-content {
-    background: white;
+    background: var(--surface-color);
     padding: 1rem;
-    border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 
-                0 2px 6px rgba(0, 0, 0, 0.04);
+    border-radius: 0;
+    border: 1px solid var(--border-color);
     transition: all 0.3s ease;
     width: 100%;
     min-height: 100px;
@@ -968,9 +983,7 @@ footer a:hover {
 }
 
 .timeline-content:hover {
-    border-color: rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 
-                0 4px 16px rgba(0, 0, 0, 0.06);
+    border-color: var(--primary-color);
     transform: rotate(0deg) translateY(-4px) scale(1.02) !important;
 }
 
@@ -1030,4 +1043,40 @@ footer a:hover {
   p, blockquote, ul, ol, dl, table {
     page-break-inside: avoid;
   }
+}
+
+
+/* ==================================================================
+   NOTION EMBED OVERRIDES (The Cinematic Treatment)
+   ================================================================== */
+/* 
+  Since Notion content is loaded via an iframe or API, we need to ensure 
+  the dark theme applies to images natively within your articles.
+  
+  Note: If you are using an iframe, these styles must be injected 
+  by your Notion renderer (like Super.so or simple iframe wrapper).
+  If you are using the Notion API to render HTML locally, this will apply instantly.
+*/
+
+.notion-page-content img {
+    /* Apply the stark Wuthering Heights grayscale filter to all article images */
+    filter: grayscale(100%) contrast(1.2) !important;
+    border-radius: 0 !important;
+    border: 1px solid var(--border-color) !important;
+    transition: filter 0.5s ease;
+}
+
+/* Optional: Hover effect to reveal original colors of the movie snapshot */
+.notion-page-content img:hover {
+    filter: grayscale(0%) contrast(1.1) !important;
+}
+
+/* Make blockquotes look like cinematic subtitles/scripts */
+.notion-quote {
+    border-left: 2px solid var(--primary-color) !important;
+    font-family: var(--font-primary) !important;
+    font-style: italic;
+    color: var(--text-color) !important;
+    background: transparent !important;
+    padding-left: 1.5rem !important;
 }

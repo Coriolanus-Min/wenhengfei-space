@@ -55,7 +55,7 @@ async function translateText(text) {
         // Display user-friendly error message
         const errorMessage = document.createElement('div');
         errorMessage.className = 'translation-error';
-        errorMessage.textContent = '翻译服务暂不可用 (Translation temporarily unavailable)';
+        errorMessage.textContent = '暂不可用 (unavailable)';
         document.body.appendChild(errorMessage);
         setTimeout(() => errorMessage.remove(), 5000);
         return text;
