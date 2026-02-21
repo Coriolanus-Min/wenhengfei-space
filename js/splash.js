@@ -112,42 +112,181 @@ function onMouseMove(event) {
     mouse = camera.position.clone().add(dir.multiplyScalar(distance));
 }
 
-// --- GENERATIVE AUDIO ---
+// --- GENERATIVE AUDIO (THE FLOCK & THE RESONANCE) ---
 function initAudio() {
     if (audioCtx) return;
     
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
-    // Drone oscillator (elemental, low, haunting drone)
-    droneOscillator = audioCtx.createOscillator();
-    droneOscillator.type = 'triangle';
-    droneOscillator.frequency.value = 55; // Low A
+    // 1. THE DEEP AIR RESONANCE / LOW WING FLAPS (Soft, distant thuds/whooshes)
+    // We use a low-pass filtered brown/pink noise equivalent mixed with a low sine wave
+    const bufferSize = audioCtx.sampleRate * 2;
+    const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+    let lastOut = 0;
+    for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        // Simple Brown noise approximation (much softer, deeper than white noise)
+        output[i] = (lastOut + (0.02 * white)) / 1.02;
+        lastOut = output[i];
+        output[i] *= 3.5; // Compensate gain
+    }
     
-    // LFO for wind-like modulation
-    const lfo = audioCtx.createOscillator();
-    lfo.type = 'sine';
-    lfo.frequency.value = 0.2; // slow haunting swell
+    const noiseSource = audioCtx.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
+    noiseSource.loop = true;
     
-    const lfoGain = audioCtx.createGain();
-    lfoGain.gain.value = 10;
+    // Heavily muffle the noise (like distant wind/wings moving massive air)
+    const noiseFilter = audioCtx.createBiquadFilter();
+    noiseFilter.type = 'lowpass';
+    noiseFilter.frequency.value = 150; // Very deep, booming air displacement
     
-    lfo.connect(lfoGain);
-    lfoGain.connect(droneOscillator.frequency);
+    // The "flap" envelope: slow, rhythmic, but soft and breathing
+    const flapLfo = audioCtx.createOscillator();
+    flapLfo.type = 'sine';
+    flapLfo.frequency.value = 0.8; // Very slow, heavy flaps (less than 1 per second)
     
-    // Lowpass filter for the "muffled" stormy feel
-    const filter = audioCtx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 400;
+    const flapLfoGain = audioCtx.createGain();
+    flapLfoGain.gain.value = 0.6;
+    flapLfo.connect(flapLfoGain);
     
+    const flapVca = audioCtx.createGain();
+    flapVca.gain.value = 0.4; 
+    flapLfoGain.connect(flapVca.gain);
+    
+    noiseSource.connect(noiseFilter);
+    noiseFilter.connect(flapVca);
+
+    
+    // 2. THE DISTANT, MELANCHOLIC CHIRPS / CALLS (Short, slow, distinct)
+    const callOsc = audioCtx.createOscillator();
+    callOsc.type = 'sine'; // Sine wave is smooth, round, not harsh or alarming
+    callOsc.frequency.value = 1200; // Lower, more mournful pitch (not a screech)
+
+    // Very gentle pitch bending (like a solitary bird call echoing)
+    const callPitchLfo = audioCtx.createOscillator();
+    callPitchLfo.type = 'sine';
+    callPitchLfo.frequency.value = 0.5;
+    
+    const callPitchGain = audioCtx.createGain();
+    callPitchGain.gain.value = 150;
+    callPitchLfo.connect(callPitchGain);
+    callPitchGain.connect(callOsc.frequency);
+
+    // The timing of the calls: Short bursts, but widely spaced out
+    const callTimingLfo = audioCtx.createOscillator();
+    callTimingLfo.type = 'sine';
+    callTimingLfo.frequency.value = 0.15; // Only triggers very rarely (once every ~6 seconds)
+    
+    // We use a wave shaper to make the trigger a short "ping" rather than a long fade
+    const curve = new Float32Array(4096);
+    for (let i = 0; i < 4096; ++i) {
+        const x = i * 2 / 4096 - 1;
+        // Only let the very peak of the sine wave through (creates a short burst)
+        curve[i] = x > 0.95 ? (x - 0.95) * 20 : 0; 
+    }
+    const waveShaper = audioCtx.createWaveShaper();
+    waveShaper.curve = curve;
+    callTimingLfo.connect(waveShaper);
+
+    const callVca = audioCtx.createGain();
+    callVca.gain.value = 0; // default silent
+    waveShaper.connect(callVca.gain);
+
+    // Add a huge amount of Delay/Reverb (Echo) to push the chirps far into the distance
+    const delay = audioCtx.createDelay();
+    delay.delayTime.value = 0.6; // 600ms echo
+    const feedback = audioCtx.createGain();
+    feedback.gain.value = 0.4;
+    delay.connect(feedback);
+    feedback.connect(delay);
+    
+    callOsc.connect(callVca);
+    callVca.connect(delay);
+
+    // 3. EXTREME SPATIAL PANNING (忽远忽近很分明)
+    const panner = audioCtx.createStereoPanner();
+    panner.pan.value = 0;
+    
+    // Very slow, sweeping pan that travels entirely from one ear to the exact opposite
+    const panLfo = audioCtx.createOscillator();
+    panLfo.type = 'triangle'; // Linear sweep, distinct movement
+    panLfo.frequency.value = 0.05; // extremely slow (20 seconds per cycle)
+    
+    const panLfoGain = audioCtx.createGain();
+    panLfoGain.gain.value = 1.0; // Hard left to hard right
+    panLfo.connect(panLfoGain);
+    panLfoGain.connect(panner.pan);
+
+    
+    // 1.5 THE SCATTERED LEAVES / FLUTTER (哒哒哒 / 哗哗哗)
+    const leavesBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const leavesOutput = leavesBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+        leavesOutput[i] = Math.random() * 2 - 1;
+    }
+    const leavesSource = audioCtx.createBufferSource();
+    leavesSource.buffer = leavesBuffer;
+    leavesSource.loop = true;
+
+    const leavesFilter = audioCtx.createBiquadFilter();
+    leavesFilter.type = 'bandpass';
+    leavesFilter.frequency.value = 600; 
+    leavesFilter.Q.value = 1.2;
+
+    const leavesLfo = audioCtx.createOscillator();
+    leavesLfo.type = 'sawtooth';
+    leavesLfo.frequency.value = 12; 
+    
+    const leavesChaosLfo = audioCtx.createOscillator();
+    leavesChaosLfo.type = 'sine';
+    leavesChaosLfo.frequency.value = 0.5;
+    const leavesChaosGain = audioCtx.createGain();
+    leavesChaosGain.gain.value = 8;
+    leavesChaosLfo.connect(leavesChaosGain);
+    leavesChaosGain.connect(leavesLfo.frequency);
+
+    const leavesLfoGain = audioCtx.createGain();
+    leavesLfoGain.gain.value = 0.8;
+    leavesLfo.connect(leavesLfoGain);
+
+    const leavesVca = audioCtx.createGain();
+    leavesVca.gain.value = 0.15; 
+    leavesLfoGain.connect(leavesVca.gain);
+
+    leavesSource.connect(leavesFilter);
+    leavesFilter.connect(leavesVca);
+    // NOW panner exists, so we can connect to it!
+    leavesVca.connect(panner); 
+
+    leavesSource.start();
+    leavesLfo.start();
+    leavesChaosLfo.start();
+
+    // Master Volume Control
     droneGain = audioCtx.createGain();
-    droneGain.gain.value = 0; // start muted, fade in
+    droneGain.gain.value = 0; // starts muted, fades in
     
-    droneOscillator.connect(filter);
-    filter.connect(droneGain);
+    // Routing
+    flapVca.connect(panner);
+    callVca.connect(panner);
+    delay.connect(panner); // The echoes also pan
+    panner.connect(droneGain);
     droneGain.connect(audioCtx.destination);
     
-    droneOscillator.start();
-    lfo.start();
+    // Start nodes
+    noiseSource.start();
+    flapLfo.start();
+    callOsc.start();
+    callPitchLfo.start();
+    callTimingLfo.start();
+    panLfo.start();
+
+    window.birdAudio = {
+        flapLfo: flapLfo,
+        noiseFilter: noiseFilter,
+        panLfo: panLfo
+    };
 }
 
 function toggleAudio() {
@@ -329,12 +468,17 @@ function updateBoidPositions() {
         averageSpeed += boid.velocity.length();
     }
 
-    // Audio modulation based on flock speed/chaos
-    if (audioCtx && isAudioPlaying && !isScattering) {
+    // Subtle Audio modulation based on flock speed/chaos
+    if (audioCtx && isAudioPlaying && !isScattering && window.birdAudio) {
         averageSpeed /= boids.length;
-        // Map average speed to drone pitch slightly to feel dynamic
-        const targetFreq = 50 + (averageSpeed * 8);
-        droneOscillator.frequency.setTargetAtTime(targetFreq, audioCtx.currentTime, 0.2);
+        
+        // Very subtle flap speed increase (from 0.8 up to maybe 1.5 max)
+        const targetFlapSpeed = 0.8 + (averageSpeed * 0.15);
+        window.birdAudio.flapLfo.frequency.setTargetAtTime(targetFlapSpeed, audioCtx.currentTime, 1.0);
+
+        // Low frequency air displacement gets slightly brighter, but never harsh (max ~300Hz)
+        const targetResonance = 150 + (averageSpeed * 50);
+        window.birdAudio.noiseFilter.frequency.setTargetAtTime(targetResonance, audioCtx.currentTime, 1.0);
     }
 }
 
