@@ -1,40 +1,118 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const whisperBox = document.getElementById('effigy-whisper');
-    const effigy = document.getElementById('hanging-effigy');
-    if (!whisperBox || !effigy) return;
+document.addEventListener('DOMContentLoaded', function () {
+    var whisperBox = document.getElementById('effigy-whisper');
+    var effigy = document.getElementById('hanging-effigy');
+    var listInner = document.getElementById('effigy-result-list-inner');
+    var resultList = document.getElementById('effigy-result-list');
+    var chatInput = document.getElementById('effigy-chat-input');
+    var sendBtn = document.getElementById('effigy-send-btn');
 
-    // Atmospheric quotes inspired by Svidrigailov / Wuthering Heights / Despair
-    const whispers = [
-        "...the rain never stops...",
-        "...it is so cold at the crossroads...",
-        "...there are no ghosts, only memories...",
-        "...heavy is the damp earth...",
-        "...we journey into the dark alone...",
-        "...even the wind sounds like weeping...",
-        "...a room with spiders in the corners...", // Svidrigailov's vision of eternity
-        "...waiting for the dawn..."
+    var whispers = [
+        '...the rain never stops...',
+        '...it is so cold at the crossroads...',
+        '...there are no ghosts, only memories...',
+        '...heavy is the damp earth...',
+        '...we journey into the dark alone...',
+        '...even the wind sounds like weeping...',
+        '...a room with spiders in the corners...',
+        '...waiting for the dawn...'
     ];
+    var lastQuoteIndex = -1;
+    var lastReplySummary = '';
 
-    let lastQuoteIndex = -1;
+    function setWhisper(text) {
+        if (whisperBox) whisperBox.textContent = text || '';
+    }
 
-    effigy.addEventListener('mouseenter', () => {
-        // Pick a random quote that isn't the last one
-        let nextIndex;
+    function pickRandomWhisper() {
+        if (!whispers.length) return '';
+        var nextIndex;
         do {
             nextIndex = Math.floor(Math.random() * whispers.length);
         } while (nextIndex === lastQuoteIndex && whispers.length > 1);
-        
         lastQuoteIndex = nextIndex;
-        whisperBox.textContent = whispers[nextIndex];
-        
-        // Add a slight randomized creak/rotation to the element itself on hover
-        // to simulate a gust of wind disturbing it
-        const gust = (Math.random() - 0.5) * 10; 
-        effigy.style.transform = `rotate(${gust}deg)`;
-    });
+        return whispers[nextIndex];
+    }
 
-    effigy.addEventListener('mouseleave', () => {
-        // Remove the forced transform so the CSS keyframe animation takes over again smoothly
-        effigy.style.transform = '';
-    });
+    if (effigy) {
+        effigy.addEventListener('mouseenter', function () {
+            setWhisper(lastReplySummary || pickRandomWhisper());
+            var gust = (Math.random() - 0.5) * 10;
+            effigy.style.transform = 'rotate(' + gust + 'deg)';
+        });
+        effigy.addEventListener('mouseleave', function () {
+            effigy.style.transform = '';
+        });
+    }
+
+    function scrollResultToBottom() {
+        if (resultList) resultList.scrollTop = resultList.scrollHeight;
+    }
+
+    function setInputEnabled(enabled) {
+        if (chatInput) chatInput.disabled = !enabled;
+        if (sendBtn) sendBtn.disabled = !enabled;
+    }
+
+    function sendMessage() {
+        if (!chatInput || !listInner) return;
+        var message = (chatInput.value || '').trim();
+        if (!message) return;
+
+        chatInput.value = '';
+        setInputEnabled(false);
+        setWhisper('...listening...');
+
+        var apiUrl = '/api/chat';
+        fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: message })
+        })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                var reply = (data && data.reply) ? String(data.reply) : '';
+                if (!reply) {
+                    setWhisper('...nothing this time...');
+                    setInputEnabled(true);
+                    return;
+                }
+                lastReplySummary = reply.split('\n')[0].trim().slice(0, 50);
+                if (lastReplySummary.length < reply.trim().length) lastReplySummary += '...';
+
+                if (typeof window.revealTextAtRate === 'function') {
+                    window.revealTextAtRate(listInner, reply, {
+                        unit: 'char',
+                        charsPerSecond: 28,
+                        newlineAsNewLine: true,
+                        lineClassName: 'effigy-result-line',
+                        scrollToBottom: scrollResultToBottom
+                    }).then(function () {
+                        setWhisper(lastReplySummary || pickRandomWhisper());
+                        setInputEnabled(true);
+                    });
+                } else {
+                    var line = document.createElement('div');
+                    line.className = 'effigy-result-line';
+                    line.textContent = reply;
+                    listInner.appendChild(line);
+                    scrollResultToBottom();
+                    setWhisper(lastReplySummary || pickRandomWhisper());
+                    setInputEnabled(true);
+                }
+            })
+            .catch(function () {
+                setWhisper('...the wind took it...');
+                setInputEnabled(true);
+            });
+    }
+
+    if (sendBtn) sendBtn.addEventListener('click', sendMessage);
+    if (chatInput) {
+        chatInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
 });

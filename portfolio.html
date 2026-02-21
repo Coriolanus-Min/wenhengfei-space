@@ -140,14 +140,22 @@
 
     <script src="js/translate.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/typewriterReveal.js"></script>
     <script src="js/minipet.js"></script>
     <!-- The Crossroads Effigy -->
     <div class="bot-icon-container">
-        <!-- The Ghostly Whisper Box -->
-        <div class="whisper-box" id="effigy-whisper">
-            ...the rain never stops...
+        <div class="effigy-panel">
+            <div class="effigy-result-list" id="effigy-result-list">
+                <div class="effigy-result-list-inner" id="effigy-result-list-inner"></div>
+            </div>
+            <div class="whisper-box" id="effigy-whisper">
+                ...the rain never stops...
+            </div>
+            <div class="effigy-input-wrap">
+                <input type="text" id="effigy-chat-input" placeholder="Say something..." maxlength="500" />
+                <button type="button" id="effigy-send-btn" title="Send"><i class="fas fa-paper-plane"></i></button>
+            </div>
         </div>
-        
         <!-- The Hanging Effigy (Burlap & Hemp) -->
         <div class="bot-icon" id="hanging-effigy">
             <svg class="droplet-shape" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
@@ -168,19 +176,19 @@
                 </defs>
 
                 <!-- The Hemp Rope extending out of frame -->
-                <line x1="50" y1="-20" x2="50" y2="35" stroke="#1a1512" stroke-width="2" stroke-dasharray="2,1" />
-                <line x1="49" y1="-20" x2="49" y2="35" stroke="#2a2520" stroke-width="1" stroke-dasharray="1,2" opacity="0.5" />
+                <line x1="50" y1="-20" x2="50" y2="35" stroke="#2d2620" stroke-width="2" stroke-dasharray="2,1" />
+                <line x1="49" y1="-20" x2="49" y2="35" stroke="#3a332c" stroke-width="1" stroke-dasharray="1,2" opacity="0.5" />
                 
                 <!-- The Noose/Knot -->
-                <ellipse cx="50" cy="35" rx="3" ry="5" fill="#1a1512" />
+                <ellipse cx="50" cy="35" rx="3" ry="5" fill="#2d2620" />
                 
                 <!-- The Ragged Burlap Body/Hood -->
                 <path d="M45,36 C30,60 25,100 20,135 C30,128 40,145 50,135 C60,140 70,125 80,135 C75,100 70,60 55,36 Z" 
-                      fill="#2c2722" filter="url(#fray) url(#hemp-texture)" opacity="0.9" />
+                      fill="#423a32" filter="url(#fray) url(#hemp-texture)" opacity="0.9" />
                 
                 <!-- The Hollow/Shadow underneath the hood -->
                 <path d="M46,40 C38,60 35,90 35,115 C45,110 50,120 55,110 C52,90 52,60 54,40 Z" 
-                      fill="#0a0806" filter="url(#fray)" opacity="0.7" />
+                      fill="#1c1814" filter="url(#fray)" opacity="0.7" />
             </svg>
         </div>
     </div>
