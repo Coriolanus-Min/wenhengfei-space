@@ -1,22 +1,12 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "builds": [{ "src": "api/**/*.js", "use": "@vercel/node" }],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/(.*)", "dest": "/$1" }
   ],
   "env": {
+    "GEMINI_API_KEY": "@gemini-api-key",
     "DEEPL_API_KEY": "@deepl-api-key",
     "DEEPL_FREE_ACCOUNT": "@deepl-free-account",
     "GOOGLE_TRANSLATE_API_KEY": "@google-translate-api-key",
