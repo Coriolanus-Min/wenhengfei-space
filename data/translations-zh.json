@@ -1,0 +1,134 @@
+{
+  "hero-title": {
+    "zh": "信号.噪声 // 寻求共鸣",
+    "_source": "signal.noise // seeking resonance"
+  },
+  "hero-description": {
+    "zh": "工作、文字与其间点滴的栖身之所。",
+    "_source": "A place for work, words, and the bits in between."
+  },
+  "about-title": {
+    "zh": "关于我",
+    "_source": "About Me"
+  },
+  "about-p1": {
+    "zh": "我的职业生涯并非始于金融领域，而是从天津医科大学的生物医学工程专业起步。从医疗器械销售转型到财富管理，是一次需要勇气的跨越，让我学会了坚韧不拔。虽然成为中信证券顶尖财富管理顾问等里程碑令我自豪，但我更珍视的是在高压环境中汲取的经验，以及与客户建立的深厚情谊——这些远比荣誉更珍贵。",
+    "_source": "My journey didn't start in finance; it began in Biomedical Engineering at Tianjin Medical University. Transitioning from medical device sales to wealth management was a leap of faith that taught me resilience. While I'm proud of milestones like becoming a top-performing wealth manager at CITIC Securities, I value the lessons learned from the pressure and the deep relationships built with clients far more than the accolades."
+  },
+  "about-p2": {
+    "zh": "我对待生活的方式，恰似备战马拉松：怀着耐心，把握节奏，尊重长远规划。无论是分析市场趋势、运营慈善微基金（\"On the way365\"），还是单纯阅读好书，我都力求保持沉稳。我深信真正的专业素养不仅在于数据驱动的成果，更在于同理心、求知欲，以及在复杂挑战中坚韧前行的能力。",
+    "_source": "I approach life much like I approach a marathon: with patience, pacing, and a respect for the long game. Whether I'm analyzing market trends, running my charitable micro-fund (\"On the way365\"), or simply reading a good book, I try to stay grounded. I believe that true expertise isn't just about data-driven results; it's about empathy, curiosity, and knowing how to endure through complex challenges."
+  },
+  "about-p3": {
+    "zh": "近来，我深深着迷于人工智能、金融与医疗健康这三个领域交织出的混乱而激动人心的交汇点。我终日钻研量化交易算法，探索生物医学信号处理技术（如脑电波监测），并致力于构建全球新闻聚合工具。这个过程充满谦卑感——不断尝试与失败交织，既要平衡CFA备考这类宏大目标，又要享受学习构建有意义事物带来的纯粹乐趣。",
+    "_source": "Lately, I find myself fascinated by the messy, exciting intersection of AI, finance, and healthcare. I spend my days tinkering with quantitative trading algorithms, exploring biomedical signal processing (like BCG), and building tools to aggregate global news. It's a humbling process of constant trial and error, balancing ambitious projects like CFA preparation with the simple joy of learning how to build things that matter."
+  },
+  "timeline-title": {
+    "zh": "我的旅程",
+    "_source": "My Journey"
+  },
+  "timeline-date-0": {
+    "zh": "2023 - 2025",
+    "_source": "2023 - 2025"
+  },
+  "timeline-title-0": {
+    "zh": "探索人工智能与量化系统",
+    "_source": "Exploring AI & Quant Systems"
+  },
+  "timeline-desc-0": {
+    "zh": "深入探索自动化与数据领域。构建实时量化交易算法，部署人工智能微信顾问，开发全球新闻聚合器以精选行业洞见。这段时期以密集的自学与实验为特征。",
+    "_source": "Dove deep into automation and data. Built live quantitative trading algorithms, deployed an AI WeChat consultant, and developed a global news aggregator to curate insights. A period defined by intense self-teaching and experimentation."
+  },
+  "timeline-date-1": {
+    "zh": "2020 - 2023",
+    "_source": "2020 - 2023"
+  },
+  "timeline-title-1": {
+    "zh": "拥抱金融市场",
+    "_source": "Embracing Financial Markets"
+  },
+  "timeline-desc-1": {
+    "zh": "转行进入金融领域，最初在中国建设银行担任产品经理，后加入中信证券。凭借深厚的市场研究能力和客户关系管理技能，我成为所在分支机构业绩最突出的财富管理顾问。",
+    "_source": "Transitioned into finance, starting as a Product Manager at China Construction Bank before moving to CITIC Securities. By leveraging deep market research and client relationship skills, I became the top-performing wealth manager in my branch."
+  },
+  "timeline-date-2": {
+    "zh": "2019 - 2020",
+    "_source": "2019 - 2020"
+  },
+  "timeline-title-2": {
+    "zh": "医疗器械销售代表",
+    "_source": "Medical Device Sales Representative"
+  },
+  "timeline-desc-2": {
+    "zh": "为杭州朗君医疗开创区域医疗设备销售业务，开展广泛的市场调研，并成功管理医院招标流程。",
+    "_source": "Pioneered regional medical equipment sales for Hangzhou Langjun Medical, conducting extensive market research and successfully managing bidding processes for hospitals."
+  },
+  "timeline-date-3": {
+    "zh": "2016年至今",
+    "_source": "2016 - Present"
+  },
+  "timeline-title-3": {
+    "zh": "\"On the way365\"微型基金联合创始人",
+    "_source": "Co-Founder of \"On the way365\" Micro-Fund"
+  },
+  "timeline-desc-3": {
+    "zh": "发起了一项基层慈善基金，成员们每日捐赠1元人民币。过去7年间，我们已筹集逾35,000元人民币，用于资助有困难的初中生。",
+    "_source": "Launched a grassroots charity fund where members donate 1 RMB daily. Over the past 7 years, we have raised over 35,000 RMB to financially support middle school students in need."
+  },
+  "timeline-date-4": {
+    "zh": "2015 - 2019",
+    "_source": "2015 - 2019"
+  },
+  "timeline-title-4": {
+    "zh": "生物医学工程学士学位",
+    "_source": "B.S. in Biomedical Engineering"
+  },
+  "timeline-desc-4": {
+    "zh": "毕业于天津医科大学。在医疗器械领域打下坚实基础，曾任勤工俭学中心主任，并创立校园辅导平台，为学生提供逾千个兼职岗位。",
+    "_source": "Graduated from Tianjin Medical University. Built a strong foundation in medical devices, served as Minister of the Work-Study Center, and founded a campus tutoring platform providing over 1,000 part-time opportunities for students."
+  },
+  "featured-work": {
+    "zh": "精选作品",
+    "_source": "Featured Work"
+  },
+  "project1-title": {
+    "zh": "\"在路上365\"慈善微基金",
+    "_source": "\"On the way365\" Charity Micro-Fund"
+  },
+  "project1-desc": {
+    "zh": "我于2016年共同创立的慈善项目。通过60余名成员每日1元人民币的微捐，我们已成功筹集逾35,000元人民币，用于资助贫困学生。",
+    "_source": "A charitable initiative I co-founded in 2016. Through daily 1 RMB micro-donations from our 60+ members, we have successfully raised over 35,000 RMB to sponsor underprivileged students."
+  },
+  "project2-title": {
+    "zh": "医疗保健行业研究与分析",
+    "_source": "Healthcare Industry Research & Analysis"
+  },
+  "project2-desc": {
+    "zh": "撰写了多篇综合性分析文章，包括一篇长达10,000字的深度解析《mRNA疗法距离我们有多远》，以及对波士顿科学公司2022年年度报告的详细财务分析。",
+    "_source": "Authored comprehensive analytical articles, including a 10,000-word deep dive into \"How Far Away is mRNA Therapy\" and a detailed financial analysis of Boston Scientific's 2022 annual report."
+  },
+  "project3-title": {
+    "zh": "顶尖财富组合策略",
+    "_source": "Top-Performing Wealth Portfolio Strategy"
+  },
+  "project3-desc": {
+    "zh": "为零售及机构客户制定并执行定制化资产配置方案，助力中信证券浙江分公司在2022年度实盘交易业绩中荣登榜首。",
+    "_source": "Strategized and executed customized asset allocation plans for retail and institutional clients, achieving the #1 rank in annual real-trading performance for the CITIC Securities Zhejiang Branch in 2022."
+  },
+  "view-portfolio": {
+    "zh": "查看完整作品集",
+    "_source": "View Full Portfolio"
+  },
+  "latest-articles": {
+    "zh": "最新文章",
+    "_source": "Latest Articles"
+  },
+  "view-articles": {
+    "zh": "查看所有文章",
+    "_source": "View All Articles"
+  },
+  "copyright": {
+    "zh": "© 2025 文恒飞。保留所有权利。",
+    "_source": "© 2025 Wen Hengfei. All Rights Reserved."
+  }
+}

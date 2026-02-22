@@ -4,7 +4,8 @@
   "description": "Personal profile website with Notion integration",
   "scripts": {
     "start": "node server.js",
-    "dev": "http-server . -p 3001 -c-1"
+    "dev": "http-server . -p 3001 -c-1",
+    "translate": "node scripts/build-translations.js"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
