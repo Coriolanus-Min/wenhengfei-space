@@ -17,10 +17,13 @@ document.addEventListener('DOMContentLoaded', function () {
         '...waiting for the dawn...'
     ];
     var lastQuoteIndex = -1;
-    var lastReplySummary = '';
 
     function setWhisper(text) {
         if (whisperBox) whisperBox.textContent = text || '';
+    }
+
+    function setInputPlaceholder(text) {
+        if (chatInput) chatInput.placeholder = text || '';
     }
 
     function pickRandomWhisper() {
@@ -33,9 +36,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return whispers[nextIndex];
     }
 
+    function refreshPlaceholderIfEmpty() {
+        if (chatInput && !chatInput.value.trim()) setInputPlaceholder(pickRandomWhisper());
+    }
+
+    setInputPlaceholder(pickRandomWhisper());
+
     if (effigy) {
         effigy.addEventListener('mouseenter', function () {
-            setWhisper(lastReplySummary || pickRandomWhisper());
+            refreshPlaceholderIfEmpty();
             var gust = (Math.random() - 0.5) * 10;
             effigy.style.transform = 'rotate(' + gust + 'deg)';
         });
@@ -60,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         chatInput.value = '';
         setInputEnabled(false);
-        setWhisper('...listening...');
+        setInputPlaceholder('...at the crossroads. go on.');
 
         var apiUrl = '/api/chat';
         fetch(apiUrl, {
@@ -72,23 +81,22 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(function (data) {
                 var reply = (data && data.reply) ? String(data.reply) : '';
                 if (!reply) {
-                    setWhisper('...nothing this time...');
+                    setInputPlaceholder('...nothing this time...');
                     setInputEnabled(true);
+                    refreshPlaceholderIfEmpty();
                     return;
                 }
-                lastReplySummary = reply.split('\n')[0].trim().slice(0, 50);
-                if (lastReplySummary.length < reply.trim().length) lastReplySummary += '...';
-
+                /* Output only in result list; random whisper in input placeholder when empty */
                 if (typeof window.revealTextAtRate === 'function') {
                     window.revealTextAtRate(listInner, reply, {
                         unit: 'char',
-                        charsPerSecond: 28,
+                        charsPerSecond: 180,
                         newlineAsNewLine: true,
                         lineClassName: 'effigy-result-line',
                         scrollToBottom: scrollResultToBottom
                     }).then(function () {
-                        setWhisper(lastReplySummary || pickRandomWhisper());
                         setInputEnabled(true);
+                        refreshPlaceholderIfEmpty();
                     });
                 } else {
                     var line = document.createElement('div');
@@ -96,13 +104,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     line.textContent = reply;
                     listInner.appendChild(line);
                     scrollResultToBottom();
-                    setWhisper(lastReplySummary || pickRandomWhisper());
                     setInputEnabled(true);
+                    refreshPlaceholderIfEmpty();
                 }
             })
             .catch(function () {
-                setWhisper('...the wind took it...');
+                setInputPlaceholder('...the wind took it...');
                 setInputEnabled(true);
+                refreshPlaceholderIfEmpty();
             });
     }
 
@@ -113,6 +122,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 e.preventDefault();
                 sendMessage();
             }
+        });
+        chatInput.addEventListener('focus', function () {
+            if (!chatInput.value.trim()) refreshPlaceholderIfEmpty();
         });
     }
 });

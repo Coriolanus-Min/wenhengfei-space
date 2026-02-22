@@ -183,6 +183,11 @@ section {
   padding: 4rem 0;
 }
 
+/* Less space above footer */
+section:last-of-type {
+  padding-bottom: 2rem;
+}
+
 .section-title {
   text-align: center;
   margin-bottom: 3rem;
@@ -305,13 +310,18 @@ section {
   opacity: 0.9;
 }
 
-/* Contact Page */
+/* Contact Page: contact-info and message-board same width */
+.contact-container,
+.message-board {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .contact-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .contact-info {
@@ -319,6 +329,16 @@ section {
   padding: 2rem;
   border: 1px solid var(--border-color);
   border-radius: 0;
+}
+
+.contact-method a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-method a:hover {
+  color: var(--primary-color);
 }
 
 .contact-info h3 {
@@ -382,11 +402,24 @@ section {
   line-height: 1.8;
 }
 
-.message-board iframe {
-  display: block;
-  margin: 0 auto;
-  border-radius: 0;
+/* Responsive iframe wrapper: same width as .contact-info; clip to hide scrollbar area */
+.message-board-iframe-wrap {
+  width: 100%;
+  overflow: hidden;
   border: 1px solid var(--border-color);
+  border-radius: 0;
+}
+
+.message-board-iframe-wrap iframe {
+  display: block;
+  width: calc(100% + 20px);
+  min-height: 480px;
+  height: 75vh;
+  max-height: 800px;
+  border: none;
+  border-radius: 0;
+  margin-right: -20px;
+  /* Scrollbar inside cross-origin iframe cannot be removed via CSS; clipping may hide edge scrollbar in some browsers */
 }
 
 /* Contact Form */
@@ -470,7 +503,8 @@ button:hover {
 .social-links {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 0;
+  margin-bottom: 0.35rem;
 }
 
 .social-links a {
@@ -482,8 +516,13 @@ button:hover {
 footer {
   background-color: var(--primary-color);
   color: var(--secondary-color);
-  padding: 2rem 0;
+  padding: 0.75rem 0;
   text-align: center;
+}
+
+footer .container > p {
+  margin: 0;
+  font-size: 0.85rem;
 }
 
 footer a {

@@ -77,12 +77,19 @@ function initSplash() {
     window.addEventListener('mousemove', onMouseMove);
     
     // Setup Mute Button (prevents scatter event from firing if clicked)
+    // Use both click and touchend so mobile gets a proper user gesture for AudioContext
     const muteBtn = document.getElementById('mute-btn');
     if (muteBtn) {
-        muteBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // prevent triggering the scatter
+        var lastMuteAt = 0;
+        const handleMute = (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            if (performance.now() - lastMuteAt < 400) return; // avoid double-fire (touchend + click)
+            lastMuteAt = performance.now();
             toggleAudio();
-        });
+        };
+        muteBtn.addEventListener('click', handleMute);
+        muteBtn.addEventListener('touchend', handleMute, { passive: false });
     }
 
     // The Scatter Trigger
@@ -302,11 +309,23 @@ function toggleAudio() {
         muteBtn.innerHTML = svgOff;
         isAudioPlaying = false;
     } else {
-        // Fade in
-        if(audioCtx.state === 'suspended') audioCtx.resume();
-        droneGain.gain.setTargetAtTime(0.3, audioCtx.currentTime, 1.0);
-        muteBtn.innerHTML = svgOn;
-        isAudioPlaying = true;
+        // Fade in: on mobile, AudioContext stays suspended until resume() completes
+        var doResume = function () {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume().then(function () {
+                    droneGain.gain.setTargetAtTime(0.3, audioCtx.currentTime, 1.0);
+                    muteBtn.innerHTML = svgOn;
+                    isAudioPlaying = true;
+                }).catch(function () {
+                    muteBtn.innerHTML = svgOff;
+                });
+            } else {
+                droneGain.gain.setTargetAtTime(0.3, audioCtx.currentTime, 1.0);
+                muteBtn.innerHTML = svgOn;
+                isAudioPlaying = true;
+            }
+        };
+        doResume();
     }
 }
 

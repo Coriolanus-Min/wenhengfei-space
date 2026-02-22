@@ -10,7 +10,7 @@
     pointer-events: none;
 }
 
-/* Panel to the lower-left of the sack: result list + whisper + input */
+/* Panel: transparent so only text is visible; blends into page */
 .effigy-panel {
     position: absolute;
     top: 85px;
@@ -24,6 +24,8 @@
     opacity: 0;
     transform: translateY(-6px);
     transition: opacity 1.2s ease, transform 1.2s ease;
+    background: transparent;
+    border: none;
 }
 
 .bot-icon-container:hover .effigy-panel {
@@ -44,12 +46,18 @@
     letter-spacing: 0.03em;
     line-height: 1.45;
     padding: 6px 8px;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 2px;
-    background: rgba(0,0,0,0.25);
+    border: none;
+    border-radius: 0;
+    background: transparent;
     /* Top fade: lines gradually disappear as they move up (FIFO) */
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgba(0,0,0,0.4) 10px, black 28px);
     mask-image: linear-gradient(to bottom, transparent 0, rgba(0,0,0,0.4) 10px, black 28px);
+    /* Hide scrollbar, keep scroll */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.effigy-result-list::-webkit-scrollbar {
+    display: none;
 }
 
 /* When empty: hide the bar so only whisper + input show until first response */
@@ -90,8 +98,8 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 0.9rem;
     color: #aaa;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: transparent;
+    border: none;
     border-radius: 2px;
     outline: none;
 }
@@ -101,23 +109,27 @@
 }
 
 .effigy-input-wrap input:focus {
-    border-color: rgba(255,255,255,0.15);
     color: #ccc;
 }
 
-.effigy-input-wrap button {
+.effigy-input-wrap button,
+#effigy-send-btn {
     padding: 6px 10px;
     color: #888;
-    background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 2px;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0;
+    box-shadow: none !important;
+    outline: none;
     cursor: pointer;
-    transition: color 0.2s, background 0.2s;
+    transition: color 0.2s;
+    appearance: none;
 }
 
-.effigy-input-wrap button:hover {
+.effigy-input-wrap button:hover,
+#effigy-send-btn:hover {
     color: #aaa;
-    background: rgba(0,0,0,0.5);
+    background: transparent !important;
 }
 
 .bot-icon {
@@ -145,17 +157,9 @@
     filter: drop-shadow(0 0 1px rgba(70,58,48,0.5)) drop-shadow(0 20px 20px rgba(0,0,0,0.9)) brightness(0.9);
 }
 
-/* The Ghostly Whisper Box (inside panel: flows between result list and input) */
+/* Whisper moved into input placeholder; this slot is hidden to avoid duplicate */
 .whisper-box {
-    color: #888;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-    text-shadow: 0 2px 4px rgba(0,0,0,1);
-    pointer-events: none;
-    min-height: 1.4em;
+    display: none;
 }
 
 /* The lifess, irregular sway of a heavy wet object */
