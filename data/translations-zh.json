@@ -546,5 +546,29 @@
   "contact-message-board-desc": {
     "zh": "请在下方分享您的想法或意见。您的回复将通过Microsoft Forms收集，并导出至Excel进行审核。",
     "_source": "Share your ideas or opinions below. Your responses will be collected in Microsoft Forms\r\n                    and exported to Excel for review."
+  },
+  "nav-home": {
+    "zh": "首页",
+    "_source": "Home"
+  },
+  "nav-work": {
+    "zh": "工作",
+    "_source": "Work"
+  },
+  "nav-hobbies": {
+    "zh": "爱好",
+    "_source": "Hobbies"
+  },
+  "nav-articles": {
+    "zh": "文章",
+    "_source": "Articles"
+  },
+  "nav-portfolio": {
+    "zh": "作品集",
+    "_source": "Portfolio"
+  },
+  "nav-contact": {
+    "zh": "联系",
+    "_source": "Contact"
   }
 }
