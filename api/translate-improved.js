@@ -143,7 +143,8 @@ async function translateWithFallback(text, targetLanguage) {
                 service: service.name
             };
         } catch (error) {
-            const errorMsg = `${service.name} 失败: ${error.message}`;
+            const detail = error.response ? JSON.stringify(error.response.data) : error.message;
+            const errorMsg = `${service.name} 失败: ${detail}`;
             console.error(errorMsg);
             errors.push(errorMsg);
             continue; // 尝试下一个服务
