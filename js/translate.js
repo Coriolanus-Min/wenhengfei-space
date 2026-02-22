@@ -66,7 +66,7 @@ async function translateText(text) {
  * Toggle page language between English and Chinese
  * Translates all text nodes and updates the UI
  */
-async function toggleLanguage() {
+window.toggleLanguage = async function toggleLanguage() {
     const button = document.querySelector('.language-switch button');
     let icon = null;
     
