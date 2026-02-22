@@ -50,14 +50,16 @@ async function translateWithDeepL(text, targetLanguage) {
         'ru': 'RU'
     };
 
-    const response = await axios.post(baseUrl, null, {
-        params: {
-            auth_key: apiKey,
-            text: text,
-            target_lang: langMap[targetLanguage] || targetLanguage.toUpperCase()
-        },
-        timeout: 10000
-    });
+    const response = await axios.post(baseUrl,
+        { text: [text], target_lang: langMap[targetLanguage] || targetLanguage.toUpperCase() },
+        {
+            headers: {
+                'Authorization': `DeepL-Auth-Key ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            timeout: 10000
+        }
+    );
 
     return response.data.translations[0].text;
 }
