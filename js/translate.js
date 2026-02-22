@@ -70,11 +70,6 @@ window.toggleLanguage = async function toggleLanguage() {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const langButton = document.querySelector('.language-switch button');
-    if (langButton) {
-        langButton.addEventListener('click', window.toggleLanguage);
-        langButton.title = '中文';
-    }
     // Preload translations so toggle is instant
     loadTranslations();
 });
