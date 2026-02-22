@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setInputEnabled(false);
         setInputPlaceholder('...at the crossroads. go on.');
 
-        var apiUrl = '/api/chat';
+        var apiUrl = 'https://wenhengfei-space.vercel.app/api/chat';
         fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
