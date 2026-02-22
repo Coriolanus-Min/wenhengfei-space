@@ -130,5 +130,421 @@
   "copyright": {
     "zh": "© 2025 文恒飞。保留所有权利。",
     "_source": "© 2025 Wen Hengfei. All Rights Reserved."
+  },
+  "work-section-title": {
+    "zh": "专业经验",
+    "_source": "Professional Experience"
+  },
+  "work-job1-title": {
+    "zh": "人工智能与量化金融探索者",
+    "_source": "AI & Quantitative Finance Explorer"
+  },
+  "work-job1-company": {
+    "zh": "独立技术计划",
+    "_source": "Independent Tech Initiatives"
+  },
+  "work-job1-date": {
+    "zh": "2023 - 2025",
+    "_source": "2023 - 2025"
+  },
+  "work-job1-desc": {
+    "zh": "通过实践性独立项目，深入探索算法交易与大型语言模型的复杂性，致力于弥合金融理论与自动化执行之间的鸿沟。",
+    "_source": "Navigated the complexities of algorithmic trading and large language models through hands-on, independent projects, aiming to bridge the gap between financial theory and automated execution."
+  },
+  "work-job1-li1": {
+    "zh": "设计并部署了一个实时运行的量化自动化算法交易系统。",
+    "_source": "Architected and deployed a live quantitative automated algorithmic trading system."
+  },
+  "work-job1-li2": {
+    "zh": "开发了基于人工智能的微信顾问，实现自动化营销和全天候高端客户服务。",
+    "_source": "Developed an AI-powered WeChat consultant for automated marketing and 24/7 premium client service."
+  },
+  "work-job1-li3": {
+    "zh": "打造了一家精英新闻聚合平台，实时推送来自12家全球顶级媒体（包括彭博社、《华尔街日报》、《经济学人》、《金融时报》、路透社、《麻省理工科技评论》、财新传媒等）的十大深度洞见，为高净值客户精选独家报道。",
+    "_source": "Built an elite news aggregation platform delivering real-time Top 10 insights from 12 global publishers (Bloomberg, WSJ, The Economist, FT, Reuters, MIT Tech Review, Caixin, etc.), curating exclusive dispatches for high-net-worth clients."
+  },
+  "work-job1-li4": {
+    "zh": "针对弹道心电图（BCG）生物医学信号处理技术及其价值链开展了深入行业研究。",
+    "_source": "Conducted deep-dive industry research on Ballistocardiogram (BCG) biomedical signal processing technologies and their value chains."
+  },
+  "work-job2-title": {
+    "zh": "财富管理师与产品经理",
+    "_source": "Wealth Manager & Product Manager"
+  },
+  "work-job2-company": {
+    "zh": "中信证券与中国建设银行",
+    "_source": "CITIC Securities & China Construction Bank"
+  },
+  "work-job2-date": {
+    "zh": "2020 - 2023",
+    "_source": "2020 - 2023"
+  },
+  "work-job2-desc": {
+    "zh": "转行进入金融领域，最初在中国建设银行担任产品经理，后加入中信证券。负责管理高净值客户投资组合，并通过深度市场研究推动投资回报。",
+    "_source": "Transitioned into finance, starting as a Product Manager at China Construction Bank before moving to CITIC Securities. Managed high-net-worth client portfolios and leveraged deep market research to drive returns."
+  },
+  "work-job2-li1": {
+    "zh": "管理超过600万元人民币的金融产品",
+    "_source": "Managed over 6 million RMB in financial products"
+  },
+  "work-job2-li2": {
+    "zh": "中信证券浙江分公司年度实盘交易业绩排名第一（2022年）",
+    "_source": "Ranked #1 in annual real-trading performance for CITIC Securities Zhejiang Branch (2022)"
+  },
+  "work-job2-li3": {
+    "zh": "荣获\"2022年度杰出财富管理师\"称号",
+    "_source": "Named \"2022 Outstanding Wealth Manager\""
+  },
+  "work-job3-title": {
+    "zh": "医疗器械销售代表",
+    "_source": "Medical Device Sales Representative"
+  },
+  "work-job3-company": {
+    "zh": "杭州朗君医疗",
+    "_source": "Hangzhou Langjun Medical"
+  },
+  "work-job3-date": {
+    "zh": "2019 - 2020",
+    "_source": "2019 - 2020"
+  },
+  "work-job3-desc": {
+    "zh": "开创区域医疗设备销售业务，开展广泛的市场调研，并管理与关键医院利益相关者的关系。",
+    "_source": "Pioneered regional medical equipment sales, conducting extensive market research and managing relationships with key hospital stakeholders."
+  },
+  "work-job3-li1": {
+    "zh": "成功管理医院招标流程",
+    "_source": "Successfully managed hospital bidding processes"
+  },
+  "work-job3-li2": {
+    "zh": "医疗设备区域市场份额扩大",
+    "_source": "Expanded regional market share for medical equipment"
+  },
+  "work-job4-title": {
+    "zh": "联合创始人",
+    "_source": "Co-Founder"
+  },
+  "work-job4-company": {
+    "zh": "\"在路上365\"微型基金",
+    "_source": "\"On the way365\" Micro-Fund"
+  },
+  "work-job4-date": {
+    "zh": "2016年至今",
+    "_source": "2016 - Present"
+  },
+  "work-job4-desc": {
+    "zh": "发起了一项基层慈善基金，成员们每日捐赠1元人民币，为有困难的初中生提供经济支持。",
+    "_source": "Launched a grassroots charity fund where members donate 1 RMB daily to financially support middle school students in need."
+  },
+  "work-job4-li1": {
+    "zh": "招募并管理60余名活跃成员",
+    "_source": "Recruited and managed 60+ active members"
+  },
+  "work-job4-li2": {
+    "zh": "七年间筹集资金超过35,000元人民币",
+    "_source": "Raised over 35,000 RMB over 7 years"
+  },
+  "work-job4-li3": {
+    "zh": "持续资助贫困学生",
+    "_source": "Provided continuous sponsorship to underprivileged students"
+  },
+  "work-skills-title": {
+    "zh": "技术技能",
+    "_source": "Technical Skills"
+  },
+  "work-skill-cat1-title": {
+    "zh": "财务管理",
+    "_source": "Financial Management"
+  },
+  "work-skill-cat1-li1": {
+    "zh": "财富组合策略",
+    "_source": "Wealth Portfolio Strategy"
+  },
+  "work-skill-cat1-li2": {
+    "zh": "高净值客户咨询",
+    "_source": "High-Net-Worth Client Advisory"
+  },
+  "work-skill-cat1-li3": {
+    "zh": "资产配置",
+    "_source": "Asset Allocation"
+  },
+  "work-skill-cat1-li4": {
+    "zh": "市场趋势分析",
+    "_source": "Market Trend Analysis"
+  },
+  "work-skill-cat1-li5": {
+    "zh": "风险管理",
+    "_source": "Risk Management"
+  },
+  "work-skill-cat1-li6": {
+    "zh": "CFA考生",
+    "_source": "CFA Candidate"
+  },
+  "work-skill-cat2-title": {
+    "zh": "医疗保健",
+    "_source": "Healthcare & Medical"
+  },
+  "work-skill-cat2-li1": {
+    "zh": "生物医学工程基金会",
+    "_source": "Biomedical Engineering Foundation"
+  },
+  "work-skill-cat2-li2": {
+    "zh": "医疗器械招标",
+    "_source": "Medical Device Bidding"
+  },
+  "work-skill-cat2-li3": {
+    "zh": "区域市场拓展",
+    "_source": "Regional Market Expansion"
+  },
+  "work-skill-cat2-li4": {
+    "zh": "医疗保健行业研究",
+    "_source": "Healthcare Industry Research"
+  },
+  "work-skill-cat2-li5": {
+    "zh": "医院利益相关方关系",
+    "_source": "Hospital Stakeholder Relations"
+  },
+  "work-skill-cat3-title": {
+    "zh": "技术与分析",
+    "_source": "Technical & Analytical"
+  },
+  "work-skill-cat3-li1": {
+    "zh": "Python数据可视化",
+    "_source": "Python Data Visualization"
+  },
+  "work-skill-cat3-li2": {
+    "zh": "人工智能数据标注",
+    "_source": "AI Data Annotation"
+  },
+  "work-skill-cat3-li3": {
+    "zh": "深度行业研究",
+    "_source": "Deep Industry Research"
+  },
+  "work-skill-cat3-li4": {
+    "zh": "数据驱动的决策",
+    "_source": "Data-Driven Decision Making"
+  },
+  "work-skill-cat3-li5": {
+    "zh": "项目管理",
+    "_source": "Project Management"
+  },
+  "work-cta-title": {
+    "zh": "有兴趣合作吗？",
+    "_source": "Interested in Working Together?"
+  },
+  "work-cta-desc": {
+    "zh": "我始终乐于探讨新的机遇和有趣的项目。",
+    "_source": "I'm always open to discussing new opportunities and interesting projects."
+  },
+  "work-cta-link": {
+    "zh": "联系我们",
+    "_source": "Get In Touch"
+  },
+  "portfolio-section-title": {
+    "zh": "我的作品集",
+    "_source": "My Portfolio"
+  },
+  "portfolio-intro1": {
+    "zh": "欢迎浏览我的作品集展示。本画廊精选了能体现我的技能、专业知识和创意理念的项目与作品样本。每件作品均附有简要说明，旨在提供创作背景并突出作品的核心亮点。",
+    "_source": "Welcome to my portfolio showcase. This gallery features selected projects and work samples that\r\n                represent my skills, expertise, and creative approach. Each item includes a brief description\r\n                to provide context and highlight key aspects of the work."
+  },
+  "portfolio-intro2": {
+    "zh": "这些项目涵盖了我职业生涯中的不同领域，展现了我应对各类挑战的能力。欢迎浏览作品集，若需了解任何具体项目的更多信息，请随时与我联系。",
+    "_source": "These projects span different areas of my professional experience and demonstrate my ability to\r\n                tackle various challenges. Feel free to explore the gallery and contact me if you'd like more\r\n                information about any specific project."
+  },
+  "portfolio-item1-title": {
+    "zh": "量化自动化交易系统",
+    "_source": "Quantitative Automated Trading System"
+  },
+  "portfolio-item1-desc": {
+    "zh": "一项旨在消除交易中人类情绪的个人实验。我构建了一个实时算法环境来测试数据驱动策略，从市场无情的反馈循环中获得了深刻的领悟。",
+    "_source": "A personal experiment in removing human emotion from trading. I built a live algorithmic environment to test data-driven strategies, learning immensely from the market's unforgiving feedback loops."
+  },
+  "portfolio-item2-title": {
+    "zh": "全球精英新闻聚合器API",
+    "_source": "Global Elite News Aggregator API"
+  },
+  "portfolio-item2-desc": {
+    "zh": "源于我个人过滤噪音的需求。这款定制API整合了12家顶级媒体（彭博社、华尔街日报、经济学人）的实时洞察，精选高价值资讯，助力我和客户聚焦真正重要的事务。",
+    "_source": "Born from my own need to filter noise. A custom API aggregating real-time insights from 12 tier-one publishers (Bloomberg, WSJ, Economist). It curates high-value dispatches, helping both myself and clients stay focused on what truly matters."
+  },
+  "portfolio-item3-title": {
+    "zh": "AI 微信顾问与客户关系管理",
+    "_source": "AI WeChat Consultant & CRM"
+  },
+  "portfolio-item3-desc": {
+    "zh": "对微信平台内人机交互的探索。我整合大型语言模型，使其成为客户全天候的顾问，在自动化效率与真实人性化互动之间探索微妙的平衡点。",
+    "_source": "An exploration into human-computer interaction within WeChat. I integrated a Large Language Model to act as a 24/7 consultant for clients, discovering the delicate balance between automated efficiency and genuine human connection."
+  },
+  "portfolio-item4-title": {
+    "zh": "\"在路上365\"慈善微基金",
+    "_source": "\"On the way365\" Charity Micro-Fund"
+  },
+  "portfolio-item4-desc": {
+    "zh": "我于2016年共同创立的慈善项目。通过60余名成员每日1元人民币的微捐，我们已成功筹集逾35,000元人民币，用于资助贫困学生。",
+    "_source": "A charitable initiative I co-founded in 2016. Through daily 1 RMB micro-donations from our 60+ members, we have successfully raised over 35,000 RMB to sponsor underprivileged students."
+  },
+  "portfolio-item5-title": {
+    "zh": "医疗保健行业研究与分析",
+    "_source": "Healthcare Industry Research & Analysis"
+  },
+  "portfolio-item5-desc": {
+    "zh": "撰写了多篇综合性分析文章，包括一篇长达1万字的深度解析《mRNA疗法距离我们有多远》，以及对波士顿科学公司2022年年度报告的详细财务分析。",
+    "_source": "Authored comprehensive analytical articles, including a 10,000-word deep dive into \"How Far Away is mRNA Therapy\" and a detailed financial analysis of Boston Scientific's 2022 annual report."
+  },
+  "portfolio-item6-title": {
+    "zh": "财富组合策略设计",
+    "_source": "Wealth Portfolio Strategy Design"
+  },
+  "portfolio-item6-desc": {
+    "zh": "在市场波动期间，为客户制定了策略性定制资产配置方案。严谨的研究流程最终助力该团队在2022年中信证券分支机构年度实盘交易业绩中荣登榜首。",
+    "_source": "Strategized customized asset allocation plans for clients during volatile markets. The rigorous research process eventually led to achieving the #1 rank in annual real-trading performance at the CITIC Securities branch in 2022."
+  },
+  "hobbies-section-title": {
+    "zh": "我的爱好与兴趣",
+    "_source": "My Hobbies & Interests"
+  },
+  "hobbies-intro1": {
+    "zh": "在职业生活之外，我热衷于各类活动，它们帮助我保持身心平衡、发现生活乐趣并持续学习成长。作为一名狂热的马拉松跑者和广泛的阅读爱好者，我坚信毅力、终身学习和数据驱动决策的重要性。",
+    "_source": "Beyond my professional life, I'm passionate about various activities that help me maintain balance, find joy, and continue learning. As an avid marathon runner and extensive reader, I believe in endurance, continuous learning, and data-driven decision-making."
+  },
+  "hobbies-intro2": {
+    "zh": "这些爱好直接增强了我的职业韧性。跑步教会我把握节奏与持之以恒的价值，而阅读则拓展了我的分析视野。作为一名热衷旅行与摄影的爱好者，我用镜头记录下所到之处的广阔无声的故事——从大学时代探索过的城市静谧角落，到近期新疆之行所见壮阔原始的自然景观。",
+    "_source": "These hobbies contribute directly to my professional resilience. Running teaches me the value of pacing and long-term commitment, while reading expands my analytical boundaries. Moreover, as an avid traveler and photographer, I use my lens to document the vast, unspoken narratives of the places I visit—from the quiet corners of cities I explored during university to the sweeping, raw landscapes of my recent journey through Xinjiang."
+  },
+  "hobbies-what-i-love-title": {
+    "zh": "我热爱做的事",
+    "_source": "What I Love To Do"
+  },
+  "hobbies-hobby1-title": {
+    "zh": "旅行与摄影",
+    "_source": "Travel & Photography"
+  },
+  "hobbies-hobby1-desc": {
+    "zh": "我深信走出舒适区是获得新视角的捷径。每年探索一座新城市已成为我的传统。从大学时代遍游国内城市，到远赴新加坡、马来西亚，我逐渐学会解读各地文化与建筑的微妙差异。 最近，我深入新疆广袤的原始美景中。透过镜头，我不仅捕捉风景，更试图凝固氛围——那些鲜明的对比、厚重的天空，以及静默中坚韧的瞬间，恰如我的人生哲学。我期待终有一日，能将镜头带往世界的每个角落。",
+    "_source": "I believe that stepping outside familiar territory is the fastest way to gain perspective. It has become a tradition of mine to explore new cities every single year. From wandering extensively through domestic cities during my university years to traveling as far as Singapore and Malaysia, I've learned to read the subtle differences in local cultures and architectures. Most recently, I spent time exploring the vast, untamed beauty of Xinjiang. Through my camera lens, I try to capture not just the scenery, but the atmosphere—the stark contrasts, the heavy skies, and the quiet moments of endurance that mirror my own philosophy. I look forward to eventually taking my lens to every corner of the globe."
+  },
+  "hobbies-hobby2-title": {
+    "zh": "马拉松跑步",
+    "_source": "Marathon Running"
+  },
+  "hobbies-hobby2-desc": {
+    "zh": "跑步是我的冥想。它剥离了金融市场的喧嚣与复杂的数据结构，只留下呼吸与脚步的韵律。马拉松的训练与奔跑教会我：最宏大的目标并非靠灵光乍现实现，而是源于日复一日不懈而朴素的坚持。",
+    "_source": "Running is my meditation. It strips away the noise of financial markets and complex data structures, leaving only the rhythm of breathing and footsteps. Training for and running marathons has taught me that the most ambitious goals are achieved not through sudden bursts of inspiration, but through relentless, unglamorous, daily consistency."
+  },
+  "hobbies-hobby3-title": {
+    "zh": "连续阅读",
+    "_source": "Continuous Reading"
+  },
+  "hobbies-hobby3-desc": {
+    "zh": "我的阅读习惯与我的专业背景同样多元。我持续涉猎涵盖哲学、医疗技术、量化金融及全球市场的各类文献。阅读是我深度研究的引擎，它让我得以在抽象的生物医学信号论文与医疗器械公司市值的实际影响之间建立联系。",
+    "_source": "My reading habits are as diverse as my professional background. I constantly consume literature spanning philosophy, healthcare technology, quantitative finance, and global markets. Reading is the engine that drives my deep research; it is how I connect the dots between an abstract biomedical signal paper and the very real implications it has on a medical device company's market valuation."
+  },
+  "hobbies-hobby4-title": {
+    "zh": "电影探索",
+    "_source": "Cinematic Exploration"
+  },
+  "hobbies-hobby4-desc": {
+    "zh": "电影是我观察世界的另一种媒介。我持续收集并研究那些捕捉特定情绪、构图与哲学意蕴的电影静帧。这些视觉锚点不仅激发我的审美感知，更成为我生活中与工作中所遇复杂而常被隐匿的人类体验的静默映照。",
+    "_source": "Film is another medium through which I observe the world. I regularly collect and study movie snapshots (stills) that capture specific moods, framing, and philosophical undertones. These visual anchors not only inspire my aesthetic sensibilities but also serve as quiet reflections of the complex, often unspoken human experiences I encounter in both life and work."
+  },
+  "hobbies-photo-archive-title": {
+    "zh": "摄影档案馆",
+    "_source": "Photography Archive"
+  },
+  "hobbies-photo1-title": {
+    "zh": "新疆探险之旅",
+    "_source": "Expedition to Xinjiang"
+  },
+  "hobbies-photo1-desc": {
+    "zh": "记录过去一年新疆自然景观中辽阔、厚重而壮丽的孤寂。",
+    "_source": "Documenting the vast, heavy, and beautiful isolation of Xinjiang's natural landscapes over the past year."
+  },
+  "hobbies-photo2-title": {
+    "zh": "大学城景",
+    "_source": "University Cityscapes"
+  },
+  "hobbies-photo2-desc": {
+    "zh": "一组在本科求学期间于不同城市拍摄的冷峻建筑研究与街头摄影作品集。",
+    "_source": "A collection of stark architectural studies and street photography captured across various cities during my undergraduate years."
+  },
+  "hobbies-photo3-title": {
+    "zh": "长远来看",
+    "_source": "The Long Run"
+  },
+  "hobbies-photo3-desc": {
+    "zh": "清晨马拉松训练时捕捉的静谧时刻，专注于耐力与孤独。",
+    "_source": "Quiet moments captured during early morning marathon training sessions, focusing on endurance and solitude."
+  },
+  "hobbies-cinematic-title": {
+    "zh": "电影瞬间",
+    "_source": "Cinematic Snapshots"
+  },
+  "hobbies-cinematic-intro": {
+    "zh": "精选的电影剧照集，与我的个人哲学和美学理念产生共鸣。",
+    "_source": "A curated collection of film stills that resonate with my personal philosophy and aesthetic."
+  },
+  "hobbies-cine1-title": {
+    "zh": "氛围与隔离",
+    "_source": "Atmosphere & Isolation"
+  },
+  "hobbies-cine1-desc": {
+    "zh": "关于构图与氛围的视觉笔记。",
+    "_source": "Visual notes on framing and mood."
+  },
+  "hobbies-cine2-title": {
+    "zh": "光与几何",
+    "_source": "Light & Geometry"
+  },
+  "hobbies-cine2-desc": {
+    "zh": "探索城市与自然环境的强烈反差。",
+    "_source": "Exploring the harsh contrast of urban and natural environments."
+  },
+  "hobbies-cine3-title": {
+    "zh": "人性因素",
+    "_source": "The Human Element"
+  },
+  "hobbies-cine3-desc": {
+    "zh": "镜头捕捉的静默坚忍瞬间。",
+    "_source": "Moments of quiet endurance captured on film."
+  },
+  "articles-section-title": {
+    "zh": "我的文章",
+    "_source": "My Articles"
+  },
+  "articles-intro1": {
+    "zh": "此处是我思绪游弋的天地，穿梭于书卷、文化与日常生活的细微角落。我拾掇着零碎片段——某句萦绕不去的箴言，某个陌生的故事，某个近乎寂静得难以察觉的细节——并将它们置于此处，作为思考的小小邀约。一切从容不迫，思绪按自己的节奏舒展。若你钟情于静谧的探索与意外的联结，欢迎与我一同徜徉于这些文字之间。",
+    "_source": "This is where my mind drifts through books, cultures, and the small corners of everyday life.\r\n                I collect fragments — a sentence that lingers, an unfamiliar story, a detail almost too quiet to notice — and place them here as small invitations to think.\r\n                Nothing is hurried; ideas unfold in their own rhythm.If you enjoy calm exploration and unexpected connections, you're welcome to wander these pages with me."
+  },
+  "articles-intro2": {
+    "zh": "我定期在此板块更新内容，敬请常来查阅最新见解。若您觉得这些文章有价值，欢迎分享传播，也欢迎就我探讨的主题展开深入讨论。",
+    "_source": "I regularly update this section with new content, so check back often for fresh insights.\r\n                Feel free to share these articles if you find them valuable, and I welcome thoughtful\r\n                discussion on the topics I explore."
+  },
+  "articles-loading": {
+    "zh": "正在加载文章...",
+    "_source": "Loading articles..."
+  },
+  "contact-section-title": {
+    "zh": "联系我们",
+    "_source": "Get In Touch"
+  },
+  "contact-info-title": {
+    "zh": "联系方式",
+    "_source": "Contact Information"
+  },
+  "contact-info-desc": {
+    "zh": "如有任何疑问或希望共同开展项目合作，欢迎随时联系。",
+    "_source": "Feel free to reach out if you have any questions or would like to collaborate on a project."
+  },
+  "contact-location": {
+    "zh": "中国深圳/杭州",
+    "_source": "Shenzhen / Hangzhou, China"
+  },
+  "contact-message-board-title": {
+    "zh": "留言板",
+    "_source": "Message Board"
+  },
+  "contact-message-board-desc": {
+    "zh": "请在下方分享您的想法或意见。您的回复将通过Microsoft Forms收集，并导出至Excel进行审核。",
+    "_source": "Share your ideas or opinions below. Your responses will be collected in Microsoft Forms\r\n                    and exported to Excel for review."
   }
 }
