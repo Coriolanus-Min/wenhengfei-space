@@ -5,8 +5,9 @@
       "title": "The Human Question in an Age of Intelligent Machines",
       "date": "2026-04-13",
       "summary": "An exploration of the societal implications of AI and intelligent machines, questioning whether they will augment or replace human labor and value creation.",
-      "content": "content/article-7.md",
-      "type": "markdown",
+      "type": "notion",
+      "notionId": "341727d0-d1bf-8069-9943-d1ceccfa90ba",
+      "notionUrl": "https://www.notion.so/The-Human-Question-in-an-Age-of-Intelligent-Machines-341727d0d1bf80699943d1ceccfa90ba?source=copy_link",
       "tags": ["AI", "technology", "society", "ethics"],
       "featured": true
     },
