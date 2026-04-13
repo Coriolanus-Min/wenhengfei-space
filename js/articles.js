@@ -267,6 +267,22 @@ class ArticleManager {
             </div>`;
     }
 
+    // Simple markdown to HTML converter
+    markdownToHtml(markdown) {
+        return markdown
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/!\[([^\]]*)\]\(([^)]*)\)/gim, '<img alt="$1" src="$2" />')
+            .replace(/\[([^\]]*)\]\(([^)]*)\)/gim, '<a href="$2">$1</a>')
+            .replace(/\n\n/gim, '</p><p>')
+            .replace(/\n/gim, '<br>')
+            .replace(/^/, '<p>')
+            .replace(/$/, '</p>');
+    }
+
     createArticleElement(article) {
         const articleElement = document.createElement('div');
         articleElement.className = 'article';
@@ -323,14 +339,16 @@ class ArticleManager {
                     </div>`;
             }
         } else {
-            // Moved date below the "Read Full Article" link so homepage/simple and full article layouts match
+            // For markdown articles, display content inline
             contentHtml = `
                 <h3 class="article-title">${article.title}</h3>
                 <p>${article.summary}</p>
                 <div class="article-tags">
                     ${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
-                <a href="${article.content}" class="read-more">Read Full Article</a>
+                <div class="article-content markdown-content" data-content-url="${article.content}">
+                    <div class="content-loading">Loading article content...</div>
+                </div>
                 <div class="article-date">${this.formatDate(article.date)}</div>`;
         }
 
@@ -376,6 +394,30 @@ class ArticleManager {
                     this.container.appendChild(articleElement);
                 } catch (error) {
                     console.error('Error creating article element:', error, article);
+                }
+            }
+            // Load markdown content for markdown articles
+            this.loadMarkdownContent();
+        }
+    }
+
+    async loadMarkdownContent() {
+        const markdownElements = this.container.querySelectorAll('.markdown-content');
+        for (const element of markdownElements) {
+            const contentUrl = element.getAttribute('data-content-url');
+            if (contentUrl) {
+                try {
+                    const response = await fetch(contentUrl);
+                    if (response.ok) {
+                        const markdown = await response.text();
+                        const html = this.markdownToHtml(markdown);
+                        element.innerHTML = html;
+                    } else {
+                        element.innerHTML = '<p>Error loading article content.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error loading markdown content:', error);
+                    element.innerHTML = '<p>Error loading article content.</p>';
                 }
             }
         }
@@ -465,7 +507,7 @@ class ArticleManager {
             articleUrl = article.notionUrl || article.url || `https://notion.so/${article.notionId.replace(/-/g, '')}`;
             target = '_blank';
         } else {
-            articleUrl = `articles/${article.id}.html`;
+            articleUrl = `articles.html`;
         }
         
         const tagsHtml = article.tags && article.tags.length > 0 
